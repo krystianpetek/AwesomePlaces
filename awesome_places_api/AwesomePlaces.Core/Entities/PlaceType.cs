@@ -3,6 +3,7 @@ namespace AwesomePlaces.Core.Entities;
 [Flags]
 public enum PlaceTypes
 {
+    None = 0,
     Landscape = 1 << 0,
     Mountain = 1 << 1,
     NatureBeauty = 1 << 2,
