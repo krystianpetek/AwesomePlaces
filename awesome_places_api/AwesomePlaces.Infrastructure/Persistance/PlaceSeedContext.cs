@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
-internal class PlaceSeedContext
+public static class PlaceSeedContext
 {
+    public static IHost PlaceContextSeed(this IHost host)
+    {
+
+        return host;
+    }
 }

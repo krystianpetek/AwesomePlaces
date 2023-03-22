@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AwesomePlaces.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AwesomePlaces.Api.Routes;
 
@@ -6,7 +7,7 @@ public static class PlacesExtensions
 {
     public static RouteGroupBuilder MapPlaces(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapGet("hello", (/*[FromServices]*/ HttpContext context) =>
+        routeGroupBuilder.MapGet("hello", ([FromServices] IPlaceService placeService, HttpContext context) =>
         {
             return "Hello World!";
         })

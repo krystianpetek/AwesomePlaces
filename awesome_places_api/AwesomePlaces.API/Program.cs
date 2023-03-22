@@ -1,6 +1,7 @@
 using AwesomePlaces.Api.Routes;
 using AwesomePlaces.Application;
 using AwesomePlaces.Infrastructure;
+using AwesomePlaces.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -59,6 +60,7 @@ public static class Program
 
         app.MapGroup("places").MapPlaces();
 
+        app.PlaceContextSeed();
         app.Run();
     }
 }

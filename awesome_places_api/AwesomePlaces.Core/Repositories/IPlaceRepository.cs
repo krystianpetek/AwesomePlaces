@@ -2,11 +2,11 @@ using AwesomePlaces.Core.Entities;
 
 namespace AwesomePlaces.Core.Repositories;
 
-public interface IPlacesRepository
+public interface IPlaceRepository
 {
-    Task<IReadOnlyList<Place>> GetAllAsync(Guid id);
+    Task<IEnumerable<Place>> GetAllAsync(Guid id);
     Task<Place> GetAsync(Guid id);
     Task AddAsync(Place place);
     Task UpdateAsync(Place place);
-    Task DeleteAsync(Place place);
+    Task DeleteAsync(Guid id);
 }
