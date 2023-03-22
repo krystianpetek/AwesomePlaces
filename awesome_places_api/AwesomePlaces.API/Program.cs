@@ -1,7 +1,6 @@
+using AwesomePlaces.Api.Routes;
 
-using AwesomePlaces.API.Routes;
-
-namespace AwesomePlaces.API;
+namespace AwesomePlaces.Api;
 
 public static class Program
 {
