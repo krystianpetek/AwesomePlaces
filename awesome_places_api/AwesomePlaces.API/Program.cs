@@ -1,4 +1,5 @@
 using AwesomePlaces.Api.Routes;
+using AwesomePlaces.Application;
 using AwesomePlaces.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,8 +37,12 @@ public static class Program
                 };
             });
 
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddApplicationServices();
 
         var app = builder.Build();
 

@@ -12,6 +12,7 @@ public static class PlacesExtensions
         })
         .WithName("GetPlaces")
         .WithOpenApi();
+        //.RequireAuthorization();
 
         routeGroupBuilder.MapPost("hello", () => { });
         return routeGroupBuilder;
