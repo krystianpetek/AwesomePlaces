@@ -11,7 +11,7 @@ namespace AwesomePlaces.Api;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -60,7 +60,7 @@ public static class Program
 
         app.MapGroup("places").MapPlaces();
 
-        app.PlaceContextSeed();
+        await app.PlaceEfSeed();
         app.Run();
     }
 }

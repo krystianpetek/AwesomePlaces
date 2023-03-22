@@ -12,7 +12,7 @@ public static class Extensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<PlaceDbContext>(options => options.UseInMemoryDatabase("PlaceDb"));
+        services.AddDbContext<PlaceEfContext>(options => options.UseInMemoryDatabase("PlaceDb"));
         services.AddScoped<IPlaceRepository, PlaceEfRepository>();
         services.AddScoped<IPlaceService, PlaceService>();
         return services;

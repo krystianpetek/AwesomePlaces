@@ -2,13 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
-public class PlaceDbContext : DbContext
+public class PlaceEfContext : DbContext
 {
-    public PlaceDbContext(DbContextOptions<PlaceDbContext> dbContextOptions) : base(dbContextOptions)
+    public PlaceEfContext(DbContextOptions<PlaceEfContext> dbContextOptions) : base(dbContextOptions)
     {
     }
 
     public DbSet<Place> Places { get; set; }
+    public DbSet<Coordinate> Coordinates { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

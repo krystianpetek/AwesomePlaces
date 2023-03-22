@@ -8,9 +8,9 @@ using System.Data;
 namespace AwesomePlaces.Infrastructure.Repositories;
 public class PlaceEfRepository : IPlaceRepository
 {
-    private readonly PlaceDbContext _placeDbContext;
+    private readonly PlaceEfContext _placeDbContext;
 
-    public PlaceEfRepository(PlaceDbContext placeDbContext)
+    public PlaceEfRepository(PlaceEfContext placeDbContext)
     {
         _placeDbContext = placeDbContext;
     }
