@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
-public class PlaceContext
+public class PlaceSqliteContext
 {
     protected readonly IConfiguration _configuration;
     
-    public PlaceContext(IConfiguration configuration)
+    public PlaceSqliteContext(IConfiguration configuration)
     {
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }
