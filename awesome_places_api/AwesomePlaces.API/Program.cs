@@ -1,3 +1,4 @@
+using AwesomePlaces.Api.Middleware;
 using AwesomePlaces.Api.Routes;
 using AwesomePlaces.Application;
 using AwesomePlaces.Infrastructure;
@@ -38,7 +39,6 @@ public static class Program
                 };
             });
 
-
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -57,6 +57,8 @@ public static class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseMiddleware<ErrorHandlingMiddleware>();
 
         app.MapGroup("places").MapPlaces();
 

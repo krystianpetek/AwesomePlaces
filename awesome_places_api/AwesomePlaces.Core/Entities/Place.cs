@@ -1,3 +1,4 @@
+using AwesomePlaces.Core.Enums;
 using AwesomePlaces.Core.Exceptions;
 
 namespace AwesomePlaces.Core.Entities;

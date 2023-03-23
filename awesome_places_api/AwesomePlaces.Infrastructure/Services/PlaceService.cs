@@ -1,7 +1,7 @@
 ﻿using AwesomePlaces.Application.Interfaces;
 using AwesomePlaces.Core.Repositories;
 
-namespace AwesomePlaces.Infrastructure;
+namespace AwesomePlaces.Infrastructure.Services;
 public class PlaceService : IPlaceService
 {
     private readonly IPlaceRepository _placeRepository;

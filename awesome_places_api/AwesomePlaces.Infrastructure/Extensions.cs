@@ -3,6 +3,7 @@ using AwesomePlaces.Application.Interfaces;
 using AwesomePlaces.Core.Repositories;
 using AwesomePlaces.Infrastructure.Persistance;
 using AwesomePlaces.Infrastructure.Repositories;
+using AwesomePlaces.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

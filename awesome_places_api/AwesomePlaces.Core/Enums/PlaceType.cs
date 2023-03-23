@@ -1,4 +1,4 @@
-namespace AwesomePlaces.Core.Entities;
+namespace AwesomePlaces.Core.Enums;
 
 [Flags]
 public enum PlaceTypes

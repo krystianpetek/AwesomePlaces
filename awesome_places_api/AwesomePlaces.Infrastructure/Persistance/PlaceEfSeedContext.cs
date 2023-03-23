@@ -1,4 +1,5 @@
 ﻿using AwesomePlaces.Core.Entities;
+using AwesomePlaces.Core.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
