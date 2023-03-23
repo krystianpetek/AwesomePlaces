@@ -31,3 +31,8 @@ https://www.youtube.com/watch?v=d4KFeRdZMcw
 
 IDEAS
 https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
+
+https://raw.githubusercontent.com/AkashDivya/SlimyCard-Animated-Flutter-Package/master/images/SlimyCard-Animated-Flutter-Package-by-Akash-Divya%20(1).gif
+https://www.youtube.com/watch?v=x4DydJKVvQk - Flutter Master Class Travel App
+https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
+https://www.youtube.com/watch?v=G1LGOH424lo - Best Flutter Widgets EVER!
