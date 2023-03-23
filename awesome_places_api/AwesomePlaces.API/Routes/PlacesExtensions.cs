@@ -1,4 +1,6 @@
 ﻿using AwesomePlaces.Application.Interfaces;
+using AwesomePlaces.Core.Entities;
+using AwesomePlaces.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AwesomePlaces.Api.Routes;
@@ -7,15 +9,30 @@ public static class PlacesExtensions
 {
     public static RouteGroupBuilder MapPlaces(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapGet("hello", ([FromServices] IPlaceService placeService, HttpContext context) =>
+        routeGroupBuilder.MapGet("places/{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
         {
-            return "Hello World!";
+            Place place = await placeService.GetPlace(id);
+            await context.Response.WriteAsJsonAsync<Place>(place);
+        })
+        .WithName("GetPlace")
+        .WithOpenApi();
+        //.RequireAuthorization();
+        
+        routeGroupBuilder.MapGet("places", async ([FromServices] IPlaceService placeService, HttpContext context) =>
+        {
+            IEnumerable<Place> places = await placeService.GetPlaces();
+            await context.Response.WriteAsJsonAsync<IEnumerable<Place>>(places);
+
         })
         .WithName("GetPlaces")
         .WithOpenApi();
-        //.RequireAuthorization();
+        
+        routeGroupBuilder.MapPost("places", async([FromBody] Place place, [FromServices] IPlaceService placeService ,HttpContext httpContext) => {
+            await placeService.CreatePlace(place);
+        })
+        .WithName("CreatePlace")
+        .WithOpenApi();
 
-        routeGroupBuilder.MapPost("hello", () => { });
         return routeGroupBuilder;
     }
 }

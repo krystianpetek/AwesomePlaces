@@ -15,12 +15,14 @@ public class PlaceEfRepository : IPlaceRepository
         _placeDbContext = placeDbContext;
     }
 
-    public async Task AddAsync(Place place)
+    public async Task<Guid> CreateAsync(Place place)
     {
         ArgumentNullException.ThrowIfNull(place, nameof(place));
 
         _placeDbContext.Places.Add(place);
         await _placeDbContext.SaveChangesAsync();
+
+        return place.Id;
     }
 
     public async Task DeleteAsync(Guid id)
@@ -32,7 +34,7 @@ public class PlaceEfRepository : IPlaceRepository
         await _placeDbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Place>> GetAllAsync(Guid id)
+    public async Task<IEnumerable<Place>> GetCollectionAsync()
     {
         return await _placeDbContext.Places.ToListAsync();
     }

@@ -13,7 +13,7 @@ public class PlaceSqliteRepository : IPlaceRepository
         _placeContext = placeContext;
     }
     
-    public async Task<IEnumerable<Place>> GetAllAsync(Guid id)
+    public async Task<IEnumerable<Place>> GetCollectionAsync()
     {
         using IDbConnection connection = _placeContext.CreateConnection();
         string sql = """
@@ -31,7 +31,7 @@ public class PlaceSqliteRepository : IPlaceRepository
         return await connection.QuerySingleOrDefaultAsync(sql);
     }
 
-    public async Task AddAsync(Place place)
+    public async Task<Guid> CreateAsync(Place place)
     {
         using IDbConnection connection = _placeContext.CreateConnection();
         var sql = """
@@ -39,6 +39,8 @@ public class PlaceSqliteRepository : IPlaceRepository
             VALUES (@Id, @Name, @Description, @PlaceType, @Coordinate, @Address, @Image, @Rating, @RequiredFee) 
             """;
         await connection.ExecuteAsync(sql);
+
+        return place.Id;
     }
 
     public async Task DeleteAsync(Guid id)
