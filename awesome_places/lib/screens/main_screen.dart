@@ -1,12 +1,13 @@
 import 'package:awesome_places/screens/explore_screen.dart';
 import 'package:awesome_places/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({super.key, required this.title});
+  MainScreen({super.key, required this.title, required this.currentTab});
   final String title;
+  int currentTab;
 
-  int currentTab = 0;
   List<BottomNavigationBarItem> pages = <BottomNavigationBarItem>[];
   List<Widget> screens = [HomeScreen(), ExploreScreen()];
 
@@ -28,10 +29,8 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(label: "Explore", icon: Icon(Icons.explore))
         ],
         currentIndex: widget.currentTab,
-        onTap: (value) {
-          setState(() {
-            widget.currentTab = value;
-          });
+        onTap: (index) {
+          context.goNamed('main', params: {'tab': '$index'});
         },
       ),
       // floatingActionButton: FloatingActionButton(),
