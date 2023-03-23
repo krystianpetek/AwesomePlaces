@@ -1,4 +1,4 @@
-import 'package:awesome_places/screens/home_screen.dart';
+import 'package:awesome_places/screens/main_screen.dart';
 import 'package:awesome_places/themes/application_themes.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class AwesomePlacesApp extends StatelessWidget {
     return MaterialApp(
       title: 'Awesome Places',
       theme: ApplicationThemes.darkTheme(),
-      home: const HomeScreen(title: 'Awesome Places'),
+      home: MainScreen(title: 'Awesome Places'),
     );
   }
 }
