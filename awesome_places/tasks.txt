@@ -1,0 +1,33 @@
+login tab
+https://www.youtube.com/watch?v=bF7-67D3x3k
+login with animation
+https://www.youtube.com/watch?v=NHAIiAmxTAU&t=85s
+
+
+register tab
+https://www.youtube.com/watch?v=Hq7Wj6DshNs
+
+
+introduction tab with indicator
+https://www.youtube.com/watch?v=d_hQoKomfdE
+or
+https://github.com/weblineindia/Flutter-Intro-Screens
+
+
+Home tab
+https://www.youtube.com/watch?v=WUUmD8s-5wY
+
+
+Place tab
+https://www.youtube.com/watch?v=uqm6U5_bcH0
+
+
+favorite tab
+
+
+profile tab
+https://www.youtube.com/watch?v=d4KFeRdZMcw
+
+
+IDEAS
+https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
