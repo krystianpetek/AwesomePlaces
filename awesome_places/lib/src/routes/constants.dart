@@ -3,14 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
-  static const String root = '/';
-  static const String home = '/home';
-  static const String homeDetails = 'details';
-  static const String profile = '/profile';
-  static const String profileDetails = 'details';
-  static const String settings = '/settings';
-  static const String login = '/login';
-  static const String explore = '/explore';
+  static const RouteModel root = RouteModel(
+    name: 'root',
+    path: '/',
+  );
+  static const RouteModel login = RouteModel(
+    name: 'login',
+    path: '/login',
+  );
+  static const RouteModel onboarding = RouteModel(
+    name: 'onboard',
+    path: '/onboard',
+  );
+  static const RouteModel home = RouteModel(
+    name: 'home',
+    path: '/home',
+  );
+  static const RouteModel explore = RouteModel(
+    name: 'explore',
+    path: '/explore',
+  );
+  static const RouteModel settings = RouteModel(
+    name: 'settings',
+    path: '/settings',
+  );
+  static const RouteModel profile = RouteModel(
+    name: 'profile',
+    path: '/profile',
+  );
   static Widget errorWidget(BuildContext context, GoRouterState state) =>
       const NotFoundScreen();
+}
+
+class RouteModel {
+  final String path;
+  final String name;
+  const RouteModel({required this.name, required this.path});
 }

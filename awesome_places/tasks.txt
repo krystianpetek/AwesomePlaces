@@ -36,3 +36,17 @@ https://raw.githubusercontent.com/AkashDivya/SlimyCard-Animated-Flutter-Package/
 https://www.youtube.com/watch?v=x4DydJKVvQk - Flutter Master Class Travel App
 https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
 https://www.youtube.com/watch?v=G1LGOH424lo - Best Flutter Widgets EVER!
+
+
+ANIMATED SPLASH SCREEN
+https://www.youtube.com/watch?v=XXISgdYHdYw
+
+
+Flutter Bottom Navigation Bar with Nested Routes: GoRouter vs Beamer Comparison
+https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter-beamer/#the-navigation-state-of-each-tab-is-not-preserved
+
+Flutter Riverpod 2.0: The Ultimate Guide
+https://codewithandrea.com/articles/flutter-state-management-riverpod/
+https://blog.logrocket.com/provider-vs-riverpod-comparing-state-managers-in-flutter/
+
+https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d04637775

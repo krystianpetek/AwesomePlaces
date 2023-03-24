@@ -1,4 +1,6 @@
+import 'package:awesome_places/src/routes/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key, this.username});
@@ -50,9 +52,10 @@ class LoginScreen extends StatelessWidget {
           'Login',
           style: TextStyle(color: Colors.white),
         ),
-        onPressed: () async {
+        onPressed: () {
           // Provider.of<AppStateManager>(context, listen: false)
           //     .login('mockUsername', 'mockPassword');
+          context.goNamed(Routes.home.name);
         },
       ),
     );

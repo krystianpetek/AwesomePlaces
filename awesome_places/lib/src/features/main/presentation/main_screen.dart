@@ -4,23 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-// class MainScreen extends StatefulWidget {
-
-//   @override
-//   State<MainScreen> createState() => _MainScreenState();
-
-//   // String currentRoute;
-
-//   // Map<String, int> mapping = <String, int>{'': 0, 'home': 0, 'explore': 1};
-
-//   // List<BottomNavigationBarItem> pages = <BottomNavigationBarItem>[
-//   //   BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-//   //   BottomNavigationBarItem(label: "Explore", icon: Icon(Icons.explore))
-//   // ];
-
-//   // Map<int, Widget> screens = {0: HomeScreen(), 1: ExploreScreen()};
-// }
-
 class MainScreen extends ConsumerWidget {
   MainScreen({
     super.key,
@@ -32,21 +15,21 @@ class MainScreen extends ConsumerWidget {
 
   final tabs = [
     NamedNavigationBarItemWidget(
-      initialLocation: Routes.home,
+      initialLocation: Routes.home.path,
       icon: const Icon(Icons.home),
       label: 'Home',
     ),
     NamedNavigationBarItemWidget(
-        initialLocation: Routes.explore,
+        initialLocation: Routes.explore.path,
         icon: const Icon(Icons.explore),
         label: 'Explore'),
     NamedNavigationBarItemWidget(
-      initialLocation: Routes.profile,
+      initialLocation: Routes.profile.path,
       icon: const Icon(Icons.person),
       label: 'Profile',
     ),
     NamedNavigationBarItemWidget(
-      initialLocation: Routes.settings,
+      initialLocation: Routes.settings.path,
       icon: const Icon(Icons.settings),
       label: 'Setting',
     ),
@@ -83,24 +66,4 @@ class MainScreen extends ConsumerWidget {
       ),
     );
   }
-  // body: widget.screens[widget.mapping],
-  // bottomNavigationBar: BottomNavigationBar(
-  //   items: widget.pages,
-  //   currentIndex: widget.mapping[widget.currentRoute]!,
-  //   onTap: (index) {
-  //     String route = widget.mapping.keys.elementAt(index);
-  //     context.goNamed('main', params: {'taba': route});
-  //   },
-  // ),
-  // floatingActionButton: FloatingActionButton(),
 }
-
-// class MainScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: screen,
-//       bottomNavigationBar: _buildBottomNavigation(context, tabs),
-//     );
-//   }
-// }
