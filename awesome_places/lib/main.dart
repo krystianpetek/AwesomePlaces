@@ -1,18 +1,21 @@
-import 'package:awesome_places/routes/app_routes.dart';
-import 'package:awesome_places/themes/application_themes.dart';
+import 'package:awesome_places/src/routes/app_routes.dart';
+import 'package:awesome_places/src/features/settings/data/themes/application_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const AwesomePlacesApp());
+  runApp(const ProviderScope(
+    child: AwesomePlacesApp(),
+  ));
 }
 
-class AwesomePlacesApp extends StatefulWidget {
+class AwesomePlacesApp extends ConsumerStatefulWidget {
   const AwesomePlacesApp({super.key});
   @override
-  State<AwesomePlacesApp> createState() => _AwesomePlacesAppState();
+  ConsumerState<AwesomePlacesApp> createState() => _AwesomePlacesAppState();
 }
 
-class _AwesomePlacesAppState extends State<AwesomePlacesApp> {
+class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
   late final _appRouter = AppRouter();
 
   @override
