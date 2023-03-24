@@ -1,4 +1,4 @@
-import 'package:awesome_places/themes/color_schemes.dart';
+import 'package:awesome_places/src/features/settings/data/themes/color_schemes.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationThemes {

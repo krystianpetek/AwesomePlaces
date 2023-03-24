@@ -1,4 +1,4 @@
-import 'package:awesome_places/screens/main_screen.dart';
+import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
 import 'package:awesome_places/src/features/not-found/presentation/not-found_screen.dart';
 import 'package:awesome_places/src/routes/constants.dart';
 import 'package:go_router/go_router.dart';
