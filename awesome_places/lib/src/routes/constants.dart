@@ -13,7 +13,7 @@ class Routes {
   );
   static const RouteModel register = RouteModel(
     name: 'register',
-    path: '/register',
+    path: 'register',
   );
   static const RouteModel onboarding = RouteModel(
     name: 'onboard',

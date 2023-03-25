@@ -1,6 +1,6 @@
 import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,23 +26,11 @@ class LoginScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: 100,
-                    child: SvgPicture.asset(
-                      'assets/images/brand_logo.svg',
-                      color: Color.fromARGB(255, 72, 130, 255),
-                    ),
-                  ),
+                  BrandLogo(),
                   SizedBox(
                     height: 30,
                   ),
-                  SizedBox(
-                    height: 50,
-                    child: SvgPicture.asset(
-                      'assets/images/brand_name.svg',
-                      color: Color.fromARGB(255, 64, 47, 218),
-                    ),
-                  ),
+                  BrandName()
                 ],
               ),
               Column(

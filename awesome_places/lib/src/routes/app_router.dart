@@ -1,4 +1,5 @@
 import 'package:awesome_places/src/features/auth/ui/login_screen.dart';
+import 'package:awesome_places/src/features/auth/ui/register_screen.dart';
 import 'package:awesome_places/src/features/auth/ui/welcome_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
@@ -34,6 +35,21 @@ class AppRouter {
                 path: Routes.login.path,
                 builder: (context, state) => LoginScreen(key: state.pageKey),
               ),
+              GoRoute(
+                  name: Routes.register.name,
+                  path: Routes.register.path,
+                  pageBuilder: (context, state) => CustomTransitionPage(
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          final tween = Tween(begin: 0.0, end: 1.0)
+                              .chain(CurveTween(curve: Curves.ease));
+                          return ScaleTransition(
+                              scale: animation.drive(tween),
+                              child: FadeTransition(
+                                  opacity: animation, child: child));
+                        },
+                        child: RegisterScreen(key: state.pageKey),
+                      )),
             ]),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,

@@ -1,4 +1,5 @@
 import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:awesome_places/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -44,31 +45,20 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                      children: [buildButton(context), buildButton(context)]),
+                  Column(children: [
+                    RedirectButton(
+                        onClick: () {
+                          context.goNamed(Routes.login.name);
+                        },
+                        text: Routes.login.name),
+                    RedirectButton(
+                        onClick: () {
+                          context.goNamed(Routes.register.name);
+                        },
+                        text: Routes.register.name),
+                  ]),
                 ],
               ))),
-    );
-  }
-
-  Widget buildButton(BuildContext context) {
-    return SizedBox(
-      height: 55,
-      child: MaterialButton(
-        color: Colors.amber,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: const Text(
-          'Login',
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () {
-          // Provider.of<AppStateManager>(context, listen: false)
-          //     .login('mockUsername', 'mockPassword');
-          context.goNamed(Routes.login.name);
-        },
-      ),
     );
   }
 }
