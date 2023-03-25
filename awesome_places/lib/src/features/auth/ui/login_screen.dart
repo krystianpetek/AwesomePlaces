@@ -1,9 +1,11 @@
 import 'package:awesome_places/src/routes/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key, this.username});
+  LoginScreen({super.key, this.username});
 
   final String? username;
 
@@ -14,25 +16,64 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Center(
-          child: ListView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.only(top: 44),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(
-                height: 200,
-                child: Image(
-                  image: AssetImage('assets/images/logo.png'),
-                ),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                    child: SvgPicture.asset(
+                      'assets/images/brand_logo.svg',
+                      color: Color.fromARGB(255, 72, 130, 255),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
+                    height: 50,
+                    child: SvgPicture.asset(
+                      'assets/images/brand_name.svg',
+                      color: Color.fromARGB(255, 64, 47, 218),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              buildTextField(username ?? 'username'),
-              const SizedBox(height: 16),
-              buildTextField('password'),
-              const SizedBox(height: 16),
-              buildButton(context),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.facebook,
+                        size: 30,
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Icon(
+                        FontAwesomeIcons.google,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  const SizedBox(height: 50),
+                  buildTextField(username ?? 'username'),
+                  const SizedBox(height: 16),
+                  buildTextField('password'),
+                  const SizedBox(height: 16),
+                  buildButton(context),
+                ],
+              )
             ],
           ),
         ),
@@ -81,4 +122,80 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  // ThemeData darkTheme = ThemeData(
+  //   brightness: Brightness.dark,
+  //   backgroundColor: bodyColorDark,
+  //   scaffoldBackgroundColor: bodyColorDark,
+  //   hintColor: textColor,
+  //   primaryColorLight: buttonBackgroundColorDark,
+  //   textTheme: TextTheme(
+  //       headline1: TextStyle(
+  //           color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+  //   buttonTheme: ButtonThemeData(
+  //       textTheme: ButtonTextTheme.primary, buttonColor: Colors.white),
+  // );
+
+  // ThemeData lightTheme = ThemeData(
+  //   brightness: Brightness.light,
+  //   backgroundColor: bodyColor,
+  //   scaffoldBackgroundColor: bodyColor,
+  //   hintColor: textColor,
+  //   primaryColorLight: buttonBackgroundColor,
+  //   textTheme: TextTheme(
+  //     headline1: TextStyle(
+  //         color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
+  //   ),
+  //   buttonTheme: ButtonThemeData(
+  //       textTheme: ButtonTextTheme.primary, buttonColor: Colors.black),
+  // );
+  // static Color textColor = const Color(0xff9C9C9D);
+  // static Color textColorDark = const Color(0xffffffff);
+
+  // static Color bodyColor = const Color(0xffffffff);
+  // static Color bodyColorDark = const Color(0xff0E0E0F);
+
+  // static Color buttonBackgroundColor = const Color(0xffF7F7F7);
+  // static Color buttonBackgroundColorDark = const Color(0xff121212);
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   final size = MediaQuery.of(context).size;
+
+  //   return Scaffold(
+  //     body: SingleChildScrollView(
+  //         child: Container(
+  //       width: size.width,
+  //       height: size.height,
+  //       color: lightTheme.backgroundColor,
+  //       padding: EdgeInsets.only(left: 20, right: 20, top: 150, bottom: 80),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //         children: [
+  //           Text(
+  //             "hello",
+  //             style: lightTheme.textTheme.headline1,
+  //           ),
+  //           Column(
+  //             children: [
+  //
+  //               Container(
+  //                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+  //                 decoration: BoxDecoration(
+  //                     color: lightTheme.primaryColorLight,
+  //                     borderRadius: BorderRadius.all(Radius.circular(20))),
+  //                 child: TextField(
+  //                   decoration: InputDecoration(
+  //                       border: InputBorder.none,
+  //                       hintText: 'email or phone number',
+  //                       hintStyle: TextStyle(color: Colors.amber)),
+  //                 ),
+  //               )
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     )),
+  //   );
+  // }
 }

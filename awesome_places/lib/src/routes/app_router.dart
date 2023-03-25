@@ -1,4 +1,5 @@
 import 'package:awesome_places/src/features/auth/ui/login_screen.dart';
+import 'package:awesome_places/src/features/auth/ui/welcome_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
@@ -19,15 +20,21 @@ class AppRouter {
 
     return GoRouter(
       debugLogDiagnostics: true,
-      initialLocation: Routes.login.path,
+      initialLocation: Routes.welcome.path,
       navigatorKey: _rootNavigatorKey,
       // refreshListenable: notifier,
       routes: [
         GoRoute(
-          name: Routes.login.name,
-          path: Routes.login.path,
-          builder: (context, state) => LoginScreen(key: state.pageKey),
-        ),
+            name: Routes.welcome.name,
+            path: Routes.welcome.path,
+            builder: (context, state) => WelcomeScreen(key: state.pageKey),
+            routes: [
+              GoRoute(
+                name: Routes.login.name,
+                path: Routes.login.path,
+                builder: (context, state) => LoginScreen(key: state.pageKey),
+              ),
+            ]),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,
           builder: (context, state, child) {

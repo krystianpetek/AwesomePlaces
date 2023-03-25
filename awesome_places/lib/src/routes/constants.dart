@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
-  static const RouteModel root = RouteModel(
-    name: 'root',
+  static const RouteModel welcome = RouteModel(
+    name: 'welcome',
     path: '/',
   );
   static const RouteModel login = RouteModel(
     name: 'login',
-    path: '/login',
+    path: 'login',
+  );
+  static const RouteModel register = RouteModel(
+    name: 'register',
+    path: '/register',
   );
   static const RouteModel onboarding = RouteModel(
     name: 'onboard',
