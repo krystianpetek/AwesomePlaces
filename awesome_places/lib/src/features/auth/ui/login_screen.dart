@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
 import 'package:awesome_places/src/routes/constants.dart';
-import 'package:awesome_places/src/widgets/widgets.dart';
+import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key, this.username});
@@ -15,23 +20,50 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Center(
+    return Consumer(builder: (context, ref, child) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               Column(
                 children: [
-                  BrandLogo(),
-                  SizedBox(
-                    height: 30,
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ),
                   ),
-                  BrandName()
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Login to your account',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 15,
+                    ),
+                  ),
                 ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Column(children: [
+                  buildInputField(label: 'Email'),
+                ]),
               ),
               Column(
                 children: [
@@ -59,14 +91,20 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   buildTextField('password'),
                   const SizedBox(height: 16),
-                  buildButton(context),
+                  RedirectButton(
+                    onClick: () {
+                      ref.read(authNotifierProvider).login('a', 'b');
+                      context.goNamed(Routes.home.name);
+                    },
+                    text: 'Login',
+                  ),
                 ],
               )
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget buildButton(BuildContext context) {
@@ -90,6 +128,43 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+  Widget buildInputField({label, obscureText = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(height: 5),
+        TextField(
+          obscureText: obscureText,
+          // cursorColor: logoColor,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.green,
+                width: 1.0,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.green,
+              ),
+            ),
+            // hintText: hintText,
+            hintStyle: TextStyle(height: 0.5),
+          ),
+        )
+      ],
+    );
+  }
+
   Widget buildTextField(String hintText) {
     return TextField(
       cursorColor: logoColor,
@@ -102,7 +177,7 @@ class LoginScreen extends StatelessWidget {
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.green,
+            color: Colors.grey,
           ),
         ),
         hintText: hintText,

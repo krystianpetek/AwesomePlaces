@@ -1,5 +1,6 @@
 login tab
 https://www.youtube.com/watch?v=bF7-67D3x3k
+https://www.youtube.com/watch?v=Hq7Wj6DshNs&t=582s
 login with animation
 https://www.youtube.com/watch?v=NHAIiAmxTAU&t=85s
 
@@ -53,6 +54,7 @@ https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d046
 
 CONTROLLER 
 https://www.flutterclutter.dev/flutter/tutorials/create-a-controller-for-a-custom-widget/2021/2149/
+https://jimmyleo.medium.com/write-a-controller-on-flutter-73286731a113
 
 Custom page transition
 https://medium.com/geekculture/defining-custom-page-transitions-in-flutter-e2972a464be

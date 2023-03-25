@@ -1,3 +1,4 @@
+import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
 import 'package:awesome_places/src/features/auth/ui/login_screen.dart';
 import 'package:awesome_places/src/features/auth/ui/register_screen.dart';
 import 'package:awesome_places/src/features/auth/ui/welcome_screen.dart';
@@ -5,7 +6,6 @@ import 'package:awesome_places/src/features/explore/presentation/explore_screen.
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
 import 'package:awesome_places/src/features/not_found/presentation/not-found_screen.dart';
-import 'package:awesome_places/src/features/settings/data/providers/app_settings_provider.dart';
 import 'package:awesome_places/src/routes/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,14 +16,25 @@ class AppRouter {
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final router = Provider<GoRouter>((ref) {
-    final duplicated = ref.read(appSettingsNotifierProvider);
-    // final notifier = ref.read(goRouterNotifierProvider);
+    // final duplicated = ref.read(appSettingsNotifierProvider);
+    final auth = ref.read(authNotifierProvider);
 
     return GoRouter(
       debugLogDiagnostics: true,
       initialLocation: Routes.welcome.path,
       navigatorKey: _rootNavigatorKey,
-      // refreshListenable: notifier,
+      refreshListenable: auth,
+      redirect: (context, state) {
+        final loggedIn = auth.isLoggedIn;
+        final loggingIn = state.subloc == '/login';
+
+        final registeringIn = state.subloc == '/register';
+        if (!loggedIn && !loggingIn && registeringIn) return '/register';
+
+        if (!loggedIn) return loggingIn ? null : '/';
+        if (loggingIn) return Routes.home.path;
+        return null;
+      },
       routes: [
         GoRoute(
             name: Routes.welcome.name,
