@@ -25,4 +25,14 @@ class Address {
       zipCode: json['zipCode'] as String,
     );
   }
+
+  // Address.fromJson(String jsonString) {
+  //   final _map = jsonDecode(jsonString);
+  //   this.id = _map['id'];
+  //   this.city = _map['city'];
+  //   this.country = _map['country'];
+  //   this.state = _map['state'];
+  //   this.street = _map['street'];
+  //   this.zipCode = _map['zipCode'];
+  // }
 }
