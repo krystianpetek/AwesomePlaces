@@ -9,7 +9,7 @@ public static class PlacesExtensions
 {
     public static RouteGroupBuilder MapPlaces(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapGet("places/{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
+        routeGroupBuilder.MapGet("{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
         {
             Place place = await placeService.GetPlace(id);
             await context.Response.WriteAsJsonAsync<Place>(place);
@@ -18,7 +18,7 @@ public static class PlacesExtensions
         .WithOpenApi();
         //.RequireAuthorization();
         
-        routeGroupBuilder.MapGet("places", async ([FromServices] IPlaceService placeService, HttpContext context) =>
+        routeGroupBuilder.MapGet("", async ([FromServices] IPlaceService placeService, HttpContext context) =>
         {
             IEnumerable<Place> places = await placeService.GetPlaces();
             await context.Response.WriteAsJsonAsync<IEnumerable<Place>>(places);
@@ -27,7 +27,7 @@ public static class PlacesExtensions
         .WithName("GetPlaces")
         .WithOpenApi();
         
-        routeGroupBuilder.MapPost("places", async([FromBody] Place place, [FromServices] IPlaceService placeService ,HttpContext httpContext) => {
+        routeGroupBuilder.MapPost("", async([FromBody] Place place, [FromServices] IPlaceService placeService ,HttpContext httpContext) => {
             await placeService.CreatePlace(place);
         })
         .WithName("CreatePlace")

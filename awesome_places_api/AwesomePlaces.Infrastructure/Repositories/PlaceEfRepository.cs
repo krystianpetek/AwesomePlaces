@@ -36,12 +36,18 @@ public class PlaceEfRepository : IPlaceRepository
 
     public async Task<IEnumerable<Place>> GetCollectionAsync()
     {
-        return await _placeDbContext.Places.ToListAsync();
+        return await _placeDbContext.Places
+            .Include(coordinate => coordinate.Coordinate)
+            .Include(address => address.Address)
+            .ToListAsync();
     }
 
     public async Task<Place> GetAsync(Guid id)
     {
-        return await _placeDbContext.Places.SingleOrDefaultAsync(place => place.Id == id);
+        return await _placeDbContext.Places
+                    .Include(coordinate => coordinate.Coordinate)
+                    .Include(address => address.Address)
+                    .SingleOrDefaultAsync(place => place.Id == id);
     }
 
     public async Task UpdateAsync(Place place)
