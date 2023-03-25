@@ -7,13 +7,13 @@ public class Coordinate
 
     }
 
-    public Coordinate(double latitute, double longitude)
+    public Coordinate(double latitude, double longitude)
     {
-        Latitute = latitute;
+        Latitude = latitude;
         Longitude = longitude;
     }
 
     public Guid Id { get; set; } = Guid.NewGuid();
-    public double Latitute { get; protected set; }
+    public double Latitude { get; protected set; }
     public double Longitude { get; protected set; }
 }
