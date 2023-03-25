@@ -8,22 +8,42 @@ class RedirectButton extends StatelessWidget {
   const RedirectButton({super.key, required this.onClick, required this.text});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 55,
+    // return SizedBox(
+    //   height: 55,
+    //   child: MaterialButton(
+    //     color: Colors.amber,
+    //     shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.circular(8),
+    //     ),
+    //     child: Text(
+    //       text,
+    //       style: TextStyle(color: Colors.white),
+    //     ),
+    //     onPressed: () {
+    //       onClick();
+    //       // Provider.of<AppStateManager>(context, listen: false)
+    //       //     .login('mockUsername', 'mockPassword');
+    //     },
+    //   ),
+    // );
+    return Container(
+      // padding: EdgeInsets.only(top: 3, left: 3),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Theme.of(context).colorScheme.background)),
       child: MaterialButton(
-        color: Colors.amber,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.white),
-        ),
+        minWidth: double.infinity,
+        height: 60,
         onPressed: () {
           onClick();
-          // Provider.of<AppStateManager>(context, listen: false)
-          //     .login('mockUsername', 'mockPassword');
         },
+        // color: Theme.of(context).colorScheme.secondaryContainer,
+        // color: const Color(0xff402fda),
+        color: Color.fromARGB(255, 47, 87, 218),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Text(text,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
       ),
     );
   }

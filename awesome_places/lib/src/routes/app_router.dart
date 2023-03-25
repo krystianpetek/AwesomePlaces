@@ -33,23 +33,35 @@ class AppRouter {
               GoRoute(
                 name: Routes.login.name,
                 path: Routes.login.path,
-                builder: (context, state) => LoginScreen(key: state.pageKey),
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    final tween = Tween(begin: 0.0, end: 1.0)
+                        .chain(CurveTween(curve: Curves.linear));
+                    return ScaleTransition(
+                        alignment: Alignment.bottomCenter,
+                        scale: animation.drive(tween),
+                        child: child);
+                  },
+                  child: LoginScreen(key: state.pageKey),
+                ),
               ),
               GoRoute(
-                  name: Routes.register.name,
-                  path: Routes.register.path,
-                  pageBuilder: (context, state) => CustomTransitionPage(
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                          final tween = Tween(begin: 0.0, end: 1.0)
-                              .chain(CurveTween(curve: Curves.ease));
-                          return ScaleTransition(
-                              scale: animation.drive(tween),
-                              child: FadeTransition(
-                                  opacity: animation, child: child));
-                        },
-                        child: RegisterScreen(key: state.pageKey),
-                      )),
+                name: Routes.register.name,
+                path: Routes.register.path,
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    final tween = Tween(begin: 0.0, end: 1.0)
+                        .chain(CurveTween(curve: Curves.easeOut));
+                    return SizeTransition(
+                      sizeFactor: animation.drive(tween),
+                      child: FadeTransition(opacity: animation, child: child),
+                    );
+                  },
+                  child: RegisterScreen(key: state.pageKey),
+                ),
+              ),
             ]),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,

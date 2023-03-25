@@ -1,3 +1,4 @@
+import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -9,7 +10,13 @@ class RegisterScreen extends StatelessWidget {
         appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Text('register'),
+          child: FadeAnimation(
+              delay: 1000,
+              opacity: 1,
+              child: Text(
+                'register',
+                style: TextStyle(color: Colors.red),
+              )),
         ));
   }
 }

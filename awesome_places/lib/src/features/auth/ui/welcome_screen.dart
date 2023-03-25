@@ -16,11 +16,11 @@ class WelcomeScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Column(
-                    children: <Widget>[
+                    children: [
                       const Text(
                         'Welcome!',
                         style: TextStyle(
@@ -28,13 +28,8 @@ class WelcomeScreen extends StatelessWidget {
                           fontSize: 28,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Column(
-                        children: const <Widget>[
-                          BrandLogo(),
-                          SizedBox(height: 30),
-                          BrandName(),
-                        ],
+                      const SizedBox(
+                        height: 20,
                       ),
                       Text(
                         'Log in or create an account to continue',
@@ -45,17 +40,32 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
+                  Column(
+                    children: const <Widget>[
+                      BrandLogo(),
+                      SizedBox(height: 30),
+                      BrandName(),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Column(children: [
                     RedirectButton(
                         onClick: () {
                           context.goNamed(Routes.login.name);
                         },
-                        text: Routes.login.name),
+                        text: 'Login'),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     RedirectButton(
                         onClick: () {
                           context.goNamed(Routes.register.name);
                         },
-                        text: Routes.register.name),
+                        text: 'Register'),
                   ]),
                 ],
               ))),

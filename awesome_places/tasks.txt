@@ -53,3 +53,6 @@ https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d046
 
 CONTROLLER 
 https://www.flutterclutter.dev/flutter/tutorials/create-a-controller-for-a-custom-widget/2021/2149/
+
+Custom page transition
+https://medium.com/geekculture/defining-custom-page-transitions-in-flutter-e2972a464be
