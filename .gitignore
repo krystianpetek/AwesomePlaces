@@ -418,3 +418,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+awesome_places_api/AwesomePlaces.Api/Properties/ServiceDependencies/AwesomePlacesApi20230325211214 - Zip Deploy/apis1.arm.json
+awesome_places_api/AwesomePlaces.Api/Properties/ServiceDependencies/AwesomePlacesApi20230325211214 - Zip Deploy/profile.arm.json
+awesome_places_api/AwesomePlaces.Api/Properties/serviceDependencies.AwesomePlacesApi20230325211214 - Zip Deploy.json
+awesome_places_api/AwesomePlaces.Api/Properties/serviceDependencies.json
