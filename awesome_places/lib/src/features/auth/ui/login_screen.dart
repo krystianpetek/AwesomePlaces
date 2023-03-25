@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
 
   final String? username;
 
-  final Color logoColor = const Color.fromRGBO(64, 143, 77, 1);
+  final Color logoColor = const Color.fromARGB(255, 40, 105, 245);
   final TextStyle focusedStyle = const TextStyle(color: Colors.green);
   final TextStyle unfocusedStyle = const TextStyle(color: Colors.grey);
 
@@ -31,12 +31,11 @@ class LoginScreen extends StatelessWidget {
             },
           ),
         ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Column(
                 children: [
@@ -47,9 +46,7 @@ class LoginScreen extends StatelessWidget {
                       fontSize: 28,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Text(
                     'Login to your account',
                     style: TextStyle(
@@ -60,51 +57,87 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Column(children: [
-                  buildInputField(label: 'Email'),
-                ]),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(FontAwesomeIcons.facebook, size: 30),
+                        SizedBox(width: 30),
+                        Icon(FontAwesomeIcons.google, size: 30),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    buildInputField(label: 'Email'),
+                    const SizedBox(height: 20),
+                    buildInputField(label: 'Password', obscureText: true),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: const [
+                        Text('Forgot password?'),
+                      ],
+                    ),
+                    const SizedBox(height: 50),
+                    RedirectButton(
+                      onClick: () {
+                        ref
+                            .read(authNotifierProvider)
+                            .login('login', 'password');
+                        context.goNamed(Routes.home.name);
+                      },
+                      text: 'Login',
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Don't have an account?"),
+                          SizedBox(width: 5),
+                          TextButton(
+                            onPressed: () async {
+                              await showModal(context);
+                            },
+                            child: const Text(
+                              "Sign up",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          )
+                        ]),
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.facebook,
-                        size: 30,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Icon(
-                        FontAwesomeIcons.google,
-                        size: 30,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  const SizedBox(height: 50),
-                  buildTextField(username ?? 'username'),
-                  const SizedBox(height: 16),
-                  buildTextField('password'),
-                  const SizedBox(height: 16),
-                  RedirectButton(
-                    onClick: () {
-                      ref.read(authNotifierProvider).login('a', 'b');
-                      context.goNamed(Routes.home.name);
-                    },
-                    text: 'Login',
-                  ),
-                ],
-              )
             ],
           ),
         ),
       );
     });
+  }
+
+  Future showModal(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 200,
+          child: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Sorry, not implemented yet!",
+                  style: TextStyle(fontSize: 24),
+                ),
+              )
+            ]),
+          ),
+        );
+      },
+    );
   }
 
   Widget buildButton(BuildContext context) {
@@ -142,19 +175,20 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(height: 5),
         TextField(
           obscureText: obscureText,
-          // cursorColor: logoColor,
+          cursorColor: logoColor,
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
             border: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.green,
+                color: Colors.black,
                 width: 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.green,
+                color: Color.fromARGB(255, 40, 105, 245),
               ),
             ),
             // hintText: hintText,

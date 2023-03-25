@@ -52,7 +52,10 @@ class AppRouter {
                     return ScaleTransition(
                         alignment: Alignment.bottomCenter,
                         scale: animation.drive(tween),
-                        child: child);
+                        child: FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        ));
                   },
                   child: LoginScreen(key: state.pageKey),
                 ),

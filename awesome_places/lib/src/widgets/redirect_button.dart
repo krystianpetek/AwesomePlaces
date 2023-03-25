@@ -10,7 +10,7 @@ class RedirectButton extends StatelessWidget {
     return Container(
       // padding: EdgeInsets.only(top: 3, left: 3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(color: Theme.of(context).colorScheme.background)),
       child: MaterialButton(
         minWidth: double.infinity,
@@ -20,9 +20,9 @@ class RedirectButton extends StatelessWidget {
         },
         // color: Theme.of(context).colorScheme.secondaryContainer,
         // color: const Color(0xff402fda),
-        color: Color.fromARGB(255, 47, 87, 218),
+        color: const Color.fromARGB(255, 47, 87, 218),
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         child: Text(text,
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
       ),
