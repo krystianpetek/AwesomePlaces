@@ -1,7 +1,8 @@
 import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
 import 'package:awesome_places/src/routes/constants.dart';
-import 'package:awesome_places/src/widgets/error_message.dart';
+import 'package:awesome_places/src/widgets/snackbar_messages/error_message.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
+import 'package:awesome_places/src/widgets/snackbar_messages/success_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,8 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         body: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -126,11 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               setState(() {
                                 widget.loading = false;
                               });
-                              // ref
-                              //     .read(authNotifierProvider)
-                              //     .login('login', 'password');
-
-                              // context.goNamed(Routes.home.name);
+                              await Future.delayed(Duration(seconds: 2));
+                              ref
+                                  .read(authNotifierProvider)
+                                  .login('login', 'password');
                             },
                             child: Text(
                               'Login',
@@ -175,7 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.black45,
         behavior: SnackBarBehavior.fixed,
         elevation: 0,
-        content: ErrorMessage(content: 'Authentication failed.'),
+        duration: Duration(seconds: 1),
+        content: SuccessMessage(content: 'Authentication successful.'),
       ),
     );
   }

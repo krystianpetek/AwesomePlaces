@@ -4,27 +4,21 @@ https://www.youtube.com/watch?v=Hq7Wj6DshNs&t=582s
 login with animation
 https://www.youtube.com/watch?v=NHAIiAmxTAU&t=85s
 
-
 register tab
 https://www.youtube.com/watch?v=Hq7Wj6DshNs
-
 
 introduction tab with indicator
 https://www.youtube.com/watch?v=d_hQoKomfdE
 or
 https://github.com/weblineindia/Flutter-Intro-Screens
 
-
 Home tab
 https://www.youtube.com/watch?v=WUUmD8s-5wY
-
 
 Place tab
 https://www.youtube.com/watch?v=uqm6U5_bcH0
 
-
 favorite tab
-
 
 profile tab
 https://www.youtube.com/watch?v=d4KFeRdZMcw
@@ -38,6 +32,9 @@ https://www.youtube.com/watch?v=x4DydJKVvQk - Flutter Master Class Travel App
 https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
 https://www.youtube.com/watch?v=G1LGOH424lo - Best Flutter Widgets EVER!
 
+Fllash error message snackbar
+https://medium.flutterdevs.com/flash-error-messages-in-flutter-6ac85f23c963
+https://www.youtube.com/watch?v=UWXC0DHIIfQ
 
 ANIMATED SPLASH SCREEN
 https://www.youtube.com/watch?v=XXISgdYHdYw
@@ -52,7 +49,7 @@ https://blog.logrocket.com/provider-vs-riverpod-comparing-state-managers-in-flut
 
 https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d04637775
 
-CONTROLLER 
+CONTROLLER
 https://www.flutterclutter.dev/flutter/tutorials/create-a-controller-for-a-custom-widget/2021/2149/
 https://jimmyleo.medium.com/write-a-controller-on-flutter-73286731a113
 
@@ -68,3 +65,9 @@ https://www.kindacode.com/article/base64-encoding-and-decoding-in-dart-and-flutt
 StreamBuilder / FutureBuilder
 https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html
 https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html
+
+BEST 15 Flutter Animated Widgets
+https://www.youtube.com/watch?v=o47ES996f3w
+
+Flutter UI Tutorial | Http and Provider - Github Following API
+https://www.youtube.com/watch?v=VHYvpTwpW-Q
