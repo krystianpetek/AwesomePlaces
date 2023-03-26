@@ -66,7 +66,7 @@ public static class Program
 
         app.UseMiddleware<ErrorHandlingMiddleware>();
 
-        app.MapGroup("/account").MapUsers();
+        app.MapGroup("/users").MapUsers();
         app.MapGroup("/places").MapPlaces();
 
         await app.PlaceEfSeed();
