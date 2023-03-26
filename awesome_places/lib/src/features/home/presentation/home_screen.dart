@@ -12,15 +12,22 @@ class HomeScreen extends StatelessWidget {
         final AuthNotifier read = ref.read(authNotifierProvider);
         return Center(
           child: Column(
-            children: [
-              Text("home"),
-              RedirectButton(
-                  onClick: () {
-                    read.logout();
-                  },
-                  text: 'logout')
-            ],
             mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("home"),
+              RedirectButton(
+                onClick: () {
+                  read.logout();
+                },
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            ],
           ),
         );
       },

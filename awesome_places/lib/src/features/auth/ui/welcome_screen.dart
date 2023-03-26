@@ -54,18 +54,32 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Column(children: [
                     RedirectButton(
-                        onClick: () {
-                          context.goNamed(Routes.login.name);
-                        },
-                        text: 'Login'),
+                      onClick: () {
+                        context.goNamed(Routes.login.name);
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
                     RedirectButton(
-                        onClick: () {
-                          context.goNamed(Routes.register.name);
-                        },
-                        text: 'Register'),
+                      onClick: () {
+                        context.goNamed(Routes.register.name);
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ]),
                 ],
               ))),

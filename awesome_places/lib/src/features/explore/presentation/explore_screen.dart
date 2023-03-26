@@ -21,11 +21,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
         children: <Widget>[
           const Text("explore"),
           RedirectButton(
-              onClick: () async {
-                data = await PlacesService().getPlaces();
-                setState(() {});
-              },
-              text: 'Fetch'),
+            onClick: () async {
+              data = await PlacesService().getPlaces();
+              setState(() {});
+            },
+            child: Text(
+              'Fetch',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
+            ),
+          ),
           SizedBox(
             height: 500,
             child: ListView.separated(
