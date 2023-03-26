@@ -66,8 +66,8 @@ public static class Program
 
         app.UseMiddleware<ErrorHandlingMiddleware>();
 
+        app.MapGroup("/account").MapUsers();
         app.MapGroup("/places").MapPlaces();
-        app.MapGet("/hello", () => { return "HelloWorld"; });
 
         await app.PlaceEfSeed();
         app.Run();

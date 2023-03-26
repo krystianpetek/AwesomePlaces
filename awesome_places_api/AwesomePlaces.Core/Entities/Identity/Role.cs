@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AwesomePlaces.Core.Entities.Identity;
-public enum Role
+public class Role
 {
-    Admin,
-    User
+    public int Id { get; set; }
+    public string Name { get; set; }
 }
