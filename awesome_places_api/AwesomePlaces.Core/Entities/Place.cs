@@ -6,16 +6,14 @@ namespace AwesomePlaces.Core.Entities;
 public class Place
 {
     public Guid Id { get; protected set; } = Guid.NewGuid();
-    public string Name { get; protected set; }
-    public string Description { get; protected set; }
-    public PlaceTypes PlaceType { get; protected set; }
-    //public int CoordinateId { get; protected set; }
-    //public int AddressId { get; protected set; }
-    public byte[] Image { get; protected set; }
-    public double Rating { get; protected set; }
-    public bool RequiredFee { get; protected set; }
-    public virtual Coordinate Coordinate { get; protected set; }
-    public virtual Address Address { get; protected set; }
+    public string Name { get; init; }
+    public string Description { get; set; }
+    public PlaceTypes PlaceType { get; init; }
+    public byte[] Image { get; init; }
+    public double Rating { get; init; }
+    public bool RequiredFee { get; init; }
+    public virtual Coordinate Coordinate { get; init; }
+    public virtual Address Address { get; init; }
 
     public Place(){}
 
@@ -38,6 +36,7 @@ public class Place
         {
             throw new InvalidPlaceDescriptionException(description);
         }
+
         this.Description = description;
     }
 }

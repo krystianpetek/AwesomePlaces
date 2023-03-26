@@ -14,6 +14,6 @@ public class Coordinate
     }
 
     public Guid Id { get; set; } = Guid.NewGuid();
-    public double Latitude { get; protected set; }
-    public double Longitude { get; protected set; }
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
 }
