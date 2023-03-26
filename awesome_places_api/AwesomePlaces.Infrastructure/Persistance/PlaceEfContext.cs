@@ -1,6 +1,7 @@
 ﻿using AwesomePlaces.Core.Entities;
 using AwesomePlaces.Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
 public class PlaceEfContext : DbContext
@@ -27,5 +28,24 @@ public class PlaceEfContext : DbContext
             .Property(u => u.Name)
             .IsRequired();
 
+        modelBuilder.Entity<Role>().HasData(
+            new List<Role>()
+            {
+                new Role()
+                {
+                    Id = 1,
+                    Name = "User"
+                },
+                new Role()
+                {
+                    Id = 2,
+                    Name = "Manager"
+            },
+                new Role()
+                {
+                    Id = 3,
+                    Name = "Admin"
+                },
+            });
     }
 }

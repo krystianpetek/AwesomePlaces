@@ -9,29 +9,31 @@ public static class PlacesExtensions
 {
     public static RouteGroupBuilder MapPlaces(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapGet("{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
+        routeGroupBuilder.MapGet( "/{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
         {
             Place place = await placeService.GetPlace(id);
             await context.Response.WriteAsJsonAsync<Place>(place);
         })
         .WithName("GetPlace")
-        .WithOpenApi();
-        //.RequireAuthorization();
-        
-        routeGroupBuilder.MapGet("", async ([FromServices] IPlaceService placeService, HttpContext context) =>
+        .WithOpenApi()
+        .RequireAuthorization();
+
+        routeGroupBuilder.MapGet("/", async ([FromServices] IPlaceService placeService, HttpContext context) =>
         {
             IEnumerable<Place> places = await placeService.GetPlaces();
             await context.Response.WriteAsJsonAsync<IEnumerable<Place>>(places);
 
         })
         .WithName("GetPlaces")
-        .WithOpenApi();
+        .WithOpenApi()
+        .RequireAuthorization();
         
         routeGroupBuilder.MapPost("", async([FromBody] Place place, [FromServices] IPlaceService placeService ,HttpContext httpContext) => {
             await placeService.CreatePlace(place);
         })
         .WithName("CreatePlace")
-        .WithOpenApi();
+        .WithOpenApi()
+        .RequireAuthorization();
 
         return routeGroupBuilder;
     }

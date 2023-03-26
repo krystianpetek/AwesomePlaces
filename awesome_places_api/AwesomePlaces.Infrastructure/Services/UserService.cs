@@ -38,18 +38,18 @@ public class UserService : IUserService
             new Claim(ClaimTypes.Role, $"{user.Role}"),
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
+        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
+        SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        DateTime expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
 
-        var token = new JwtSecurityToken(
+        JwtSecurityToken token = new JwtSecurityToken(
             issuer: _authenticationSettings.JwtIssuer,
             audience: _authenticationSettings.JwtIssuer,
             claims: claims,
             expires: expires,
             signingCredentials: credentials);
 
-        var tokenHandler = new JwtSecurityTokenHandler();
+        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         return tokenHandler.WriteToken(token);
     }
 

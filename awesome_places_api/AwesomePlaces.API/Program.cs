@@ -6,6 +6,7 @@ using AwesomePlaces.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace AwesomePlaces.Api;
@@ -39,10 +40,38 @@ public static class Program
             });
         builder.Services.ConfigureSwaggerGen(setup =>
             {
-                setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                setup.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Awesome Places API",
                     Version = "v1"
+                });
+                setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme.
+                    First fetch register, next login and in response you get JWT Token.
+                    Token pass in Authorize section like this example: 'Bearer {token}'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
                 });
             });
 
@@ -67,8 +96,8 @@ public static class Program
 
         app.UseMiddleware<ErrorHandlingMiddleware>();
 
-        app.MapGroup("/users").MapUsers();
-        app.MapGroup("/places").MapPlaces();
+        app.MapGroup("users").MapUsers();
+        app.MapGroup("places").MapPlaces();
 
         await app.PlaceEfSeed();
         app.Run();
