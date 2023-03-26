@@ -36,6 +36,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       Text(data[index].description),
                       Text(data[index].address!.country),
                       Text(data[index].address!.city),
+                      Image.memory(data[index].image),
                     ],
                   );
                 },

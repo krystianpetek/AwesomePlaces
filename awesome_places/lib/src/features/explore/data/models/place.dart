@@ -8,8 +8,7 @@ class Place {
   String id;
   String description;
   int placeType;
-  // Uint8List image;
-  String image;
+  Uint8List image;
   double rating;
   bool requiredFee;
   Coordinate? coordinate;
@@ -31,7 +30,7 @@ class Place {
         id: json['id'] as String,
         description: json['description'] as String,
         placeType: json['placeType'] as int,
-        image: json['image'] as String,
+        image: base64.decode(json['image']),
         rating: json['rating'] as double,
         requiredFee: json['requiredFee'] as bool,
         address: Address.fromJson(json['address']),

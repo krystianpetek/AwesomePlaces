@@ -58,3 +58,13 @@ https://jimmyleo.medium.com/write-a-controller-on-flutter-73286731a113
 
 Custom page transition
 https://medium.com/geekculture/defining-custom-page-transitions-in-flutter-e2972a464be
+
+Problem with http call from chrome /edge debug
+https://stackoverflow.com/questions/71157863/dart-flutter-http-request-raises-xmlhttprequest-error
+
+base64 decode
+https://www.kindacode.com/article/base64-encoding-and-decoding-in-dart-and-flutter/
+
+StreamBuilder / FutureBuilder
+https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html
+https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html
