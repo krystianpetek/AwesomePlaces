@@ -38,39 +38,34 @@ public static class Program
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings!.JwtKey)),
                 };
             });
-        builder.Services.ConfigureSwaggerGen(setup =>
+        builder.Services.ConfigureSwaggerGen(swaggerGenOptions =>
             {
-                setup.SwaggerDoc("v1", new OpenApiInfo
+                swaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Awesome Places API",
                     Version = "v1"
                 });
-                setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                var jwtSecurityScheme = new OpenApiSecurityScheme
                 {
-                    Description = @"JWT Authorization header using the Bearer scheme.
-                    First fetch register, next login and in response you get JWT Token.
-                    Token pass in Authorize section like this example: 'Bearer {token}'",
-                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Name = "JWT Authorization",
                     In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-
-                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    Description = "Put you JWT Bearer token in Authorize section. **_Only Token!_**",
+                    Reference = new OpenApiReference
                     {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
-                        },
-                        new List<string>()
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                swaggerGenOptions.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+                swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { 
+                        jwtSecurityScheme, 
+                        Array.Empty<string>() 
                     }
                 });
             });
