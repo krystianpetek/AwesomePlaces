@@ -15,14 +15,17 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
-  HttpOverrides.global = new MyHttpOverrides();
-  runApp(const ProviderScope(
-    child: AwesomePlacesApp(),
-  ));
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(
+    const ProviderScope(
+      child: AwesomePlacesApp(),
+    ),
+  );
 }
 
 class AwesomePlacesApp extends ConsumerStatefulWidget {
   const AwesomePlacesApp({super.key});
+
   @override
   ConsumerState<AwesomePlacesApp> createState() => _AwesomePlacesAppState();
 }
@@ -30,14 +33,14 @@ class AwesomePlacesApp extends ConsumerStatefulWidget {
 class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
   @override
   Widget build(BuildContext context) {
-    final routerWatcher = ref.watch(AppRouter.router);
+    final routerProvider = ref.watch(AppRouter.router);
 
     return MaterialApp.router(
       title: 'Awesome Places',
       theme: ApplicationThemes.darkTheme(),
-      routerDelegate: routerWatcher.routerDelegate,
-      routeInformationParser: routerWatcher.routeInformationParser,
-      routeInformationProvider: routerWatcher.routeInformationProvider,
+      routerDelegate: routerProvider.routerDelegate,
+      routeInformationParser: routerProvider.routeInformationParser,
+      routeInformationProvider: routerProvider.routeInformationProvider,
     );
   }
 }

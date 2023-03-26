@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
 import 'package:awesome_places/src/routes/constants.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
@@ -7,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key, this.username});
@@ -62,10 +59,31 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(FontAwesomeIcons.facebook, size: 30),
-                        SizedBox(width: 30),
-                        Icon(FontAwesomeIcons.google, size: 30),
+                      children: [
+                        InkWell(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                          onTap: () async {
+                            await showModal(context,
+                                reason: 'Login by Facebook');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(7),
+                            child: Icon(FontAwesomeIcons.facebook, size: 30),
+                          ),
+                        ),
+                        const SizedBox(width: 30),
+                        InkWell(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                          onTap: () async {
+                            await showModal(context, reason: 'Login by Google');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(7),
+                            child: Icon(FontAwesomeIcons.google, size: 30),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -75,8 +93,12 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text('Forgot password?'),
+                      children: [
+                        InkWell(
+                            child: const Text('Forgot password?'),
+                            onTap: () async {
+                              await showModal(context);
+                            })
                       ],
                     ),
                     const SizedBox(height: 50),
@@ -91,20 +113,23 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Don't have an account?"),
-                          SizedBox(width: 5),
-                          TextButton(
-                            onPressed: () async {
-                              await showModal(context);
-                            },
-                            child: const Text(
-                              "Sign up",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          )
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text("Don't have an account?"),
+                        const SizedBox(width: 5),
+                        InkWell(
+                          onTap: () async {
+                            await showModal(context);
+                          },
+                          child: const Text(
+                            "Sign up",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.blue),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -115,26 +140,32 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  Future showModal(BuildContext context) {
+  Future showModal(BuildContext context, {String reason = 'This feature'}) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
         return SizedBox(
-          height: 200,
-          child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  "Sorry, not implemented yet!",
-                  style: TextStyle(fontSize: 24),
-                ),
-              )
-            ]),
-          ),
+          height: MediaQuery.of(context).size.height / 3,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            const Text('Sorry!', style: TextStyle(fontSize: 30)),
+            const SizedBox(height: 5),
+            Text(
+              '$reason not implemented yet!',
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              child: const Text('Close'),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateColor.resolveWith((states) => logoColor),
+                  foregroundColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ]),
         );
       },
     );

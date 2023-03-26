@@ -45,6 +45,9 @@ class AppRouter {
                 name: Routes.login.name,
                 path: Routes.login.path,
                 pageBuilder: (context, state) => CustomTransitionPage(
+                  child: LoginScreen(key: state.pageKey),
+                  transitionDuration: const Duration(milliseconds: 500),
+                  barrierColor: Colors.black54,
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
                     final tween = Tween(begin: 0.0, end: 1.0)
@@ -57,23 +60,27 @@ class AppRouter {
                           child: child,
                         ));
                   },
-                  child: LoginScreen(key: state.pageKey),
                 ),
               ),
               GoRoute(
                 name: Routes.register.name,
                 path: Routes.register.path,
                 pageBuilder: (context, state) => CustomTransitionPage(
+                  child: RegisterScreen(key: state.pageKey),
+                  transitionDuration: const Duration(milliseconds: 500),
+                  barrierColor: Colors.black54,
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
                     final tween = Tween(begin: 0.0, end: 1.0)
                         .chain(CurveTween(curve: Curves.easeOut));
                     return SizeTransition(
                       sizeFactor: animation.drive(tween),
-                      child: FadeTransition(opacity: animation, child: child),
+                      child: FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      ),
                     );
                   },
-                  child: RegisterScreen(key: state.pageKey),
                 ),
               ),
             ]),
