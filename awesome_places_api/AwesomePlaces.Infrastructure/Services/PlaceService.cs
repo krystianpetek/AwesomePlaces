@@ -1,5 +1,6 @@
 ﻿using AwesomePlaces.Application.Interfaces;
 using AwesomePlaces.Core.Entities;
+using AwesomePlaces.Core.Exceptions;
 using AwesomePlaces.Core.Repositories;
 
 namespace AwesomePlaces.Infrastructure.Services;
@@ -18,8 +19,8 @@ public class PlaceService : IPlaceService
 
     public async Task<Place> GetPlace(Guid id)
     {
-        return await _placeRepository.GetAsync(id);
-
+        Place place = await _placeRepository.GetAsync(id) ?? throw new NotFoundException("Place not found.");
+        return place;
     }
 
     public async Task<IEnumerable<Place>> GetPlaces()
