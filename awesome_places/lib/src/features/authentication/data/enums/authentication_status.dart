@@ -1,4 +1,4 @@
-enum AuthenticatedStatus {
+enum AuthenticationStatus {
   Unuthenticated,
   Authenticated,
 }

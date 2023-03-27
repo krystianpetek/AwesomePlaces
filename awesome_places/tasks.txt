@@ -46,6 +46,7 @@ https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-
 Flutter Riverpod 2.0: The Ultimate Guide
 https://codewithandrea.com/articles/flutter-state-management-riverpod/
 https://blog.logrocket.com/provider-vs-riverpod-comparing-state-managers-in-flutter/
+https://riverpod.dev/docs/providers/state_notifier_provider
 
 https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d04637775
 
@@ -71,3 +72,4 @@ https://www.youtube.com/watch?v=o47ES996f3w
 
 Flutter UI Tutorial | Http and Provider - Github Following API
 https://www.youtube.com/watch?v=VHYvpTwpW-Q
+
