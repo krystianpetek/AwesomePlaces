@@ -1,18 +1,18 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppCache {
-  Future<void> invalidate() async {
+  Future<void> resetUser() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user', '');
+    await prefs.setString('userState', '');
   }
 
-  Future<void> cacheUser(String user) async {
+  Future<void> setUser(String userState) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user', user);
+    await prefs.setString('userState', userState);
   }
 
-  Future<String?> isUserLoggedIn() async {
+  Future<String> getUser() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user');
+    return prefs.getString('userState') ?? '';
   }
 }
