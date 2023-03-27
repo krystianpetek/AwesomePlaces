@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/features/main/data/models/named_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

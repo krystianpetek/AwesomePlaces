@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class PlacesService {
   Future getPlaces() async {
-    final response = await http.get(Uri.parse(ApiEndpoints.places));
+    final response = await http.get(Uri.parse(ApiEndpoints.getPlaceCollection));
     if (response.statusCode == 200) {
       final place = jsonDecode(response.body);
 

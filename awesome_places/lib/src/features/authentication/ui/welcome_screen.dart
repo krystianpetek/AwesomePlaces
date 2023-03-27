@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:awesome_places/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';

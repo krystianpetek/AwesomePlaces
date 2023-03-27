@@ -43,7 +43,7 @@ class ErrorMessage extends StatelessWidget {
                                 ),
                                 Text(
                                   content,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 14, color: Colors.white),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
