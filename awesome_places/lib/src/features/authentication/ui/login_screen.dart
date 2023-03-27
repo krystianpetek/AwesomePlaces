@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
+import 'package:awesome_places/src/features/authentication/data/providers/auth_provider.dart';
 import 'package:awesome_places/src/routes/constants.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/error_message.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
@@ -20,10 +20,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final Color logoColor = const Color.fromARGB(255, 40, 105, 245);
-
-  final TextStyle focusedStyle = const TextStyle(color: Colors.green);
-
-  final TextStyle unfocusedStyle = const TextStyle(color: Colors.grey);
 
   @override
   Widget build(BuildContext context) {

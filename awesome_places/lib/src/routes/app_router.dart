@@ -1,7 +1,7 @@
-import 'package:awesome_places/src/features/auth/data/auth_provider.dart';
-import 'package:awesome_places/src/features/auth/ui/login_screen.dart';
-import 'package:awesome_places/src/features/auth/ui/register_screen.dart';
-import 'package:awesome_places/src/features/auth/ui/welcome_screen.dart';
+import 'package:awesome_places/src/features/authentication/data/providers/auth_provider.dart';
+import 'package:awesome_places/src/features/authentication/ui/login_screen.dart';
+import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
+import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';

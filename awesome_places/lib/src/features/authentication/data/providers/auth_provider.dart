@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/auth/data/app_cache.dart';
+import 'package:awesome_places/src/features/authentication/data/app_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
