@@ -3,6 +3,7 @@ using AwesomePlaces.Api.Routes;
 using AwesomePlaces.Application;
 using AwesomePlaces.Infrastructure;
 using AwesomePlaces.Infrastructure.Persistance;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -74,7 +75,6 @@ public static class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<ErrorHandlingMiddleware>();
-
         builder.Services.AddSingleton<AuthenticationSettings>(authenticationSettings);
         builder.Services.AddInfrastructureServices(builder.Configuration);
         builder.Services.AddApplicationServices();

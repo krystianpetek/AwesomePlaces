@@ -13,4 +13,5 @@ public class RegisterUserModel
     
     [JsonIgnore]
     public int RoleId { get; set; } = 1;
+
 }
