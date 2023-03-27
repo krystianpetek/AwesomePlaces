@@ -1,41 +1,49 @@
-import 'package:awesome_places/src/features/authentication/data/providers/auth_provider.dart';
+import 'package:awesome_places/src/features/authentication/data/models/authentication_state.dart';
+import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/login_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
-import 'package:awesome_places/src/features/not_found/presentation/not-found_screen.dart';
-import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
+    implements Listenable {
+  VoidCallback? routerListener;
+
+  late bool isAuthenticated = false;
+
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-  static final router = Provider<GoRouter>((ref) {
-    // final duplicated = ref.read(appSettingsNotifierProvider);
-    final auth = ref.read(authNotifierProvider);
+  @override
+  Future<void> build() async {
+    isAuthenticated = ref.watch(authenticationProvider).user!.isNotEmpty;
 
-    return GoRouter(
-      debugLogDiagnostics: true,
-      initialLocation: Routes.welcome.path,
-      navigatorKey: _rootNavigatorKey,
-      refreshListenable: auth,
-      redirect: (context, state) {
-        final loggedIn = auth.isLoggedIn;
-        final loggingIn = state.subloc == '/login';
+    ref.listenSelf((_, __) {
+      if (state.isLoading) return;
+      routerListener?.call();
+    });
+  }
 
-        final registeringIn = state.subloc == '/register';
-        if (!loggedIn && !loggingIn && registeringIn) return '/register';
+  String? redirect(BuildContext context, GoRouterState state) {
+    if (this.state.isLoading || this.state.hasError) return null;
 
-        if (!loggedIn) return loggingIn ? null : '/';
-        if (loggingIn) return Routes.home.path;
-        return null;
-      },
-      routes: [
+    final loggedIn = isAuthenticated;
+
+    final loggingIn = state.subloc == '/login';
+    final registeringIn = state.subloc == '/register';
+    if (!loggedIn && !loggingIn && registeringIn) return '/register';
+
+    if (!loggedIn) return loggingIn ? null : '/';
+    if (loggingIn) return Routes.home.path;
+    return null;
+  }
+
+  List<RouteBase> get routes => [
         GoRoute(
             name: Routes.welcome.name,
             path: Routes.welcome.path,
@@ -127,8 +135,30 @@ class AppRouter {
             // ),
           ],
         )
-      ],
-      errorBuilder: (context, state) => const NotFoundScreen(),
-    );
-  });
+      ];
+
+  /// Adds [GoRouter]'s listener as specified by its [Listenable].
+  /// [GoRouteInformationProvider] uses this method on creation to handle its
+  /// internal [ChangeNotifier].
+  /// Check out the internal implementation of [GoRouter] and
+  /// [GoRouteInformationProvider] to see this in action.
+  @override
+  void addListener(VoidCallback listener) {
+    routerListener = listener;
+  }
+
+  /// Removes [GoRouter]'s listener as specified by its [Listenable].
+  /// [GoRouteInformationProvider] uses this method when disposing,
+  /// so that it removes its callback when destroyed.
+  /// Check out the internal implementation of [GoRouter] and
+  /// [GoRouteInformationProvider] to see this in action.
+  @override
+  void removeListener(VoidCallback listener) {
+    routerListener = null;
+  }
 }
+
+final routerChangeNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<RouterChangeNotifier, void>(() {
+  return RouterChangeNotifier();
+});

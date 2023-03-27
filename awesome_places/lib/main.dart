@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:awesome_places/src/routes/app_router.dart';
+import 'package:awesome_places/src/routes/providers/router_provider.dart';
 import 'package:awesome_places/src/features/settings/data/themes/application_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,14 +33,13 @@ class AwesomePlacesApp extends ConsumerStatefulWidget {
 class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
   @override
   Widget build(BuildContext context) {
-    final routerProvider = ref.watch(AppRouter.router);
-
+    final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Awesome Places',
       theme: ApplicationThemes.darkTheme(),
-      routerDelegate: routerProvider.routerDelegate,
-      routeInformationParser: routerProvider.routeInformationParser,
-      routeInformationProvider: routerProvider.routeInformationProvider,
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }
