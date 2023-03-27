@@ -1,8 +1,8 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using System.Reflection;
-using FluentValidation;
 
-namespace AwesomePlaces.Application.Interfaces;
+namespace AwesomePlaces.Api.Helpers;
 
 [Obsolete(message: "Obsolete because its failed implemented? I found better approach for my purpose by validation filter.")]
 public class Validated<T>
@@ -14,7 +14,7 @@ public class Validated<T>
         Value = value;
         ValidationResult = validationResult;
     }
-    
+
     public T Value { get; }
 
     public bool IsValid => ValidationResult.IsValid;

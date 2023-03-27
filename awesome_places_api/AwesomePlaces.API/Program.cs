@@ -3,7 +3,6 @@ using AwesomePlaces.Api.Routes;
 using AwesomePlaces.Application;
 using AwesomePlaces.Infrastructure;
 using AwesomePlaces.Infrastructure.Persistance;
-using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -64,9 +63,9 @@ public static class Program
                 swaggerGenOptions.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
                 swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { 
-                        jwtSecurityScheme, 
-                        Array.Empty<string>() 
+                    {
+                        jwtSecurityScheme,
+                        Array.Empty<string>()
                     }
                 });
             });

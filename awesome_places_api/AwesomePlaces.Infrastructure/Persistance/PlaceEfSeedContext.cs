@@ -1,14 +1,8 @@
 ﻿using AwesomePlaces.Core.Entities;
 using AwesomePlaces.Core.Enums;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
 public static class PlaceEfSeedContext

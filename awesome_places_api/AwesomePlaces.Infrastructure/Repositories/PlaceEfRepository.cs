@@ -1,9 +1,7 @@
 ﻿using AwesomePlaces.Core.Entities;
 using AwesomePlaces.Core.Repositories;
 using AwesomePlaces.Infrastructure.Persistance;
-using Dapper;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace AwesomePlaces.Infrastructure.Repositories;
 public class PlaceEfRepository : IPlaceRepository

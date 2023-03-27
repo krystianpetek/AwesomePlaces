@@ -10,7 +10,7 @@ public class RegisterUserModel
     public string Password { get; set; }
     [DefaultValue("defaultPass")]
     public string ConfirmPassword { get; set; }
-    
+
     [JsonIgnore]
     public int RoleId { get; set; } = 1;
 

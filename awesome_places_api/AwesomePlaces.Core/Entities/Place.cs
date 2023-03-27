@@ -15,7 +15,7 @@ public class Place
     public virtual Coordinate Coordinate { get; init; }
     public virtual Address Address { get; init; }
 
-    public Place(){}
+    public Place() { }
 
     public Place(Guid id, string name, string description, PlaceTypes placeType, Coordinate coordinate, Address address, byte[] image, double rating, bool requiredFee)
     {

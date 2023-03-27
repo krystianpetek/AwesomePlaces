@@ -23,7 +23,7 @@ public class UserEfRepository : IUserRepository
     public async Task<User?> GetAsync(string email)
     {
         var dbUser = await _placeEfContext.Users
-            //.Include(dbUser => dbUser.Role)
+                //.Include(dbUser => dbUser.Role)
                 .FirstOrDefaultAsync(dbUser => dbUser.Email == email);
         return dbUser;
     }

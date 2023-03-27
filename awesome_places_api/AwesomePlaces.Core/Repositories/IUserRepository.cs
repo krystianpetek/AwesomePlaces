@@ -1,5 +1,4 @@
-﻿using AwesomePlaces.Core.Entities;
-using AwesomePlaces.Core.Entities.Identity;
+﻿using AwesomePlaces.Core.Entities.Identity;
 
 namespace AwesomePlaces.Core.Repositories;
 public interface IUserRepository

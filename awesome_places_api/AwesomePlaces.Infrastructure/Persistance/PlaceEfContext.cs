@@ -1,7 +1,6 @@
 ﻿using AwesomePlaces.Core.Entities;
 using AwesomePlaces.Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace AwesomePlaces.Infrastructure.Persistance;
 public class PlaceEfContext : DbContext

@@ -10,8 +10,8 @@ public static class UserExtensions
     public static RouteGroupBuilder MapUsers(this RouteGroupBuilder routeGroupBuilder)
     {
         routeGroupBuilder.MapPost("register", async (
-            [FromBody] RegisterUserModel registerUserModel, 
-            [FromServices] IUserService usersService, 
+            [FromBody] RegisterUserModel registerUserModel,
+            [FromServices] IUserService usersService,
             HttpContext context) =>
         {
             await usersService.RegisterUser(registerUserModel);
@@ -32,8 +32,8 @@ public static class UserExtensions
         .WithOpenApi();
 
         routeGroupBuilder.MapPost("login", async (
-            [FromBody] LoginUserModel loginUserModel, 
-            [FromServices] IUserService usersService, 
+            [FromBody] LoginUserModel loginUserModel,
+            [FromServices] IUserService usersService,
             HttpContext context) =>
         {
             string token = await usersService.LoginGenerateJwt(loginUserModel);

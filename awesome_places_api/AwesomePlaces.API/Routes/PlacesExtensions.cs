@@ -1,6 +1,5 @@
 ﻿using AwesomePlaces.Application.Interfaces;
 using AwesomePlaces.Core.Entities;
-using AwesomePlaces.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AwesomePlaces.Api.Routes;
@@ -9,7 +8,7 @@ public static class PlacesExtensions
 {
     public static RouteGroupBuilder MapPlaces(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapGet( "/{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
+        routeGroupBuilder.MapGet("/{id}", async ([FromQuery] Guid id, [FromServices] IPlaceService placeService, HttpContext context) =>
         {
             Place place = await placeService.GetPlace(id);
             await context.Response.WriteAsJsonAsync<Place>(place);
@@ -27,8 +26,9 @@ public static class PlacesExtensions
         .WithName("GetPlaces")
         .WithOpenApi()
         .RequireAuthorization();
-        
-        routeGroupBuilder.MapPost("", async([FromBody] Place place, [FromServices] IPlaceService placeService ,HttpContext httpContext) => {
+
+        routeGroupBuilder.MapPost("", async ([FromBody] Place place, [FromServices] IPlaceService placeService, HttpContext httpContext) =>
+        {
             await placeService.CreatePlace(place);
         })
         .WithName("CreatePlace")

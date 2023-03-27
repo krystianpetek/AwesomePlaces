@@ -12,7 +12,7 @@ public class PlaceSqliteRepository : IPlaceRepository
     {
         _placeContext = placeContext;
     }
-    
+
     public async Task<IEnumerable<Place>> GetCollectionAsync()
     {
         using IDbConnection connection = _placeContext.CreateConnection();
