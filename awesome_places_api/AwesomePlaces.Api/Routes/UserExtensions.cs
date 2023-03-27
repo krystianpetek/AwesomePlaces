@@ -2,6 +2,7 @@
 using AwesomePlaces.Application.Interfaces;
 using AwesomePlaces.Application.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace AwesomePlaces.Api.Routes;
 
@@ -36,8 +37,9 @@ public static class UserExtensions
             [FromServices] IUserService usersService,
             HttpContext context) =>
         {
-            string token = await usersService.LoginGenerateJwt(loginUserModel);
-            return Results.Ok(token);
+            string accessToken = await usersService.LoginGenerateJwt(loginUserModel);
+            var response = new JwtToken() { access_token = accessToken };
+            return TypedResults.Json(response);
         })
         .AddEndpointFilterFactory((context, next) =>
         {
