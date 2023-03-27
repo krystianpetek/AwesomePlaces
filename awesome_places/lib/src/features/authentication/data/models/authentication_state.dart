@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
 
 class AuthenticationState {
-  final String? user;
-  final String? accessToken;
+  final String user;
+  final String accessToken;
   final AuthenticationStatus status;
 
   AuthenticationState({
-    this.user,
-    this.accessToken,
+    required this.user,
+    required this.accessToken,
     this.status = AuthenticationStatus.Unuthenticated,
   });
 
@@ -27,9 +27,7 @@ class AuthenticationState {
 
   factory AuthenticationState.initialize() {
     return AuthenticationState(
-        status: AuthenticationStatus.Unuthenticated,
-        user: null,
-        accessToken: null);
+        status: AuthenticationStatus.Unuthenticated, user: '', accessToken: '');
   }
 
   factory AuthenticationState.fromMap(Map<String, dynamic> map) {
