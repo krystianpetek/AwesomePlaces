@@ -1,5 +1,6 @@
-import 'package:awesome_places/src/features/authentication/data/providers/auth_provider.dart';
-import 'package:awesome_places/src/routes/constants.dart';
+import 'package:awesome_places/src/features/authentication/data/models/login.dart';
+import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/error_message.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/success_message.dart';
@@ -116,15 +117,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               setState(() {
                                 widget.loading = true;
                               });
-                              await Future.delayed(Duration(seconds: 2));
+                              await ref
+                                  .read(authenticationProvider.notifier)
+                                  .login(Login(
+                                      email: 'userMock@email.com',
+                                      password: 'defaultPass'));
+                              context.goNamed(Routes.home.name);
                               showSnackBar(context);
                               setState(() {
                                 widget.loading = false;
                               });
-                              await Future.delayed(Duration(seconds: 2));
-                              ref
-                                  .read(authNotifierProvider)
-                                  .login('login', 'password');
                             },
                             child: Text(
                               'Login',
@@ -163,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void showSnackBar(BuildContext context) {
+  void showSnackBar(BuildContext context, {String message = ''}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.black45,
