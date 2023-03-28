@@ -1,9 +1,10 @@
+import 'package:awesome_places/src/widgets/snackbar_messages/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 
-class ErrorMessage extends StatelessWidget {
-  final String content;
+class ErrorMessage extends StatelessWidget implements CustomSnackBar {
+  final String message;
 
-  const ErrorMessage({super.key, required this.content});
+  const ErrorMessage({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,8 @@ class ErrorMessage extends StatelessWidget {
                       height: 90,
                       decoration: BoxDecoration(
                         color: Colors.red.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
                       ),
                       child: Row(
                         children: [
@@ -42,7 +44,7 @@ class ErrorMessage extends StatelessWidget {
                                       fontSize: 18, color: Colors.white),
                                 ),
                                 Text(
-                                  content,
+                                  message,
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.white),
                                   maxLines: 2,

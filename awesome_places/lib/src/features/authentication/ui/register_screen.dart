@@ -1,6 +1,5 @@
 import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});

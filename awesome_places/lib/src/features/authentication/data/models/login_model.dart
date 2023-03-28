@@ -19,6 +19,10 @@ class LoginModel {
     );
   }
 
+  factory LoginModel.initialize() {
+    return const LoginModel(email: '', password: '');
+  }
+
   factory LoginModel.fromMap(Map<String, dynamic> map) {
     return LoginModel(
       email: map['email'] as String,

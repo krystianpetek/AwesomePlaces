@@ -47,6 +47,7 @@ Flutter Riverpod 2.0: The Ultimate Guide
 https://codewithandrea.com/articles/flutter-state-management-riverpod/
 https://blog.logrocket.com/provider-vs-riverpod-comparing-state-managers-in-flutter/
 https://riverpod.dev/docs/providers/state_notifier_provider
+https://stackoverflow.com/questions/71813090/flutter-riverpod-ref-read-vs-ref-listen-vs-ref-watch
 
 https://medium.com/flutter-community/flutter-riverpod-tutorial-timer-app-186d04637775
 

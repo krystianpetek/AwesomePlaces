@@ -20,7 +20,7 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
 
   @override
   Future<void> build() async {
-    isAuthenticated = ref.watch(authenticationProvider).user!.isNotEmpty;
+    isAuthenticated = ref.watch(authenticationProvider).user.isNotEmpty;
 
     ref.listenSelf((_, __) {
       if (state.isLoading) return;

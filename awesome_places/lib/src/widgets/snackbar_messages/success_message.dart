@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SuccessMessage extends StatelessWidget {
-  final String content;
+import 'custom_snackbar.dart';
 
-  const SuccessMessage({super.key, required this.content});
+class SuccessMessage extends StatelessWidget implements CustomSnackBar {
+  final String message;
+
+  const SuccessMessage({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class SuccessMessage extends StatelessWidget {
                       height: 90,
                       decoration: BoxDecoration(
                         color: Colors.green.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
                       ),
                       child: Row(
                         children: [
@@ -42,8 +45,8 @@ class SuccessMessage extends StatelessWidget {
                                       fontSize: 18, color: Colors.white),
                                 ),
                                 Text(
-                                  content,
-                                  style: TextStyle(
+                                  message,
+                                  style: const TextStyle(
                                       fontSize: 14, color: Colors.white),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
