@@ -1,4 +1,5 @@
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/custom_snackbar.dart';
@@ -72,7 +73,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(50)),
                         onTap: () async {
-                          await showModal(context, reason: 'Login by Facebook');
+                          await showModal(
+                              text: "Login by Facebook isn't implemented yet!");
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(7),
@@ -84,7 +86,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(50)),
                         onTap: () async {
-                          await showModal(context, reason: 'Login by Google');
+                          await showModal(
+                              text: "Login by Google isn't implemented yet!");
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(7),
@@ -94,15 +97,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  buildInputField(
+                  EmailField(
+                    textEditingController: emailController,
                     label: 'Email',
-                    textController: emailController,
                   ),
                   const SizedBox(height: 20),
-                  buildInputField(
-                      label: 'Password',
-                      obscureText: true,
-                      textController: passwordController),
+                  PasswordField(
+                    label: 'Password',
+                    textEditingController: passwordController,
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -110,9 +114,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       InkWell(
                           child: const Text('Forgot password?'),
                           onTap: () async {
-                            await showModal(context);
+                            await showModal(
+                                text: "This feature isn't implemented yet!");
+                            await showModal(
+                              text: "I fill login data for you.",
+                            );
                             emailController.text = 'userMock@email.com';
                             passwordController.text = 'defaultPass';
+                            // komunikat o wypełnieniu danymi
                           })
                     ],
                   ),
@@ -126,10 +135,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           onClick: () async {
                             setState(() {
                               widget.loading = true;
+                              // przenieść do auth state
                             });
-                            await authenticationNotifier.login(LoginModel(
-                                email: emailController.text,
-                                password: passwordController.text));
+                            await authenticationNotifier.login(
+                              LoginModel(
+                                  email: emailController.text,
+                                  password: passwordController.text),
+                            );
 
                             if (authenticationNotifier
                                 .state.errorMessage.isNotEmpty) {
@@ -161,7 +173,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       const SizedBox(width: 5),
                       InkWell(
                         onTap: () async {
-                          await showModal(context);
+                          await showModal(
+                              text: "This feature isn't implemented yet!");
                         },
                         child: const Text(
                           "Sign up",
@@ -187,33 +200,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  Future showModal(BuildContext context, {String reason = 'This feature'}) {
+  Future showModal({required String text}) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Text('Sorry!', style: TextStyle(fontSize: 30)),
-            const SizedBox(height: 5),
-            Text(
-              '$reason not implemented yet!',
-              style: const TextStyle(fontSize: 15, color: Colors.grey),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateColor.resolveWith((states) => logoColor),
-                  foregroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white)),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Close'),
-            )
-          ]),
-        );
+        return ShowModalBottom(text: text);
       },
     );
   }
@@ -239,6 +230,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
+// email field nad password field
+// register screen
+// validators in fields
+// remove build buttons
+// move showmodal
   Widget buildInputField(
       {required String label,
       bool obscureText = false,
