@@ -6,28 +6,35 @@ class AuthenticationStateModel {
   final String user;
   final String accessToken;
   final AuthenticationStatus status;
+  final String errorMessage;
 
-  AuthenticationStateModel({
-    required this.user,
-    required this.accessToken,
-    this.status = AuthenticationStatus.unuthenticated,
-  });
+  AuthenticationStateModel(
+      {required this.user,
+      required this.accessToken,
+      this.status = AuthenticationStatus.unuthenticated,
+      this.errorMessage = ''});
 
   AuthenticationStateModel copyWith({
     String? user,
     String? accessToken,
     AuthenticationStatus? status,
+    String? errorMessage,
   }) {
     return AuthenticationStateModel(
       user: user ?? this.user,
       accessToken: accessToken ?? this.accessToken,
       status: status ?? this.status,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   factory AuthenticationStateModel.initialize() {
     return AuthenticationStateModel(
-        status: AuthenticationStatus.unuthenticated, user: '', accessToken: '');
+      status: AuthenticationStatus.unuthenticated,
+      user: '',
+      accessToken: '',
+      errorMessage: '',
+    );
   }
 
   factory AuthenticationStateModel.fromMap(Map<String, dynamic> map) {
@@ -35,6 +42,7 @@ class AuthenticationStateModel {
       user: map['user'] as String,
       accessToken: ['accessToken'] as String,
       status: map['authenticationState'] as AuthenticationStatus,
+      errorMessage: map['errorMessage'] as String,
     );
   }
 
@@ -43,6 +51,7 @@ class AuthenticationStateModel {
       'user': user,
       'accessToken': accessToken,
       'status': status.name,
+      'errorMessage': errorMessage,
     };
   }
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:awesome_places/src/features/authentication/data/app_cache.dart';
 import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
 import 'package:awesome_places/src/features/authentication/data/models/models.dart';
@@ -27,6 +29,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
         user: '',
         accessToken: '',
         status: AuthenticationStatus.unuthenticated,
+        errorMessage: '',
       );
       return;
     }
@@ -45,19 +48,45 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
         user: '${login.email}',
         accessToken: '$token',
         status: AuthenticationStatus.authenticated,
+        errorMessage: '',
       );
 
       await _appCache.setUser(authenticationState.toJson());
       state = authenticationState;
-    } catch (HttpException) {}
+    } on SocketException {
+      String exceptionMessage = 'No connection to internet';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on HttpException {
+      String exceptionMessage = 'Unable to login';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on FormatException {
+      String exceptionMessage = 'Bad response format';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } catch (Exception) {
+      String exceptionMessage = 'Something went wrong!';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    }
   }
 
   Future<void> logout() async {
     await _appCache.resetUser();
-    state = AuthenticationStateModel(
+    state = state.copyWith(
       user: '',
       accessToken: '',
       status: AuthenticationStatus.unuthenticated,
+      errorMessage: '',
     );
   }
 }
