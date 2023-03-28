@@ -36,6 +36,8 @@ class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Awesome Places',
+      themeMode: ThemeMode.system,
+      darkTheme: ApplicationThemes.darkTheme(),
       theme: ApplicationThemes.darkTheme(),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,

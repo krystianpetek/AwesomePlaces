@@ -9,9 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
-  LoginScreen({super.key, this.username});
-
-  final String? username;
+  LoginScreen({super.key});
   bool loading = false;
 
   @override
@@ -66,6 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _formKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +177,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 text: "This feature isn't implemented yet!");
                           },
                           child: const Text(
-                            "Sign up",
+                            "Register",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.blue),

@@ -1,5 +1,7 @@
-- validators in fields
 - register screen
+- login screen positioning
+- theme provider
+- splash native screen
 - better error screen 
 - Stream/future builder w pllace'ach /Stream.periodic
 
