@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:awesome_places/src/features/authentication/data/app_cache.dart';
+import 'package:awesome_places/src/features/authentication/data/services/app_cache_service.dart';
 import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
 import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 import 'package:awesome_places/src/features/authentication/data/services/authentication_service.dart';
@@ -16,7 +16,7 @@ final authenticationProvider =
 });
 
 class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
-  final AppCache _appCache = AppCache();
+  final AppCacheService _appCache = AppCacheService();
   final IAuthenticationService authenticationService;
 
   AuthenticationNotifier(this.authenticationService,
@@ -69,7 +69,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
       );
       print(exceptionMessage);
     } on HttpException {
-      String exceptionMessage = 'Unable to login';
+      String exceptionMessage = 'Unable to login, incorrect login data.';
       state = state.copyWith(
         errorMessage: exceptionMessage,
       );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RedirectButton extends StatelessWidget {
+class ApproveButton extends StatelessWidget {
   final Function onClick;
   Widget child;
 
-  RedirectButton({super.key, required this.onClick, required this.child});
+  ApproveButton({super.key, required this.onClick, required this.child});
 
   @override
   Widget build(BuildContext context) {

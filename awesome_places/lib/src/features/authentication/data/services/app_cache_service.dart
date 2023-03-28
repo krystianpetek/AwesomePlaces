@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppCache {
+class AppCacheService {
   Future<void> resetUser() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('userState', '');

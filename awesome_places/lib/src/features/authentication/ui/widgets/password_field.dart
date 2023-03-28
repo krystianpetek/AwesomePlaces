@@ -1,3 +1,4 @@
+import 'package:awesome_places/src/features/authentication/data/validators/form_validators.dart';
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
@@ -25,8 +26,13 @@ class PasswordField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        TextField(
+        TextFormField(
           controller: textEditingController,
+          validator: (value) {
+            if (!value!.isValidPassword) {
+              return "Provide a valid password of more than 8 characters!";
+            }
+          },
           obscureText: obscureText,
           cursorColor: const Color.fromARGB(255, 40, 105, 245),
           keyboardType: TextInputType.emailAddress,

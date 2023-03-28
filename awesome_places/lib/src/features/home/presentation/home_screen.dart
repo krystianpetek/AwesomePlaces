@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("home"),
-              RedirectButton(
+              ApproveButton(
                 onClick: () {
                   read.logout();
                 },

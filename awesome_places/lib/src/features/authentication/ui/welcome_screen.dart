@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  RedirectButton(
+                  ApproveButton(
                     onClick: () {
                       context.goNamed(Routes.login.name);
                     },
@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  RedirectButton(
+                  ApproveButton(
                     onClick: () {
                       context.goNamed(Routes.register.name);
                     },

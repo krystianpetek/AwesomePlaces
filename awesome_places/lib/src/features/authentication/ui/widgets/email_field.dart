@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:awesome_places/src/features/authentication/data/validators/form_validators.dart';
 
 class EmailField extends StatelessWidget {
   final String label;
@@ -25,9 +26,14 @@ class EmailField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        TextField(
+        TextFormField(
           controller: textEditingController,
           obscureText: obscureText,
+          validator: (value) {
+            if (!value!.isValidEmail) {
+              return "Enter valid email!";
+            }
+          },
           cursorColor: const Color.fromARGB(255, 40, 105, 245),
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(

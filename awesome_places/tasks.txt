@@ -1,3 +1,62 @@
+- validators in fields
+- register screen
+- better error screen 
+- Stream/future builder w pllace'ach /Stream.periodic
+
+- network connectivity check?
+
+
+class TimerCountdown extends ConsumerWidget {
+  TimerCountdown({super.key});
+
+  final _numbers = numbers();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (kDebugMode) {
+      print('TimerCountdown.build');
+    }
+
+    return StreamBuilder(
+      stream: _numbers,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          case ConnectionState.active:
+            return Text('Countdown: ${snapshot.data}');
+          case ConnectionState.done:
+            return SelectableText('Done at: ${snapshot.data}');
+          default:
+            return Container();
+        }
+      },
+    );
+  }
+}
+
+final counterProvider = StateNotifierProvider.autoDispose((ref) => Counter());
+
+class Counter extends StateNotifier<int> {
+  Counter() : super(0);
+
+  void increment() => state++;
+}
+
+final limitCountProvider = StateProvider((ref) => 5);
+
+final streamProvider = StreamProvider<int>((ref) {
+  final int limit = ref.watch(limitCountProvider);
+
+  return Stream.periodic(const Duration(seconds: 1), (number) => number + 1)
+      .take(limit);
+});
+
+
+
 login tab
 https://www.youtube.com/watch?v=bF7-67D3x3k
 https://www.youtube.com/watch?v=Hq7Wj6DshNs&t=582s
@@ -74,3 +133,7 @@ https://www.youtube.com/watch?v=o47ES996f3w
 Flutter UI Tutorial | Http and Provider - Github Following API
 https://www.youtube.com/watch?v=VHYvpTwpW-Q
 
+form with vallidation 
+https://docs.flutter.dev/cookbook/forms/validation
+
+https://codewithandrea.com/articles/loading-error-states-state-notifier-async-value/

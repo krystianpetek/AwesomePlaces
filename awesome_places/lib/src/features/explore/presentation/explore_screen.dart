@@ -20,7 +20,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const Text("explore"),
-          RedirectButton(
+          ApproveButton(
             onClick: () async {
               data = await PlacesService().getPlaces();
               setState(() {});
