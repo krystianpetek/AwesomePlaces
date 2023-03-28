@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:awesome_places/src/features/authentication/data/app_cache.dart';
@@ -41,7 +42,9 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
   Future<void> login(LoginModel login) async {
     try {
       final String? token =
-          await authenticationService.login(login: login); // api login
+          await authenticationService.login(login: login).timeout(
+                const Duration(seconds: 10),
+              );
 
       final AuthenticationStateModel authenticationState =
           AuthenticationStateModel(
@@ -55,6 +58,12 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
       state = authenticationState;
     } on SocketException {
       String exceptionMessage = 'No connection to internet';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on TimeoutException {
+      String exceptionMessage = 'Request login execution timeout';
       state = state.copyWith(
         errorMessage: exceptionMessage,
       );
