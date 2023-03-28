@@ -1,24 +1,24 @@
 import 'package:awesome_places/src/features/authentication/data/app_cache.dart';
 import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
-import 'package:awesome_places/src/features/authentication/data/models/authentication_state.dart';
-import 'package:awesome_places/src/features/authentication/data/models/login.dart';
+import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 import 'package:awesome_places/src/features/authentication/data/services/authentication_service.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authenticationProvider =
-    StateNotifierProvider<AuthenticationNotifier, AuthenticationState>((ref) {
+    StateNotifierProvider<AuthenticationNotifier, AuthenticationStateModel>(
+        (ref) {
   final service = ref.watch(authenticationServiceProvider);
   return AuthenticationNotifier(service);
 });
 
-class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
+class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
   final AppCache _appCache = AppCache();
   final IAuthenticationService authenticationService;
 
   AuthenticationNotifier(this.authenticationService,
-      [AuthenticationState? state])
-      : super(state ?? AuthenticationState.initialize());
+      [AuthenticationStateModel? state])
+      : super(state ?? AuthenticationStateModel.initialize());
 
   Future<void> checkAuthenticationStatus() async {
     final String userState = await _appCache.getUser();
@@ -26,24 +26,25 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       state = state.copyWith(
         user: '',
         accessToken: '',
-        status: AuthenticationStatus.Unuthenticated,
+        status: AuthenticationStatus.unuthenticated,
       );
       return;
     }
-    final AuthenticationState authenticationState =
-        AuthenticationState.fromJson(userState);
+    final AuthenticationStateModel authenticationState =
+        AuthenticationStateModel.fromJson(userState);
     state = authenticationState;
   }
 
-  Future<void> login(Login login) async {
+  Future<void> login(LoginModel login) async {
     try {
       final String? token =
           await authenticationService.login(login: login); // api login
 
-      final AuthenticationState authenticationState = AuthenticationState(
+      final AuthenticationStateModel authenticationState =
+          AuthenticationStateModel(
         user: '${login.email}',
         accessToken: '$token',
-        status: AuthenticationStatus.Authenticated,
+        status: AuthenticationStatus.authenticated,
       );
 
       await _appCache.setUser(authenticationState.toJson());
@@ -53,10 +54,10 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
 
   Future<void> logout() async {
     await _appCache.resetUser();
-    state = AuthenticationState(
+    state = AuthenticationStateModel(
       user: '',
       accessToken: '',
-      status: AuthenticationStatus.Unuthenticated,
+      status: AuthenticationStatus.unuthenticated,
     );
   }
 }

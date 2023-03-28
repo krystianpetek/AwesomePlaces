@@ -1,4 +1,3 @@
-import 'package:awesome_places/src/features/authentication/data/models/authentication_state.dart';
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/login_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
@@ -137,21 +136,11 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
         )
       ];
 
-  /// Adds [GoRouter]'s listener as specified by its [Listenable].
-  /// [GoRouteInformationProvider] uses this method on creation to handle its
-  /// internal [ChangeNotifier].
-  /// Check out the internal implementation of [GoRouter] and
-  /// [GoRouteInformationProvider] to see this in action.
   @override
   void addListener(VoidCallback listener) {
     routerListener = listener;
   }
 
-  /// Removes [GoRouter]'s listener as specified by its [Listenable].
-  /// [GoRouteInformationProvider] uses this method when disposing,
-  /// so that it removes its callback when destroyed.
-  /// Check out the internal implementation of [GoRouter] and
-  /// [GoRouteInformationProvider] to see this in action.
   @override
   void removeListener(VoidCallback listener) {
     routerListener = null;

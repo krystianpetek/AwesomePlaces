@@ -1,10 +1,10 @@
-import 'package:awesome_places/src/features/authentication/data/models/login.dart';
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
-import 'package:awesome_places/src/widgets/snackbar_messages/error_message.dart';
 import 'package:awesome_places/src/widgets/redirect_button.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/success_message.dart';
 import 'package:flutter/material.dart';
+import 'package:awesome_places/src/features/authentication/data/models/models.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                               await ref
                                   .read(authenticationProvider.notifier)
-                                  .login(Login(
+                                  .login(LoginModel(
                                       email: 'userMock@email.com',
                                       password: 'defaultPass'));
                               context.goNamed(Routes.home.name);

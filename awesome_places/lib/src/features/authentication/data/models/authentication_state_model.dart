@@ -2,36 +2,36 @@ import 'dart:convert';
 
 import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
 
-class AuthenticationState {
+class AuthenticationStateModel {
   final String user;
   final String accessToken;
   final AuthenticationStatus status;
 
-  AuthenticationState({
+  AuthenticationStateModel({
     required this.user,
     required this.accessToken,
-    this.status = AuthenticationStatus.Unuthenticated,
+    this.status = AuthenticationStatus.unuthenticated,
   });
 
-  AuthenticationState copyWith({
+  AuthenticationStateModel copyWith({
     String? user,
     String? accessToken,
     AuthenticationStatus? status,
   }) {
-    return AuthenticationState(
+    return AuthenticationStateModel(
       user: user ?? this.user,
       accessToken: accessToken ?? this.accessToken,
       status: status ?? this.status,
     );
   }
 
-  factory AuthenticationState.initialize() {
-    return AuthenticationState(
-        status: AuthenticationStatus.Unuthenticated, user: '', accessToken: '');
+  factory AuthenticationStateModel.initialize() {
+    return AuthenticationStateModel(
+        status: AuthenticationStatus.unuthenticated, user: '', accessToken: '');
   }
 
-  factory AuthenticationState.fromMap(Map<String, dynamic> map) {
-    return AuthenticationState(
+  factory AuthenticationStateModel.fromMap(Map<String, dynamic> map) {
+    return AuthenticationStateModel(
       user: map['user'] as String,
       accessToken: ['accessToken'] as String,
       status: map['authenticationState'] as AuthenticationStatus,
@@ -46,8 +46,8 @@ class AuthenticationState {
     };
   }
 
-  factory AuthenticationState.fromJson(String json) {
-    return AuthenticationState.fromMap(
+  factory AuthenticationStateModel.fromJson(String json) {
+    return AuthenticationStateModel.fromMap(
         jsonDecode(json) as Map<String, dynamic>);
   }
 

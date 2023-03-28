@@ -1,5 +1,6 @@
 import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -8,8 +9,8 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
+        body: const Padding(
+          padding: EdgeInsets.all(16),
           child: FadeAnimation(
               delay: 1000,
               opacity: 1,

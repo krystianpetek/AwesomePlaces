@@ -1,26 +1,26 @@
 import 'dart:convert';
 
-class Login {
+class LoginModel {
   final String? email;
   final String? password;
 
-  const Login({
+  const LoginModel({
     this.email,
     this.password,
   });
 
-  Login copyWith({
+  LoginModel copyWith({
     String? email,
     String? password,
   }) {
-    return Login(
+    return LoginModel(
       email: email ?? this.email,
       password: password ?? this.password,
     );
   }
 
-  factory Login.fromMap(Map<String, dynamic> map) {
-    return Login(
+  factory LoginModel.fromMap(Map<String, dynamic> map) {
+    return LoginModel(
       email: map['email'] as String,
       password: map['password'] as String,
     );
@@ -33,8 +33,8 @@ class Login {
     };
   }
 
-  factory Login.fromJson(String json) {
-    return Login.fromMap(jsonDecode(json) as Map<String, dynamic>);
+  factory LoginModel.fromJson(String json) {
+    return LoginModel.fromMap(jsonDecode(json) as Map<String, dynamic>);
   }
 
   String toJson() {
