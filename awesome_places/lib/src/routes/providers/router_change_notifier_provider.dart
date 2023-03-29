@@ -96,6 +96,7 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
           navigatorKey: _shellNavigatorKey,
           builder: (context, state, child) {
             return MainScreen(
+              title: 'Awesome Places',
               screen: child,
               key: state.pageKey,
             );

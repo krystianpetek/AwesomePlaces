@@ -6,14 +6,14 @@ class ApplicationThemes {
     return ThemeData(
         useMaterial3: true,
         colorScheme: darkColorScheme,
-        // primaryColor: const Color.fromRGBO(58, 58, 250, 1.0),
+        primaryColor: const Color.fromRGBO(58, 58, 250, 1.0),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             showSelectedLabels: false,
             showUnselectedLabels: false,
             elevation: 0,
             backgroundColor: Colors.white,
             unselectedItemColor: Colors.white,
-            unselectedIconTheme: IconThemeData(color: Colors.amber),
+            unselectedIconTheme: IconThemeData(color: Colors.blue),
             selectedItemColor: Colors.white));
     // TODO
   }

@@ -7,10 +7,10 @@ import 'package:go_router/go_router.dart';
 class MainScreen extends ConsumerWidget {
   MainScreen({
     super.key,
-    // required this.title,
+    required this.title,
     required this.screen,
   });
-  // final String title;
+  final String title;
   final Widget screen;
 
   final tabs = [
@@ -31,36 +31,35 @@ class MainScreen extends ConsumerWidget {
     NamedNavigationBarItemWidget(
       initialLocation: Routes.settings.path,
       icon: const Icon(Icons.settings),
-      label: 'Setting',
+      label: 'Settings',
     ),
   ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int _locationToTabIndex(String location) {
+    int locationToTabIndex(String location) {
       final index =
           tabs.indexWhere((t) => location.startsWith(t.initialLocation));
-      // if index not found (-1), return 0
-      return index < 0 ? 0 : index;
+      return index < 0 ? 0 : index; // if index not found (-1), return 0
     }
 
-    int _currentIndex = _locationToTabIndex(GoRouter.of(context).location);
-    void _onItemTapped(BuildContext context, int tabIndex) {
-      if (tabIndex != _currentIndex) {
-        // go to the initial location of the selected tab (by index)
-        context.go(tabs[tabIndex].initialLocation);
+    int currentIndex = locationToTabIndex(GoRouter.of(context).location);
+    void onItemTapped(BuildContext context, int tabIndex) {
+      if (tabIndex != currentIndex) {
+        context.go(tabs[tabIndex]
+            .initialLocation); // go to the initial location of the selected tab (by index)
       }
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('title'),
+        title: Text(title),
       ),
       body: screen,
       bottomNavigationBar: BottomNavigationBar(
         items: tabs,
-        onTap: (value) => _onItemTapped(context, value),
-        currentIndex: _currentIndex,
+        onTap: (value) => onItemTapped(context, value),
+        currentIndex: currentIndex,
         showSelectedLabels: true,
         showUnselectedLabels: true,
       ),
