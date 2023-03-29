@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class LoginModel {
+import 'package:awesome_places/src/features/authentication/data/models/to_json_models.dart';
+
+class LoginModel implements ToJsonModels {
   final String? email;
   final String? password;
 

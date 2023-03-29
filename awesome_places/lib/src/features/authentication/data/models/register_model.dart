@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class RegisterModel {
+import 'package:awesome_places/src/features/authentication/data/models/to_json_models.dart';
+
+class RegisterModel implements ToJsonModels {
   final String? email;
   final String? password;
   final String? confirmPassword;
