@@ -1,10 +1,13 @@
 import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
-import 'package:awesome_places/src/widgets/redirect_button.dart';
+import 'package:awesome_places/src/routes/models/routes.dart';
+import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
-  const RegisterScreen({super.key});
+  RegisterScreen({super.key});
+  bool loading = false;
 
   @override
   ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
@@ -29,75 +32,94 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    "Register",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  Text("Create an account in my app",
-                      style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 15,
-                      )),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  EmailField(
-                      label: "Email", textEditingController: emailController),
-                  const SizedBox(height: 20),
-                  PasswordField(
-                      label: "Password",
-                      obscureText: true,
-                      textEditingController: passwordController),
-                  const SizedBox(height: 20),
-                  PasswordField(
-                      label: "Confirm Password",
-                      obscureText: true,
-                      textEditingController: confirmPasswordController),
-                ],
-              ),
-              ApproveButton(
-                onClick: () {},
-                child: Text(
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                const Text(
                   "Register",
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text("Already have an account?"),
-                  const SizedBox(width: 5),
-                  InkWell(
-                    onTap: () async {
-                      await showModal(
-                          text: "This feature isn't implemented yet!");
-                    },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.blue),
-                    ),
+                const SizedBox(height: 20),
+                Text(
+                  "Create an account in my app",
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                    fontSize: 15,
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      EmailField(
+                          label: "Email",
+                          textEditingController: emailController),
+                      const SizedBox(height: 20),
+                      PasswordField(
+                          label: "Password",
+                          obscureText: true,
+                          textEditingController: passwordController),
+                      const SizedBox(height: 20),
+                      PasswordField(
+                          label: "Confirm password",
+                          hintText: "Confirm password",
+                          obscureText: true,
+                          textEditingController: confirmPasswordController),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                widget.loading
+                    ? ApproveButton(
+                        onClick: () {},
+                        child: const CircularProgressIndicator(),
+                      )
+                    : ApproveButton(
+                        onClick: () {},
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("Already have an account?"),
+                    const SizedBox(width: 5),
+                    InkWell(
+                      onTap: () {
+                        context.goNamed(Routes.login.name);
+                      },
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

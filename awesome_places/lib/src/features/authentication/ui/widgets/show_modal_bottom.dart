@@ -9,10 +9,14 @@ class ShowModalBottom extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text('Sorry!', style: TextStyle(fontSize: 30)),
+        const Text(
+          'Sorry!',
+          style: TextStyle(fontSize: 30),
+        ),
         const SizedBox(height: 5),
         Text(
           text,
+          textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 15, color: Colors.grey),
         ),
         const SizedBox(height: 10),

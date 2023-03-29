@@ -1,5 +1,5 @@
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
-import 'package:awesome_places/src/widgets/redirect_button.dart';
+import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,8 +1,8 @@
-- register screen
-- login screen positioning
+- register screen only handle button click
+- register api call
 - theme provider
 - splash native screen
-- better error screen 
+- better error screen
 - Stream/future builder w pllace'ach /Stream.periodic
 
 - network connectivity check?

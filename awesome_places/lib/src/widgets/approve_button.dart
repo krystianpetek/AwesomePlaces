@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ApproveButton extends StatelessWidget {
   final Function onClick;
-  Widget child;
+  final Widget child;
 
-  ApproveButton({super.key, required this.onClick, required this.child});
+  const ApproveButton({super.key, required this.onClick, required this.child});
 
   @override
   Widget build(BuildContext context) {

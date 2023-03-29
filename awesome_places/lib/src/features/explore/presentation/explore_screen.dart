@@ -1,6 +1,6 @@
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
-import 'package:awesome_places/src/widgets/redirect_button.dart';
+import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:flutter/material.dart';
 
 class ExploreScreen extends StatefulWidget {

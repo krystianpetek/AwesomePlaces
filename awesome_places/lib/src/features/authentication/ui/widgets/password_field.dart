@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
   final String label;
+  final String hintText;
   final bool obscureText;
   final TextEditingController textEditingController;
 
@@ -11,6 +12,7 @@ class PasswordField extends StatelessWidget {
     required this.label,
     this.obscureText = true,
     required this.textEditingController,
+    this.hintText = 'Enter password',
   });
 
   @override
@@ -36,23 +38,24 @@ class PasswordField extends StatelessWidget {
           obscureText: obscureText,
           cursorColor: const Color.fromARGB(255, 40, 105, 245),
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-            border: OutlineInputBorder(
+          decoration: InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey)),
+            border: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black,
                 width: 1.0,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color.fromARGB(255, 40, 105, 245),
               ),
             ),
-            hintText: "Enter password",
-            hintStyle: TextStyle(height: 0.5),
+            hintText: hintText,
+            hintStyle: const TextStyle(height: 0.5),
           ),
         )
       ],

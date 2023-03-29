@@ -1,5 +1,5 @@
 import 'package:awesome_places/src/routes/models/routes.dart';
-import 'package:awesome_places/src/widgets/redirect_button.dart';
+import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:awesome_places/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,12 +11,13 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        minimum: const EdgeInsets.only(top: 50),
         child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Column(
@@ -38,17 +39,12 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
               Column(
                 children: const <Widget>[
                   BrandLogo(),
                   SizedBox(height: 30),
                   BrandName(),
                 ],
-              ),
-              const SizedBox(height: 20),
-              const SizedBox(
-                height: 20,
               ),
               Column(
                 children: [
