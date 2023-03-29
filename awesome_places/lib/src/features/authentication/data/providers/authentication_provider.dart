@@ -29,7 +29,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
       state = state.copyWith(
         user: '',
         accessToken: '',
-        status: AuthenticationStatus.unuthenticated,
+        status: AuthenticationStatus.unauthenticated,
         errorMessage: '',
       );
       return;
@@ -89,12 +89,61 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
     }
   }
 
+  Future<void> register(RegisterModel register) async {
+    try {
+      await authenticationService.register(register: register).timeout(
+            const Duration(seconds: 10),
+          );
+
+      final AuthenticationStateModel authenticationState =
+          AuthenticationStateModel(
+        user: '',
+        accessToken: '',
+        status: AuthenticationStatus.unauthenticated,
+        errorMessage: '',
+      );
+
+      await _appCache.setUser(authenticationState.toJson());
+      state = authenticationState;
+    } on SocketException {
+      String exceptionMessage = 'No connection to internet.';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on TimeoutException {
+      String exceptionMessage = 'Register execution timeout.';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on HttpException {
+      String exceptionMessage = 'Unable to register, ensure valid data.';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } on FormatException {
+      String exceptionMessage = 'Bad response format.';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    } catch (Exception) {
+      String exceptionMessage = 'Something went wrong!';
+      state = state.copyWith(
+        errorMessage: exceptionMessage,
+      );
+      print(exceptionMessage);
+    }
+  }
+
   Future<void> logout() async {
     await _appCache.resetUser();
     state = state.copyWith(
       user: '',
       accessToken: '',
-      status: AuthenticationStatus.unuthenticated,
+      status: AuthenticationStatus.unauthenticated,
       errorMessage: '',
     );
   }

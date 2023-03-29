@@ -71,7 +71,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(50)),
                       onTap: () async {
                         await showModal(
-                            text: "Login by Facebook isn't implemented yet!");
+                          text: "Login by Facebook isn't implemented yet!",
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(7),
@@ -83,7 +84,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(50)),
                       onTap: () async {
                         await showModal(
-                            text: "Login by Google isn't implemented yet!");
+                          text: "Login by Google isn't implemented yet!",
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(7),
@@ -143,18 +145,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                           await authenticationNotifier.login(
                             LoginModel(
-                                email: emailController.text,
-                                password: passwordController.text),
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ),
                           );
                           if (authenticationNotifier
                               .state.errorMessage.isNotEmpty) {
                             // ignore: use_build_context_synchronously
-                            MessageSnackBar.buildErrorSnackbar(context,
-                                authenticationNotifier.state.errorMessage);
+                            MessageSnackBar.buildErrorSnackbar(
+                              context,
+                              authenticationNotifier.state.errorMessage,
+                            );
                           } else {
                             // ignore: use_build_context_synchronously
                             MessageSnackBar.buildSuccessSnackBar(
-                                context, 'Authenticated successfully.');
+                              context,
+                              'Authenticated successfully.',
+                            );
                           }
                           setState(() {
                             widget.loading = false;

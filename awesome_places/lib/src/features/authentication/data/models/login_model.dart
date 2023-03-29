@@ -43,6 +43,7 @@ class LoginModel implements ToJsonModels {
     return LoginModel.fromMap(jsonDecode(json) as Map<String, dynamic>);
   }
 
+  @override
   String toJson() {
     return jsonEncode(toMap());
   }

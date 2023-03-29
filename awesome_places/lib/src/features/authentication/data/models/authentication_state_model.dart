@@ -11,7 +11,7 @@ class AuthenticationStateModel {
   AuthenticationStateModel(
       {required this.user,
       required this.accessToken,
-      this.status = AuthenticationStatus.unuthenticated,
+      this.status = AuthenticationStatus.unauthenticated,
       this.errorMessage = ''});
 
   AuthenticationStateModel copyWith({
@@ -30,7 +30,7 @@ class AuthenticationStateModel {
 
   factory AuthenticationStateModel.initialize() {
     return AuthenticationStateModel(
-      status: AuthenticationStatus.unuthenticated,
+      status: AuthenticationStatus.unauthenticated,
       user: '',
       accessToken: '',
       errorMessage: '',

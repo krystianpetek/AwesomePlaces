@@ -5,8 +5,12 @@ extension FormValidators on String {
   }
 
   bool get isValidPassword {
-    return length > 8;
+    return length >= 8;
     //RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
     // return passwordRegExp.hasMatch(this);
+  }
+
+  bool samePassword(String password) {
+    return password == this;
   }
 }

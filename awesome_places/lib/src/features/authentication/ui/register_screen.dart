@@ -1,6 +1,9 @@
+import 'package:awesome_places/src/features/authentication/data/models/models.dart';
+import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/approve_button.dart';
+import 'package:awesome_places/src/widgets/snackbar_messages/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +24,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authenticationNotifier = ref.watch(authenticationProvider.notifier);
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -90,7 +95,48 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: const CircularProgressIndicator(),
                       )
                     : ApproveButton(
-                        onClick: () {},
+                        onClick: () async {
+                          setState(() {
+                            widget.loading = true;
+                            // loading should will be move to authenticate state
+                          });
+                          if (passwordController.text !=
+                              confirmPasswordController.text) {
+                            MessageSnackBar.buildErrorSnackbar(
+                              context,
+                              "Passwords must be the same!",
+                            );
+                            setState(() {
+                              widget.loading = false;
+                            });
+                            return;
+                          }
+
+                          await authenticationNotifier.register(
+                            RegisterModel(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              confirmPassword: confirmPasswordController.text,
+                            ),
+                          );
+                          if (authenticationNotifier
+                              .state.errorMessage.isNotEmpty) {
+                            // ignore: use_build_context_synchronously
+                            MessageSnackBar.buildErrorSnackbar(
+                              context,
+                              authenticationNotifier.state.errorMessage,
+                            );
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            MessageSnackBar.buildSuccessSnackBar(
+                              context,
+                              'Registration completed successfully.',
+                            );
+                          }
+                          setState(() {
+                            widget.loading = false;
+                          });
+                        },
                         child: const Text(
                           "Register",
                           style: TextStyle(

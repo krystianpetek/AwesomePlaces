@@ -45,6 +45,7 @@ class RegisterModel implements ToJsonModels {
     return RegisterModel.fromMap(jsonDecode(json) as Map<String, dynamic>);
   }
 
+  @override
   String toJson() {
     return jsonEncode(toMap());
   }
