@@ -1,5 +1,3 @@
-- register screen only handle button click
-- register api call
 - theme provider
 - splash native screen
 - better error screen
@@ -60,8 +58,8 @@ final streamProvider = StreamProvider<int>((ref) {
 
 
 login tab
-https://www.youtube.com/watch?v=bF7-67D3x3k
-https://www.youtube.com/watch?v=Hq7Wj6DshNs&t=582s
+https://www.youtube.com/watch?v=bF7-67D3x3k !
+https://www.youtube.com/watch?v=Hq7Wj6DshNs ++
 login with animation
 https://www.youtube.com/watch?v=NHAIiAmxTAU&t=85s
 

@@ -40,10 +40,10 @@ class WelcomeScreen extends StatelessWidget {
                 ],
               ),
               Column(
-                children: const <Widget>[
-                  BrandLogo(),
-                  SizedBox(height: 30),
-                  BrandName(),
+                children: <Widget>[
+                  BrandLogo(height: 80),
+                  const SizedBox(height: 30),
+                  const BrandName(),
                 ],
               ),
               Column(

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandLogo extends StatelessWidget {
-  const BrandLogo({super.key});
+  double? height;
+
+  BrandLogo({super.key, this.height = 80});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class BrandLogo extends StatelessWidget {
       radius: 50,
       backgroundColor: Colors.white,
       child: SvgPicture.asset(
-        height: 80,
+        height: height,
         'assets/images/brand_logo.svg',
         color: Color.fromARGB(255, 64, 47, 218),
       ),
