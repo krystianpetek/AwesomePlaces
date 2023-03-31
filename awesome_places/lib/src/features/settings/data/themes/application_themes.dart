@@ -11,9 +11,10 @@ class ApplicationThemes {
             showSelectedLabels: false,
             showUnselectedLabels: false,
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             unselectedItemColor: Colors.white,
-            unselectedIconTheme: IconThemeData(color: Colors.blue),
+            selectedIconTheme: IconThemeData(color: Colors.blue),
+            unselectedIconTheme: IconThemeData(color: Colors.grey),
             selectedItemColor: Colors.white));
     // TODO
   }
@@ -27,9 +28,11 @@ class ApplicationThemes {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           elevation: 0,
-          backgroundColor: Colors.black,
-          unselectedItemColor: Colors.white,
-          selectedItemColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.black,
+          selectedIconTheme: IconThemeData(color: Colors.blue),
+          unselectedIconTheme: IconThemeData(color: Colors.grey),
           selectedLabelStyle: TextStyle(color: Colors.white)),
     );
     // TODO

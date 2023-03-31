@@ -23,11 +23,11 @@ class MainScreen extends ConsumerWidget {
         initialLocation: Routes.explore.path,
         icon: const Icon(Icons.explore),
         label: 'Explore'),
-    NamedNavigationBarItemWidget(
-      initialLocation: Routes.profile.path,
-      icon: const Icon(Icons.person),
-      label: 'Profile',
-    ),
+    // NamedNavigationBarItemWidget(
+    //   initialLocation: Routes.profile.path,
+    //   icon: const Icon(Icons.person),
+    //   label: 'Profile',
+    // ),
     NamedNavigationBarItemWidget(
       initialLocation: Routes.settings.path,
       icon: const Icon(Icons.settings),
@@ -54,6 +54,24 @@ class MainScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        actions: [
+          Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.white70),
+                  gradient: LinearGradient(colors: Colors.primaries),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      blurRadius: 3,
+                      color: Colors.grey,
+                    )
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(5)))),
+          Padding(
+            padding: EdgeInsets.only(right: 50),
+          )
+        ],
       ),
       body: screen,
       bottomNavigationBar: BottomNavigationBar(
