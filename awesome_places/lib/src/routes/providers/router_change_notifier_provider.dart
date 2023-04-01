@@ -5,6 +5,7 @@ import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dar
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
+import 'package:awesome_places/src/features/profile/presentation/profile_screen.dart';
 import 'package:awesome_places/src/features/settings/presentation/settings_screen.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
@@ -45,60 +46,72 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
 
   List<RouteBase> get routes => [
         GoRoute(
-            name: Routes.welcome.name,
-            path: Routes.welcome.path,
-            builder: (context, state) => WelcomeScreen(key: state.pageKey),
-            routes: [
-              GoRoute(
-                name: Routes.login.name,
-                path: Routes.login.path,
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  child: LoginScreen(key: state.pageKey),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  barrierColor: Colors.black54,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    final tween = Tween(begin: 0.0, end: 1.0)
-                        .chain(CurveTween(curve: Curves.linear));
-                    return ScaleTransition(
-                        alignment: Alignment.bottomCenter,
-                        scale: animation.drive(tween),
-                        child: FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        ));
-                  },
-                ),
-              ),
-              GoRoute(
-                name: Routes.register.name,
-                path: Routes.register.path,
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  child: RegisterScreen(key: state.pageKey),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  barrierColor: Colors.black54,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    final tween = Tween(begin: 0.0, end: 1.0)
-                        .chain(CurveTween(curve: Curves.easeOut));
-                    return SizeTransition(
-                      sizeFactor: animation.drive(tween),
+          name: Routes.welcome.name,
+          path: Routes.welcome.path,
+          builder: (context, state) => WelcomeScreen(key: state.pageKey),
+          routes: [
+            GoRoute(
+              name: Routes.login.name,
+              path: Routes.login.path,
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: LoginScreen(key: state.pageKey),
+                transitionDuration: const Duration(milliseconds: 500),
+                barrierColor: Colors.black54,
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  final tween = Tween(begin: 0.0, end: 1.0)
+                      .chain(CurveTween(curve: Curves.linear));
+                  return ScaleTransition(
+                      alignment: Alignment.bottomCenter,
+                      scale: animation.drive(tween),
                       child: FadeTransition(
                         opacity: animation,
                         child: child,
-                      ),
-                    );
-                  },
-                ),
+                      ));
+                },
               ),
-            ]),
+            ),
+            GoRoute(
+              name: Routes.register.name,
+              path: Routes.register.path,
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: RegisterScreen(key: state.pageKey),
+                transitionDuration: const Duration(milliseconds: 500),
+                barrierColor: Colors.black54,
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  final tween = Tween(begin: 0.0, end: 1.0)
+                      .chain(CurveTween(curve: Curves.easeOut));
+                  return SizeTransition(
+                    sizeFactor: animation.drive(tween),
+                    child: FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        GoRoute(
+          name: Routes.profile.name,
+          path: Routes.profile.path,
+          pageBuilder: (context, state) {
+            return NoTransitionPage(
+              child: ProfileScreen(key: state.pageKey),
+            );
+          },
+        ),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,
-          builder: (context, state, child) {
-            return MainScreen(
-              title: 'Awesome Places',
-              screen: child,
-              key: state.pageKey,
+          pageBuilder: (context, state, child) {
+            return NoTransitionPage(
+              child: MainScreen(
+                title: 'Awesome Places',
+                screen: child,
+                key: state.pageKey,
+              ),
             );
           },
           routes: [
@@ -128,7 +141,7 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
                   child: SettingsScreen(key: state.pageKey),
                 );
               },
-            )
+            ),
 
             // routing by currentIndex but obsolete
             // GoRoute(
