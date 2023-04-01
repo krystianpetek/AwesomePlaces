@@ -7,31 +7,14 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final AuthenticationNotifier read =
-            ref.read(authenticationProvider.notifier);
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("home"),
-              ApproveButton(
-                onClick: () {
-                  read.logout();
-                },
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                ),
-              )
-            ],
-          ),
-        );
-      },
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Text("HomeScreen", style: TextStyle(fontSize: 30)),
+        ],
+      ),
     );
   }
 }

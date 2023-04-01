@@ -56,12 +56,20 @@ class MainScreen extends ConsumerWidget {
         title: Text(title),
         actions: [
           Container(
+              child: GestureDetector(
+                onTap: () {
+                  context.goNamed(Routes.profile.name);
+                },
+              ),
               width: 40,
               height: 40,
               decoration: BoxDecoration(
                   border: Border.all(width: 2, color: Colors.white70),
-                  gradient: LinearGradient(colors: Colors.primaries),
-                  boxShadow: <BoxShadow>[
+                  // gradient: LinearGradient(colors: Colors.primaries),
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/author.png'),
+                  ),
+                  boxShadow: const <BoxShadow>[
                     BoxShadow(
                       blurRadius: 3,
                       color: Colors.grey,
@@ -69,7 +77,7 @@ class MainScreen extends ConsumerWidget {
                   ],
                   borderRadius: BorderRadius.all(Radius.circular(5)))),
           Padding(
-            padding: EdgeInsets.only(right: 50),
+            padding: EdgeInsets.only(right: 40),
           )
         ],
       ),
