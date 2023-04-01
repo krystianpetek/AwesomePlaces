@@ -7,11 +7,11 @@ class ApplicationThemes {
         useMaterial3: true,
         colorScheme: darkColorScheme,
         primaryColor: const Color.fromRGBO(58, 58, 250, 1.0),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
             showSelectedLabels: false,
             showUnselectedLabels: false,
             elevation: 0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color.fromRGBO(30, 30, 30, 1),
             unselectedItemColor: Colors.white,
             selectedIconTheme: IconThemeData(color: Colors.blue),
             unselectedIconTheme: IconThemeData(color: Colors.grey),
@@ -28,7 +28,7 @@ class ApplicationThemes {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color.fromRGBO(30, 30, 30, 1),
           unselectedItemColor: Colors.black,
           selectedItemColor: Colors.black,
           selectedIconTheme: IconThemeData(color: Colors.blue),

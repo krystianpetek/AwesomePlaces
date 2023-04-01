@@ -39,6 +39,10 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationStateModel> {
     state = authenticationState;
   }
 
+  String? getToken() {
+    return state.accessToken;
+  }
+
   Future<void> login(LoginModel login) async {
     try {
       final String? token =

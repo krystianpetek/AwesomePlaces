@@ -6,6 +6,7 @@ import 'coordinate.dart';
 
 class Place {
   String id;
+  String name;
   String description;
   int placeType;
   Uint8List image;
@@ -16,6 +17,7 @@ class Place {
 
   Place({
     required this.id,
+    required this.name,
     required this.description,
     required this.placeType,
     required this.image,
@@ -28,6 +30,7 @@ class Place {
   factory Place.fromJson(Map<String, dynamic> json) {
     return Place(
         id: json['id'] as String,
+        name: json['name'] as String,
         description: json['description'] as String,
         placeType: json['placeType'] as int,
         image: base64.decode(json['image']),
