@@ -1,56 +1,44 @@
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
+import 'package:awesome_places/src/features/explore/presentation/place_list_view.dart';
+import 'package:awesome_places/src/features/explore/presentation/place_list_view_item.dart';
 import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ExploreScreen extends StatefulWidget {
+class ExploreScreen extends ConsumerStatefulWidget {
   const ExploreScreen({super.key});
 
   @override
-  State<ExploreScreen> createState() => _ExploreScreenState();
+  ConsumerState<ExploreScreen> createState() => _ExploreScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
-  late List<Place> data = [];
-
+class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      padding: const EdgeInsets.all(16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const Text("explore"),
-          ApproveButton(
-            onClick: () async {
-              data = await PlacesService().getPlaces();
-              setState(() {});
-            },
-            child: Text(
-              'Fetch',
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
-          ),
           SizedBox(
-            height: 500,
-            child: ListView.separated(
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Text(data[index].id),
-                      Text(data[index].description),
-                      Text(data[index].address!.country),
-                      Text(data[index].address!.city),
-                      Image.memory(data[index].image),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 50);
-                },
-                itemCount: data.length),
+            height: MediaQuery.of(context).size.height - 150,
+            child: FutureBuilder(
+              future: PlacesService(ref: ref).getPlaces(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  case ConnectionState.done:
+                    return PlaceListView(places: snapshot?.data);
+                  default:
+                    return Container();
+                }
+              },
+            ),
           ),
         ],
       ),
