@@ -14,15 +14,15 @@ class _PlaceListViewItemState extends State<PlaceListViewItem> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onDoubleTap: () {
-        setState(() {
-          opacity = 0.4;
-        });
-      },
-      onTap: () {
+    return MouseRegion(
+      onHover: (event) {
         setState(() {
           opacity = 0;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          opacity = 0.4;
         });
       },
       child: Center(
