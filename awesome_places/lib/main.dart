@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:awesome_places/src/routes/providers/router_provider.dart';
 import 'package:awesome_places/src/features/settings/data/themes/application_themes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,6 +40,11 @@ class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
       // themeMode: ThemeMode.system,
       darkTheme: ApplicationThemes.darkTheme(),
       theme: ApplicationThemes.lightTheme(),
+      scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.touch,
+        PointerDeviceKind.unknown,
+      }),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
