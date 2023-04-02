@@ -1,5 +1,6 @@
 import 'package:awesome_places/src/features/explore/data/models/explore_state_model.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
+import 'package:awesome_places/src/features/explore/presentation/widgets/stars.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -113,65 +114,9 @@ class _PlaceFullScreenState extends ConsumerState<PlaceFullScreen> {
                             height: 1.2,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.only(right: 3),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 15,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 3),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 15,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 3),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 15,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 3),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 15,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 5),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.grey,
-                              size: 15,
-                            ),
-                          ),
-                          const Text(
-                            '4.0',
-                            style: TextStyle(color: Colors.white70),
-                          ),
-                          const Text(
-                            '(2300)',
-                            style:
-                                TextStyle(color: Colors.white38, fontSize: 12),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 20),
+                      Stars(rating: item.rating),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(right: 50),
                         child: Text(
