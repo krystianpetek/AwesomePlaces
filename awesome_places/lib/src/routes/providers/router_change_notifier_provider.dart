@@ -2,7 +2,11 @@ import 'package:awesome_places/src/features/authentication/data/providers/authen
 import 'package:awesome_places/src/features/authentication/ui/login_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dart';
+import 'package:awesome_places/src/features/explore/data/models/place.dart';
+import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
+import 'package:awesome_places/src/features/explore/presentation/place_details_screen.dart';
+import 'package:awesome_places/src/features/explore/presentation/place_full_screen_view.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
 import 'package:awesome_places/src/features/profile/presentation/profile_screen.dart';
@@ -23,7 +27,7 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
   @override
   Future<void> build() async {
     isAuthenticated = ref.watch(authenticationProvider).user.isNotEmpty;
-
+    
     ref.listenSelf((_, __) {
       if (state.isLoading) return;
       routerListener?.call();
@@ -32,6 +36,8 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
 
   String? redirect(BuildContext context, GoRouterState state) {
     if (this.state.isLoading || this.state.hasError) return null;
+
+    final path = state.location;
 
     final loggedIn = isAuthenticated;
 
@@ -94,15 +100,6 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
             ),
           ],
         ),
-        GoRoute(
-          name: Routes.profile.name,
-          path: Routes.profile.path,
-          pageBuilder: (context, state) {
-            return NoTransitionPage(
-              child: ProfileScreen(key: state.pageKey),
-            );
-          },
-        ),
         ShellRoute(
           navigatorKey: _shellNavigatorKey,
           pageBuilder: (context, state, child) {
@@ -125,14 +122,35 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
               },
             ),
             GoRoute(
-              name: Routes.explore.name,
-              path: Routes.explore.path,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(
-                  child: ExploreScreen(key: state.pageKey),
-                );
-              },
-            ),
+                name: Routes.explore.name,
+                path: Routes.explore.path,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    child: ExploreScreen(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    name: Routes.placeFullScreen.name,
+                    path: Routes.placeFullScreen.path,
+                    pageBuilder: (context, state) {
+                      return NoTransitionPage(
+                        child: PlaceFullScreen(key: state.pageKey),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    name: Routes.place.name,
+                    path: Routes.place.path,
+                    pageBuilder: (context, state) {
+                      final Place place = state.extra as Place;
+                      return NoTransitionPage(
+                        child: PlaceDetailsScreen(
+                            place: place, key: state.pageKey),
+                      );
+                    },
+                  )
+                ]),
             GoRoute(
               name: Routes.settings.name,
               path: Routes.settings.path,
@@ -142,7 +160,6 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
                 );
               },
             ),
-
             // routing by currentIndex but obsolete
             // GoRoute(
             //   path: Routes.home,
@@ -157,7 +174,16 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
             //   },
             // ),
           ],
-        )
+        ),
+        GoRoute(
+          name: Routes.profile.name,
+          path: Routes.profile.path,
+          pageBuilder: (context, state) {
+            return NoTransitionPage(
+              child: ProfileScreen(key: state.pageKey),
+            );
+          },
+        ),
       ];
 
   @override

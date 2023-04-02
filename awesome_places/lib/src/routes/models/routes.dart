@@ -35,6 +35,22 @@ class Routes {
     name: 'profile',
     path: '/profile',
   );
+  static const RouteModel placeFullScreen = RouteModel(
+    name: 'placeFullScreen',
+    path: 'placeFullScreen',
+  );
+  // static const RouteModel placeGrid = RouteModel(
+  //   name: 'placeGrid',
+  //   path: 'placeGrid',
+  // );
+  // static const RouteModel placeList = RouteModel(
+  //   name: 'placeList',
+  //   path: 'placeList',
+  // );
+  static const RouteModel place = RouteModel(
+    name: 'place',
+    path: 'place',
+  );
   static Widget errorWidget(BuildContext context, GoRouterState state) =>
       const NotFoundScreen();
 }
