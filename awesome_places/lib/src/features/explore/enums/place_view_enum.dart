@@ -1,0 +1,4 @@
+enum PlaceViewEnum {
+  ListView,
+  GridView,
+}

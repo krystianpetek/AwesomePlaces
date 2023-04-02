@@ -40,7 +40,7 @@ class SuccessMessage extends StatelessWidget implements CustomSnackBar {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  'Error!',
+                                  'Success!',
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),

@@ -12,7 +12,7 @@ class PlacesService {
   final WidgetRef ref;
   PlacesHttpHandler placesHttpHandler = PlacesHttpHandler();
 
-  Future getPlaces() async {
+  Future<List<Place>?> getPlaces() async {
     String authToken = ref.read(authenticationProvider).accessToken;
     try {
       http.Response response = await placesHttpHandler.getCollection(
@@ -22,12 +22,13 @@ class PlacesService {
         final place = jsonDecode(response.body);
 
         final placeMap = Place.fromListJson(place);
-        return placeMap;
+        return placeMap ?? <Place>[];
       }
     } catch (exception) {
       log("$exception");
       rethrow;
     }
+    return null;
   }
 }
 
