@@ -1,6 +1,7 @@
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/circle_image.dart';
+import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +35,11 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 16),
-            buildProfile(),
+            FadeAnimation(
+              delay: 100,
+              child: buildProfile(),
+              duration: 1000,
+            ),
             Expanded(child: buildMenu(read))
           ],
         ),
