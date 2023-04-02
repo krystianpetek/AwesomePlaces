@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
+import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +23,8 @@ class PlacesService {
         final place = jsonDecode(response.body);
 
         final placeMap = Place.fromListJson(place);
-        return placeMap ?? <Place>[];
+        ref.watch(exploreProvider).places = placeMap ?? <Place>[];
+        return placeMap;
       }
     } catch (exception) {
       log("$exception");
