@@ -35,7 +35,7 @@ class _PlaceGridViewItemState extends State<PlaceGridViewItem> {
             },
             child: Container(
               width: MediaQuery.of(context).size.width / 2,
-              height: MediaQuery.of(context).size.width / 2 - 16,
+              height: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   colorFilter: ColorFilter.mode(
@@ -45,7 +45,6 @@ class _PlaceGridViewItemState extends State<PlaceGridViewItem> {
                   image: MemoryImage(widget.place.image),
                   fit: BoxFit.fill,
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               child: Stack(
                 children: [

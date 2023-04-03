@@ -1,4 +1,3 @@
-import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
 import 'package:awesome_places/src/features/explore/enums/place_view_enum.dart';
@@ -24,10 +23,45 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          Expanded(
+            child: (exploreNotifier.places.isEmpty)
+                ? SizedBox(
+                    child: FutureBuilder(
+                      future: PlacesService(ref: ref).getPlaces(),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          case ConnectionState.done:
+                            exploreNotifier.places = snapshot.data!;
+                            return Expanded(
+                              child: exploreNotifier.placeViewEnum ==
+                                      PlaceViewEnum.ListView
+                                  ? const PlaceListView()
+                                  : const PlaceGridView(),
+                            );
+                          default:
+                            return Container();
+                        }
+                      },
+                    ),
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height - 1040,
+                    child:
+                        exploreNotifier.placeViewEnum == PlaceViewEnum.ListView
+                            ? const PlaceListView()
+                            : const PlaceGridView(),
+                  ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               PopupMenuButton(
+                padding: const EdgeInsets.all(16),
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
@@ -58,42 +92,8 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                     )
                   ];
                 },
-              ),
+              )
             ],
-          ),
-          Expanded(
-            child: (exploreNotifier.places.isEmpty)
-                ? SizedBox(
-                    child: FutureBuilder(
-                      future: PlacesService(ref: ref).getPlaces(),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          case ConnectionState.done:
-                            exploreNotifier.places = snapshot.data!;
-                            return Expanded(
-                              child: exploreNotifier.placeViewEnum ==
-                                      PlaceViewEnum.ListView
-                                  ? PlaceListView()
-                                  : PlaceGridView(),
-                            );
-                          default:
-                            return Container();
-                        }
-                      },
-                    ),
-                  )
-                : SizedBox(
-                    height: MediaQuery.of(context).size.height - 150,
-                    child:
-                        exploreNotifier.placeViewEnum == PlaceViewEnum.ListView
-                            ? PlaceListView()
-                            : PlaceGridView(),
-                  ),
           ),
         ],
       ),
