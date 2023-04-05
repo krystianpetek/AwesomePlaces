@@ -1,4 +1,3 @@
-import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_list_view_item.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,12 @@ class PlaceListView extends StatelessWidget {
               return PlaceListViewItem(place: exploreNotifier.places[index]);
             },
             separatorBuilder: (context, index) {
-              return const SizedBox(height: 30);
+              return const Divider(
+                indent: 25,
+                endIndent: 25,
+                height: 50,
+                thickness: 1,
+              );
             },
             itemCount: exploreNotifier.places.length);
       },

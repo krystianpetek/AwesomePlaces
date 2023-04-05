@@ -101,12 +101,14 @@ class _PlaceListViewItemState extends State<PlaceListViewItem> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 10),
-                child: Text(
-                  widget.place.description,
-                  style: const TextStyle(fontSize: 15),
-                  textAlign: TextAlign.left,
+                padding: const EdgeInsets.all(16),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    widget.place.description,
+                    style: const TextStyle(fontSize: 15),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
               ),
             ],

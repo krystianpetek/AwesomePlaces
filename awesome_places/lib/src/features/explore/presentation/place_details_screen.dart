@@ -52,18 +52,18 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
             ),
           ),
           // const PlaceBackButton(),
-          scroll(),
+          placeDetails(),
         ],
       ),
     ));
   }
 
-  scroll() {
+  Widget placeDetails() {
     return DraggableScrollableSheet(
         initialChildSize: 0.5,
         maxChildSize: 1.0,
         minChildSize: 0.5,
-        builder: (context, scrollController) {
+        builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             clipBehavior: Clip.antiAlias,
@@ -139,38 +139,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                       "Location",
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    const SizedBox(height: 10),
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      itemBuilder: (context, index) => ingredients(context),
-                    ),
+                    location(context),
                     const PlaceDivider(),
                     Text(
                       "Route",
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      itemBuilder: (context, index) => steps(context, index),
-                    ),
+                    const SizedBox(height: 10),
                     SizedBox(
-                      height: 500,
-                      child: GoogleMap(
-                        onMapCreated: (controller) {
-                          mapController = controller;
-                        },
-                        initialCameraPosition: CameraPosition(
-                            target: LatLng(widget.place.coordinate!.latitude,
-                                widget.place.coordinate!.longitude),
-                            zoom: 12),
-                      ),
+                      child: navigation(),
                     ),
                   ],
                 ),
@@ -180,70 +157,82 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         });
   }
 
-  ingredients(BuildContext context) {
+  Widget navigation() {
+    return GoogleMap(
+      onMapCreated: (controller) {
+        mapController = controller;
+      },
+      initialCameraPosition: CameraPosition(
+          target: LatLng(widget.place.coordinate!.latitude,
+              widget.place.coordinate!.longitude),
+          zoom: 12),
+    );
+  }
+
+  Widget location(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
+      child: Column(
         children: [
-          Text("${widget.place.coordinate!.latitude}"),
-          const CircleAvatar(
-            radius: 10,
-            backgroundColor: Color(0xFFE3FFF8),
-            child: Icon(
-              Icons.done,
-              size: 15,
-              color: primary,
-            ),
+          Row(
+            children: [
+              Text(
+                "Latitute: ${widget.place.coordinate!.latitude}\nLongitude: ${widget.place.coordinate!.longitude}",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: SecondaryText),
+              ),
+            ],
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-            "4 Eggs",
-            style: Theme.of(context).textTheme.bodyMedium,
+          const SizedBox(height: 10),
+          Column(
+            children: [
+              const SizedBox(height: 10),
+              iconWithText(
+                icon: Icons.location_city,
+                text: widget.place.address!.city,
+              ),
+              const SizedBox(height: 10),
+              iconWithText(
+                icon: Icons.place,
+                text: widget.place.address!.state,
+              ),
+              const SizedBox(height: 10),
+              iconWithText(
+                icon: Icons.local_post_office,
+                text: widget.place.address!.zipCode,
+              ),
+              const SizedBox(height: 10),
+              iconWithText(
+                icon: Icons.home,
+                text: widget.place.address!.country,
+              )
+            ],
           ),
         ],
       ),
     );
   }
 
-  steps(BuildContext context, int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CircleAvatar(
-            backgroundColor: mainText,
-            radius: 12,
-            child: Text("${index + 1}"),
+  Widget iconWithText({required IconData icon, required String text}) {
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 10,
+          backgroundColor: const Color(0x302196f3),
+          child: Icon(
+            icon,
+            size: 15,
+            color: const Color(0xFF2196f3),
           ),
-          Column(
-            children: [
-              SizedBox(
-                width: 270,
-                child: Text(
-                  "Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your",
-                  maxLines: 3,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: mainText),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Image.asset(
-                "assets/images/author.png",
-                height: 155,
-                width: 270,
-              )
-            ],
-          )
-        ],
-      ),
+        ),
+        const SizedBox(width: 7),
+        Text(
+          text,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+      ],
     );
   }
 }
