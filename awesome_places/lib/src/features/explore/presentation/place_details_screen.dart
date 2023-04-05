@@ -3,12 +3,13 @@ import 'package:awesome_places/src/features/explore/presentation/widgets/place_d
 import 'package:awesome_places/src/features/explore/presentation/widgets/stars.dart';
 import 'package:awesome_places/src/features/settings/data/themes/color_schemes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'widgets/place_back_button.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
-  PlaceDetailsScreen({Key? key, required this.place}) : super(key: key);
+  const PlaceDetailsScreen({Key? key, required this.place}) : super(key: key);
   final Place place;
 
   @override
@@ -23,6 +24,19 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -37,7 +51,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   fit: BoxFit.cover),
             ),
           ),
-          const PlaceBackButton(),
+          // const PlaceBackButton(),
           scroll(),
         ],
       ),
