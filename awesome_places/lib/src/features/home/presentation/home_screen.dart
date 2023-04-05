@@ -8,6 +8,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Awesome Places"),
+        centerTitle: true,
         actions: [
           Container(
               child: GestureDetector(

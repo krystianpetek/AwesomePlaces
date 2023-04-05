@@ -83,6 +83,15 @@ profile tab
 https://www.youtube.com/watch?v=d4KFeRdZMcw
 
 
+product detail page
+https://www.youtube.com/watch?v=iZh9Tdhi6MA
+
+google api flutter 
+https://www.youtube.com/watch?v=Zz5hMvgiWmY&t=599s
+
+google api sdk key - Markers, Polylines, & Directions API
+https://www.youtube.com/watch?v=zLBXLDe-lv0
+
 IDEAS
 https://www.walturn.com/insights/10-flutter-app-ideas-that-will-make-you-money
 
