@@ -37,7 +37,7 @@ class _AwesomePlacesAppState extends ConsumerState<AwesomePlacesApp> {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Awesome Places',
-      // themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       darkTheme: ApplicationThemes.darkTheme(),
       theme: ApplicationThemes.lightTheme(),
       scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {

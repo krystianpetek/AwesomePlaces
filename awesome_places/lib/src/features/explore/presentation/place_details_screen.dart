@@ -65,6 +65,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         minChildSize: 0.5,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
+            height: 500,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(
@@ -139,14 +140,16 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                       "Location",
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    location(context),
+                    SizedBox(child: location(context)),
                     const PlaceDivider(),
                     Text(
                       "Route",
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(height: 10),
-                    SizedBox(
+                    Container(
+                      constraints:
+                          BoxConstraints(minHeight: 100, maxHeight: 600),
                       child: navigation(),
                     ),
                   ],
