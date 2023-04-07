@@ -80,9 +80,6 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                 )
               ];
             },
-          ),
-          const SizedBox(
-            width: 40,
           )
         ],
         title: const Text("Explore"),
