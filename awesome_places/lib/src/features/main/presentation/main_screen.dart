@@ -29,8 +29,8 @@ class MainScreen extends ConsumerWidget {
     //   label: 'Profile',
     // ),
     NamedNavigationBarItemWidget(
-      initialLocation: Routes.settings.path,
-      icon: const Icon(Icons.settings),
+      initialLocation: Routes.search.path,
+      icon: const Icon(Icons.search_outlined),
       label: 'Settings',
     ),
   ];

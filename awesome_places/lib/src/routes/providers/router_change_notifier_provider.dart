@@ -3,14 +3,13 @@ import 'package:awesome_places/src/features/authentication/ui/login_screen.dart'
 import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dart';
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/explore_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_details_screen.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_full_screen_view.dart';
 import 'package:awesome_places/src/features/home/presentation/home_screen.dart';
 import 'package:awesome_places/src/features/main/presentation/main_screen.dart';
 import 'package:awesome_places/src/features/profile/presentation/profile_screen.dart';
-import 'package:awesome_places/src/features/settings/presentation/settings_screen.dart';
+import 'package:awesome_places/src/features/search/presentation/search_screen.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +26,7 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
   @override
   Future<void> build() async {
     isAuthenticated = ref.watch(authenticationProvider).user.isNotEmpty;
-    
+
     ref.listenSelf((_, __) {
       if (state.isLoading) return;
       routerListener?.call();
@@ -152,11 +151,11 @@ class RouterChangeNotifier extends AutoDisposeAsyncNotifier<void>
                   )
                 ]),
             GoRoute(
-              name: Routes.settings.name,
-              path: Routes.settings.path,
+              name: Routes.search.name,
+              path: Routes.search.path,
               pageBuilder: (context, state) {
                 return NoTransitionPage(
-                  child: SettingsScreen(key: state.pageKey),
+                  child: SearchScreen(key: state.pageKey),
                 );
               },
             ),

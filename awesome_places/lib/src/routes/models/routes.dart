@@ -27,9 +27,9 @@ class Routes {
     name: 'explore',
     path: '/explore',
   );
-  static const RouteModel settings = RouteModel(
-    name: 'settings',
-    path: '/settings',
+  static const RouteModel search = RouteModel(
+    name: 'search',
+    path: '/search',
   );
   static const RouteModel profile = RouteModel(
     name: 'profile',
