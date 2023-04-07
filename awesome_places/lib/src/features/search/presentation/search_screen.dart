@@ -2,6 +2,7 @@ import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/circle_image.dart';
+import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -54,21 +55,25 @@ class _SearchScreenState extends State<SearchScreen> {
                     onChanged: (value) => onSearch(value),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey[850],
+                      fillColor: Color(0x30505050),
                       contentPadding: const EdgeInsets.all(0),
                       prefixIcon: Icon(
                         Icons.search,
                         color: Colors.grey.shade500,
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(7),
+                          borderSide: const BorderSide(color: Colors.white)),
                       hintText: "Search places",
                       hintStyle:
-                          TextStyle(fontSize: 16, color: Colors.grey.shade500),
+                          TextStyle(fontSize: 16, color: Colors.grey.shade600),
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
                 if (places.isEmpty)
                   Expanded(
                     child: FutureBuilder(
@@ -83,12 +88,21 @@ class _SearchScreenState extends State<SearchScreen> {
                           case ConnectionState.done:
                             places = snapshot.data!;
                             foundedPlaces = places;
-                            return ListView.builder(
+                            return ListView.separated(
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return showPlace(foundedPlaces[index]);
+                                return FadeAnimation(
+                                    duration: 1000,
+                                    delay: index * 50,
+                                    child: showPlace(foundedPlaces[index]));
                               },
                               itemCount: places.length,
+                              separatorBuilder: (context, index) {
+                                return FadeAnimation(
+                                    duration: 1000,
+                                    delay: index * 50,
+                                    child: const Divider(height: 5));
+                              },
                             );
                           default:
                             return Container();
@@ -99,12 +113,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 else
                   Expanded(
                     child: foundedPlaces.isNotEmpty
-                        ? ListView.builder(
+                        ? ListView.separated(
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return showPlace(foundedPlaces[index]);
                             },
                             itemCount: foundedPlaces.length,
+                            separatorBuilder: (context, index) =>
+                                const Divider(height: 5),
                           )
                         : const Center(
                             child: Text("No places found",
@@ -120,72 +136,43 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget showPlace(Place places) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(children: [
-            Container(
+    return InkWell(
+      onTap: () {
+        context.pushNamed(Routes.place.name, extra: places);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        child: Row(
+          children: [
+            Row(children: [
+              SizedBox(
                 width: 60,
                 height: 60,
                 child: CircleImage(
                   imageProvider: MemoryImage(places.image),
                   imageRadius: 35,
-                )),
-            SizedBox(width: 10),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(places.name,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500)),
-              SizedBox(
-                height: 5,
+                ),
               ),
-              // Text(places.description,
-              //     style: TextStyle(color: Colors.grey[500])),
-            ])
-          ]),
-          GestureDetector(
-            onTap: () {
-              context.pushNamed(Routes.place.name, extra: places);
-            },
-            child: AnimatedContainer(
-              height: 35,
-              width: 110,
-              duration: Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                  color: Colors.blue[700],
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.transparent,
-                  )),
-              child: Center(
-                child: Text('Go'),
-              ),
-            ),
-            // child: AnimatedContainer(
-            //     height: 35,
-            //     width: 110,
-            //     duration: Duration(milliseconds: 300),
-            //     decoration: BoxDecoration(
-            //         color: user.isFollowedByMe
-            //             ? Colors.blue[700]
-            //             : Color(0xffffff),
-            //         borderRadius: BorderRadius.circular(5),
-            //         border: Border.all(
-            //           color: user.isFollowedByMe
-            //               ? Colors.transparent
-            //               : Colors.grey.shade700,
-            //         )),
-            //     child: Center(
-            //         child: Text(user.isFollowedByMe ? 'Unfollow' : 'Follow',
-            //             style: TextStyle(
-            //                 color: user.isFollowedByMe
-            //                     ? Colors.white
-            //                     : Colors.white)))),
-          )
-        ],
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    places.name,
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    places.address!.country,
+                    style: TextStyle(color: Colors.grey.shade500),
+                  ),
+                ],
+              )
+            ]),
+          ],
+        ),
       ),
     );
   }

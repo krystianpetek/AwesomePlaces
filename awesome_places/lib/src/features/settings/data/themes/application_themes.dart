@@ -11,7 +11,7 @@ class ApplicationThemes {
             showSelectedLabels: false,
             showUnselectedLabels: false,
             elevation: 0,
-            backgroundColor: Color.fromRGBO(30, 30, 30, 1),
+            backgroundColor: Color(0xFF1C1B1F),
             unselectedItemColor: Colors.white,
             selectedIconTheme: IconThemeData(color: Colors.blue),
             unselectedIconTheme: IconThemeData(color: Colors.grey),
