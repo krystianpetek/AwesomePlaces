@@ -132,7 +132,7 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           "Krystian Petek",
           style: TextStyle(fontSize: 21),
         ),
-        Text(".NET Developer"),
+        Text("Developer"),
       ],
     );
   }

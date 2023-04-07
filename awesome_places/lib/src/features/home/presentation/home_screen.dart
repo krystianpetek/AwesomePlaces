@@ -1,4 +1,5 @@
 import 'package:awesome_places/src/routes/models/routes.dart';
+import 'package:awesome_places/src/widgets/brand_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,7 +9,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Awesome Places"),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BrandLogo(
+                  height: 40,
+                  radius: 25,
+                ),
+                const SizedBox(width: 10),
+                const Text("Awesome Places"),
+              ],
+            )
+          ],
+        ),
         centerTitle: true,
         actions: [
           Container(

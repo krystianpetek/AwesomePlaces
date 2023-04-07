@@ -168,7 +168,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       initialCameraPosition: CameraPosition(
           target: LatLng(widget.place.coordinate!.latitude,
               widget.place.coordinate!.longitude),
-          zoom: 12),
+          zoom: 13),
+      markers: {
+        Marker(
+          markerId: const MarkerId("place"),
+          position: LatLng(widget.place.coordinate!.latitude,
+              widget.place.coordinate!.longitude),
+          draggable: true,
+        )
+      },
     );
   }
 

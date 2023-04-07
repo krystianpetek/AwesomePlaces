@@ -3,13 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandLogo extends StatelessWidget {
   double? height;
+  double? radius;
 
-  BrandLogo({super.key, this.height = 80});
-
+  BrandLogo({super.key, this.height = 80, this.radius = 50});
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: 50,
+      radius: radius,
       backgroundColor: Colors.white,
       child: SvgPicture.asset(
         height: height,
