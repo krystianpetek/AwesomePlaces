@@ -15,9 +15,10 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(width: 20),
                 BrandLogo(
-                  height: 40,
-                  radius: 25,
+                  height: 30,
+                  radius: 20,
                 ),
                 const SizedBox(width: 10),
                 const Text("Awesome Places"),
