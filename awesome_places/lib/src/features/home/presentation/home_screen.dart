@@ -1,5 +1,4 @@
 import 'package:awesome_places/src/routes/models/routes.dart';
-import 'package:awesome_places/src/widgets/brand_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,14 +13,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: 20),
-                BrandLogo(
-                  height: 30,
-                  radius: 20,
-                ),
-                const SizedBox(width: 10),
-                const Text("Awesome Places"),
+              children: const [
+                SizedBox(width: 50),
+                Text("Awesome Places"),
               ],
             )
           ],

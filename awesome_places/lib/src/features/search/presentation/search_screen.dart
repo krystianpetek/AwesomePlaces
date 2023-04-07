@@ -45,12 +45,16 @@ class _SearchScreenState extends State<SearchScreen> {
             centerTitle: true,
           ),
           body: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.only(
+              bottom: 16,
+              left: 16,
+              right: 16,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
-                  height: 40,
+                  height: 50,
                   child: TextField(
                     onChanged: (value) => onSearch(value),
                     decoration: InputDecoration(
@@ -73,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 if (places.isEmpty)
                   Expanded(
                     child: FutureBuilder(
