@@ -5,8 +5,7 @@ import 'package:awesome_places/src/features/settings/data/themes/color_schemes.d
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'widgets/place_back_button.dart';
+import 'package:location/location.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
   const PlaceDetailsScreen({Key? key, required this.place}) : super(key: key);
@@ -19,6 +18,22 @@ class PlaceDetailsScreen extends StatefulWidget {
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   bool heartClick = false;
   late GoogleMapController? mapController;
+  LocationData? currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
+
+  Future getCurrentLocation() async {
+    Location myLocation = Location();
+    final response = await myLocation.getLocation();
+
+    setState(() {
+      currentLocation = response;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +167,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                       minHeight: 100,
                       maxHeight: 600,
                     ),
-                    child: navigation(),
+                    child: currentLocation == null
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.blue,
+                            ),
+                          )
+                        : navigation(),
                   ),
                 ],
               ),
@@ -169,14 +190,29 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         mapController = controller;
       },
       initialCameraPosition: CameraPosition(
-          target: LatLng(widget.place.coordinate!.latitude,
-              widget.place.coordinate!.longitude),
+          target: LatLng(
+            widget.place.coordinate!.latitude,
+            widget.place.coordinate!.longitude,
+          ),
           zoom: 13),
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
+      buildingsEnabled: true,
+      compassEnabled: true,
       markers: {
         Marker(
+          markerId: const MarkerId("currentLocation"),
+          position: LatLng(
+            currentLocation!.latitude!,
+            currentLocation!.longitude!,
+          ),
+        ),
+        Marker(
           markerId: const MarkerId("place"),
-          position: LatLng(widget.place.coordinate!.latitude,
-              widget.place.coordinate!.longitude),
+          position: LatLng(
+            widget.place.coordinate!.latitude,
+            widget.place.coordinate!.longitude,
+          ),
           draggable: true,
         )
       },

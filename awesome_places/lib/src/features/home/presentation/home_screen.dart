@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height - 310,
+                        height: MediaQuery.of(context).size.height - 342,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
