@@ -31,7 +31,7 @@ class Stars extends StatelessWidget {
     List<Container> containers = [];
 
     for (int i = 1; i <= 5; i++) {
-      if (rating > i) {
+      if (rating >= i) {
         containers.add(
           Container(
             margin: const EdgeInsets.only(right: 3),

@@ -119,7 +119,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           ),
                         ),
                         const SizedBox(width: 7),
-                        Stars(rating: widget.place.rating),
+                        Stars(rating: widget.place.rating.toDouble()),
                       ],
                     ),
                     const PlaceDivider(),
