@@ -62,7 +62,7 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           delay: 300,
           duration: 1000,
           child: ListTile(
-            title: const Text('Help center (author GH)'),
+            title: const Text('Help center - author GitHub'),
             onTap: () async {
               launchBrowser(uri: ApiEndpoints.developerProfile);
             },
@@ -72,6 +72,26 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           delay: 500,
           duration: 1000,
           child: ListTile(
+            title: const Text('Project repository'),
+            onTap: () async {
+              launchBrowser(uri: ApiEndpoints.projectRepository);
+            },
+          ),
+        ),
+        FadeAnimation(
+          delay: 700,
+          duration: 1000,
+          child: ListTile(
+            title: const Text('Awesome Places API'),
+            onTap: () async {
+              launchBrowser(uri: ApiEndpoints.projectApiOAS);
+            },
+          ),
+        ),
+        FadeAnimation(
+          delay: 900,
+          duration: 1000,
+          child: ListTile(
             title: const Text('Notifications'),
             onTap: () async {
               await showModal(text: "This feature isn't implemented yet!");
@@ -79,7 +99,7 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ),
         FadeAnimation(
-          delay: 700,
+          delay: 1100,
           duration: 1000,
           child: ListTile(
             title: const Text('My account'),
@@ -89,7 +109,7 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ),
         FadeAnimation(
-          delay: 900,
+          delay: 1300,
           duration: 1000,
           child: ListTile(
             title: const Text('Log out'),

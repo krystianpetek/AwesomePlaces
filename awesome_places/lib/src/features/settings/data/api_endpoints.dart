@@ -22,7 +22,7 @@ class ApiEndpoints {
       Uri.parse("https://github.com/krystianpetek/");
 
   static final Uri projectRepository =
-      Uri.parse("https://github.com/krystianpetek/");
+      Uri.parse("https://github.com/krystianpetek/AwesomePlaces");
 
   static final Uri projectApiOAS = Uri.parse(
       "https://awesomeplacesapi20230325211214.azurewebsites.net/swagger/index.html");
