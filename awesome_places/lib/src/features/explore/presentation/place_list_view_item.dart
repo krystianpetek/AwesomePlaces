@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class PlaceListViewItem extends StatefulWidget {
-  PlaceListViewItem({super.key, required this.place});
+  const PlaceListViewItem({super.key, required this.place});
   final Place place;
 
   @override

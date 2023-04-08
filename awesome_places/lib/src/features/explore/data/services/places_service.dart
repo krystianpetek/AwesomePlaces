@@ -23,7 +23,7 @@ class PlacesService {
         final place = jsonDecode(response.body);
 
         final placeMap = Place.fromListJson(place);
-        ref.watch(exploreProvider).places = placeMap ?? <Place>[];
+        ref.watch(placesProvider).places = placeMap ?? <Place>[];
         return placeMap;
       }
     } catch (exception) {

@@ -10,10 +10,10 @@ class PlaceListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final exploreNotifier = ref.watch(exploreProvider);
+        final placeNotifier = ref.watch(placesProvider);
         return ListView.separated(
             itemBuilder: (context, index) {
-              return PlaceListViewItem(place: exploreNotifier.places[index]);
+              return PlaceListViewItem(place: placeNotifier.places[index]);
             },
             separatorBuilder: (context, index) {
               return const Divider(
@@ -23,7 +23,7 @@ class PlaceListView extends StatelessWidget {
                 thickness: 1,
               );
             },
-            itemCount: exploreNotifier.places.length);
+            itemCount: placeNotifier.places.length);
       },
     );
   }

@@ -1,12 +1,12 @@
-import 'package:awesome_places/src/features/explore/data/models/explore_state_model.dart';
+import 'package:awesome_places/src/features/explore/data/models/place_state_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final exploreProvider =
-    StateNotifierProvider<ExploreNotifier, ExploreStateModel>((ref) {
-  return ExploreNotifier();
+final placesProvider =
+    StateNotifierProvider<PlaceNotifier, PlaceStateModel>((ref) {
+  return PlaceNotifier();
 });
 
-class ExploreNotifier extends StateNotifier<ExploreStateModel> {
-  ExploreNotifier([ExploreStateModel? state])
-      : super(state ?? ExploreStateModel.initialize());
+class PlaceNotifier extends StateNotifier<PlaceStateModel> {
+  PlaceNotifier([PlaceStateModel? state])
+      : super(state ?? PlaceStateModel.initialize());
 }

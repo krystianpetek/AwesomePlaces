@@ -59,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     onChanged: (value) => onSearch(value),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0x30505050),
+                      fillColor: const Color(0x30505050),
                       contentPadding: const EdgeInsets.all(0),
                       prefixIcon: Icon(
                         Icons.search,

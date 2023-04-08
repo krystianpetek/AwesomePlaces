@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/explore/data/models/explore_state_model.dart';
+import 'package:awesome_places/src/features/explore/data/models/place_state_model.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
 import 'package:awesome_places/src/features/explore/enums/place_view_enum.dart';
@@ -19,7 +19,7 @@ class ExploreScreen extends ConsumerStatefulWidget {
 class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   Widget fetchData() {
     return Consumer(builder: (context, ref, child) {
-      ExploreStateModel exploreNotifier = ref.watch(exploreProvider);
+      PlaceStateModel placeNotifier = ref.watch(placesProvider);
       return FutureBuilder(
         future: PlacesService(ref: ref).getPlaces(),
         builder: (context, snapshot) {
@@ -30,9 +30,9 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                 child: CircularProgressIndicator(),
               );
             case ConnectionState.done:
-              exploreNotifier.places = snapshot.data!;
+              placeNotifier.places = snapshot.data!;
               return Expanded(
-                child: exploreNotifier.placeViewEnum == PlaceViewEnum.ListView
+                child: placeNotifier.placeViewEnum == PlaceViewEnum.ListView
                     ? const PlaceListView()
                     : const PlaceGridView(),
               );
@@ -46,7 +46,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final exploreNotifier = ref.watch(exploreProvider);
+    final placeNotifier = ref.watch(placesProvider);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -58,7 +58,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                   child: const Text("List view"),
                   onTap: () {
                     setState(() {
-                      exploreNotifier.placeViewEnum = PlaceViewEnum.ListView;
+                      placeNotifier.placeViewEnum = PlaceViewEnum.ListView;
                     });
                   },
                 ),
@@ -66,7 +66,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                   child: const Text("Grid view"),
                   onTap: () {
                     setState(() {
-                      exploreNotifier.placeViewEnum = PlaceViewEnum.GridView;
+                      placeNotifier.placeViewEnum = PlaceViewEnum.GridView;
                     });
                   },
                 ),
@@ -92,10 +92,10 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: (exploreNotifier.places.isEmpty)
+              child: (placeNotifier.places.isEmpty)
                   ? SizedBox(child: fetchData())
                   : SizedBox(
-                      child: exploreNotifier.placeViewEnum ==
+                      child: placeNotifier.placeViewEnum ==
                               PlaceViewEnum.ListView
                           ? const PlaceListView()
                           : const PlaceGridView(),

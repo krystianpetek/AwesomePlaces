@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/explore/data/models/explore_state_model.dart';
+import 'package:awesome_places/src/features/explore/data/models/place_state_model.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/widgets/stars.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
@@ -27,8 +27,8 @@ class _PlaceFullScreenState extends ConsumerState<PlaceFullScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ExploreStateModel exploreNotifier = ref.watch(exploreProvider);
-    totalPage = exploreNotifier.places.length;
+    final PlaceStateModel placeNotifier = ref.watch(placesProvider);
+    totalPage = placeNotifier.places.length;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -49,13 +49,13 @@ class _PlaceFullScreenState extends ConsumerState<PlaceFullScreen> {
         physics: const RangeMaintainingScrollPhysics(),
         itemBuilder: (context, index) {
           return makePage(
-              item: exploreNotifier.places[index],
-              description: exploreNotifier.places[index].description,
-              image: exploreNotifier.places[index].image,
+              item: placeNotifier.places[index],
+              description: placeNotifier.places[index].description,
+              image: placeNotifier.places[index].image,
               page: index + 1,
-              title: exploreNotifier.places[index].name);
+              title: placeNotifier.places[index].name);
         },
-        itemCount: exploreNotifier.places.length,
+        itemCount: placeNotifier.places.length,
       ),
     );
   }
@@ -96,7 +96,7 @@ class _PlaceFullScreenState extends ConsumerState<PlaceFullScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '/' + totalPage.toString(),
+                      '/$totalPage',
                       style: const TextStyle(color: Colors.white, fontSize: 15),
                     )
                   ],

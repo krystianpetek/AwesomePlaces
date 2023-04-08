@@ -10,12 +10,12 @@ class PlaceGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final exploreNotifier = ref.watch(exploreProvider);
+        final placeNotifier = ref.watch(placesProvider);
         return GridView.builder(
-          itemCount: exploreNotifier.places.length,
+          itemCount: placeNotifier.places.length,
           itemBuilder: (BuildContext context, int index) {
             return PlaceGridViewItem(
-              place: exploreNotifier.places[index],
+              place: placeNotifier.places[index],
             );
           },
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
