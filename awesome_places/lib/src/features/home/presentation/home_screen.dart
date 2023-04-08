@@ -93,14 +93,16 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            topPlaces(
-                              placeNotifier.places.reduce((value, element) =>
-                                  value.rating > element.rating
-                                      ? value
-                                      : element),
-                            ),
                           ],
-                        )
+                        ),
+                        const SizedBox(height: 8),
+                        topPlaces(
+                          context,
+                          placeNotifier.places.reduce(
+                            (value, element) =>
+                                value.rating > element.rating ? value : element,
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -114,13 +116,108 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget topPlaces(Place place) {
-    return Container(
-      child: InkWell(
-        child: Row(
-          children: [],
+  Widget topPlaces(BuildContext context, Place place) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Text(
+              "Top places",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () {
+                context.goNamed(Routes.explore.name);
+              },
+              child: const Text(
+                "see all",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
+          ],
         ),
-      ),
+        Container(
+          padding: const EdgeInsets.all(10),
+          constraints: const BoxConstraints(maxHeight: 130),
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            onTap: () {
+              context.pushNamed(Routes.place.name, extra: place);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                color: Colors.grey[900],
+                border: Border.all(width: 1, color: Colors.grey.shade800),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        opacity: 0.9,
+                        image: MemoryImage(place.image),
+                      ),
+                    ),
+                  ),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(),
+                      Positioned(
+                        top: 5,
+                        left: 10,
+                        child: Text(
+                          place.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Positioned(
+                        top: 30,
+                        left: 10,
+                        width: MediaQuery.of(context).size.width - 150,
+                        child: Text(
+                          place.description,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodySmall!,
+                        ),
+                      ),
+                      Positioned(
+                          bottom: 8,
+                          left: 10,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_outlined,
+                                size: 16,
+                                color: Colors.grey.shade400,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${place.address!.country}, ${place.address!.city}',
+                                style: TextStyle(
+                                    color: Colors.grey.shade400, fontSize: 12),
+                              ),
+                            ],
+                          ))
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
