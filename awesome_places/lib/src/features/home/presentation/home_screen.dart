@@ -48,23 +48,25 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    const Text("Hi, ",
-                                        style: TextStyle(fontSize: 20)),
-                                    Text(
-                                      user.user,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.blue.shade400,
-                                      ),
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  const Text("Hi, ",
+                                      style: TextStyle(fontSize: 20)),
+                                  Text(
+                                    user.user,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.blue.shade400,
                                     ),
-                                  ]),
-                                  Text('Where would you like to go?',
-                                      style:
-                                          TextStyle(color: Colors.grey[500])),
+                                  ),
                                 ]),
+                                Text(
+                                  'Where would you like to go?',
+                                  style: TextStyle(color: Colors.grey[500]),
+                                ),
+                              ],
+                            ),
                             const Spacer(),
                             Container(
                               width: 40,
@@ -159,6 +161,7 @@ class HomeScreen extends StatelessWidget {
                                                 : element,
                                       ),
                                     ),
+                                    const SizedBox(height: 20)
                                   ],
                                 ),
                               ),
