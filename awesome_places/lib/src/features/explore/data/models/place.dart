@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:awesome_places/src/features/explore/data/models/place_types.dart';
+
 import 'address.dart';
 import 'coordinate.dart';
 
@@ -8,7 +10,7 @@ class Place {
   String id;
   String name;
   String description;
-  int placeType;
+  PlaceTypes placeType;
   Uint8List image;
   num rating;
   bool requiredFee;
@@ -32,7 +34,7 @@ class Place {
         id: json['id'] as String,
         name: json['name'] as String,
         description: json['description'] as String,
-        placeType: json['placeType'] as int,
+        placeType: PlaceTypes.values.elementAt(json['placeType']),
         image: base64.decode(json['image']),
         rating: json['rating'] as num,
         requiredFee: json['requiredFee'] as bool,

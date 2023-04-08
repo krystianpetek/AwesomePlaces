@@ -1,6 +1,6 @@
 class ApiEndpoints {
   static String username = "krystianpetek2@gmail.com";
-  static String passwd = "krystianpetek2@gmail.com";
+  static String passwd = "defaultPass";
 
   // static const awesomePlacesUrl = 'https://localhost:7098';
   static const registerUrl =
