@@ -4,6 +4,7 @@ import 'package:awesome_places/src/features/authentication/data/providers/authen
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
 import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
+import 'package:awesome_places/src/features/explore/presentation/widgets/star.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         title: const Center(
           child: Text("Awesome Places"),
         ),
@@ -100,55 +102,70 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Column(
                           children: [
-                            Row(
-                              children: [],
-                            ),
                             headerText("Search for places"),
                             const SizedBox(height: 8),
                             searchInputField(context),
                             const SizedBox(height: 16),
-                            headerText("Popular"),
                           ],
                         ),
                       ),
-                      recommendedPlaces(context, placeNotifier.places),
-                      Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "Top places",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height - 310,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
                                 ),
-                                const Spacer(),
-                                TextButton(
-                                  onPressed: () {
-                                    context.goNamed(Routes.explore.name);
-                                  },
-                                  child: const Text(
-                                    "see all",
-                                    style: TextStyle(
-                                        fontSize: 16, color: Colors.grey),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            topPlaces(
-                              context,
-                              placeNotifier.places.reduce(
-                                (value, element) =>
-                                    value.rating > element.rating
-                                        ? value
-                                        : element,
+                                child: headerText("Popular"),
                               ),
-                            ),
-                          ],
+                              recommendedPlaces(context, placeNotifier.places),
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          "Top places",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const Spacer(),
+                                        TextButton(
+                                          onPressed: () {
+                                            context
+                                                .goNamed(Routes.explore.name);
+                                          },
+                                          child: const Text(
+                                            "see all",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    topPlaces(
+                                      context,
+                                      placeNotifier.places.reduce(
+                                        (value, element) =>
+                                            value.rating > element.rating
+                                                ? value
+                                                : element,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   );
                 default:
@@ -167,7 +184,7 @@ class HomeScreen extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -180,7 +197,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           constraints: const BoxConstraints(maxHeight: 130),
           child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             onTap: () {
               context.pushNamed(Routes.place.name, extra: place);
             },
@@ -330,6 +347,40 @@ class HomeScreen extends StatelessWidget {
                 opacity: 0.9,
                 image: MemoryImage(place.image),
               ),
+            ),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(),
+                Positioned(
+                  left: 10,
+                  bottom: 15,
+                  child: Text(
+                    place.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Positioned(
+                  bottom: 15,
+                  right: 10,
+                  child: Row(
+                    children: [
+                      const Star(),
+                      const SizedBox(width: 5),
+                      Text(
+                        "${place.rating}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),
