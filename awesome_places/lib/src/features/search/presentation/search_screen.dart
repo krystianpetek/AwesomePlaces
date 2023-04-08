@@ -56,6 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 50,
                   child: TextField(
+                    autofocus: true,
                     onChanged: (value) => onSearch(value),
                     decoration: InputDecoration(
                       filled: true,

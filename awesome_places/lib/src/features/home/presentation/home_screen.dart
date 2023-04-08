@@ -37,12 +37,12 @@ class HomeScreen extends StatelessWidget {
                   );
                 case ConnectionState.done:
                   placeNotifier.places = snapshot.data!;
-                  return Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Column(
@@ -95,16 +95,61 @@ class HomeScreen extends StatelessWidget {
                             const SizedBox(width: 8),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        topPlaces(
-                          context,
-                          placeNotifier.places.reduce(
-                            (value, element) =>
-                                value.rating > element.rating ? value : element,
-                          ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [],
+                            ),
+                            headerText("Search for places"),
+                            const SizedBox(height: 8),
+                            searchInputField(context),
+                            const SizedBox(height: 16),
+                            headerText("Popular"),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      recommendedPlaces(context, placeNotifier.places),
+                      Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Text(
+                                  "Top places",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const Spacer(),
+                                TextButton(
+                                  onPressed: () {
+                                    context.goNamed(Routes.explore.name);
+                                  },
+                                  child: const Text(
+                                    "see all",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.grey),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            topPlaces(
+                              context,
+                              placeNotifier.places.reduce(
+                                (value, element) =>
+                                    value.rating > element.rating
+                                        ? value
+                                        : element,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   );
                 default:
                   return Container();
@@ -116,28 +161,21 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget headerText(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        textAlign: TextAlign.left,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
   Widget topPlaces(BuildContext context, Place place) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            const Text(
-              "Top places",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const Spacer(),
-            TextButton(
-              onPressed: () {
-                context.goNamed(Routes.explore.name);
-              },
-              child: const Text(
-                "see all",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ],
-        ),
         Container(
           padding: const EdgeInsets.all(10),
           constraints: const BoxConstraints(maxHeight: 130),
@@ -218,6 +256,84 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget recommendedPlaces(BuildContext context, List<Place> places) {
+    places.sort((a, b) {
+      return a.rating.compareTo(b.rating);
+    });
+    final bestPlaces = places.getRange(0, 4).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 400,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: bestPlaces.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) =>
+                  cardPlace(context, bestPlaces[index])),
+        ),
+      ],
+    );
+  }
+
+  Widget searchInputField(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: TextField(
+        onTap: () => context.pushNamed(Routes.search.name),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color(0x30505050),
+          contentPadding: const EdgeInsets.all(0),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey.shade500,
+          ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+              borderSide: const BorderSide(color: Colors.white)),
+          hintText: "Search places",
+          hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+        ),
+      ),
+    );
+  }
+
+  Widget cardPlace(BuildContext context, Place place) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      constraints: const BoxConstraints(maxHeight: 300),
+      child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        onTap: () {
+          context.pushNamed(Routes.place.name, extra: place);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Colors.grey[900],
+            border: Border.all(width: 1, color: Colors.grey.shade800),
+          ),
+          child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                opacity: 0.9,
+                image: MemoryImage(place.image),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
