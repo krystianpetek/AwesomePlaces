@@ -87,7 +87,9 @@ class _SearchScreenState extends State<SearchScreen> {
                           case ConnectionState.none:
                           case ConnectionState.waiting:
                             return const Center(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(
+                                color: Colors.blue,
+                              ),
                             );
                           case ConnectionState.done:
                             places = snapshot.data!;

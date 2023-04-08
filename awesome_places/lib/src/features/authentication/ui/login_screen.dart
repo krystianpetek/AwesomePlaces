@@ -134,7 +134,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 widget.loading
                     ? ApproveButton(
                         onClick: () {},
-                        child: const CircularProgressIndicator(),
+                        child: const CircularProgressIndicator(
+                          color: Colors.blue,
+                        ),
                       )
                     : ApproveButton(
                         onClick: () async {

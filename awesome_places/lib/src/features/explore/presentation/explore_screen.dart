@@ -27,7 +27,9 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
               );
             case ConnectionState.done:
               placeNotifier.places = snapshot.data!;
@@ -95,10 +97,10 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
               child: (placeNotifier.places.isEmpty)
                   ? SizedBox(child: fetchData())
                   : SizedBox(
-                      child: placeNotifier.placeViewEnum ==
-                              PlaceViewEnum.ListView
-                          ? const PlaceListView()
-                          : const PlaceGridView(),
+                      child:
+                          placeNotifier.placeViewEnum == PlaceViewEnum.ListView
+                              ? const PlaceListView()
+                              : const PlaceGridView(),
                     ),
             ),
           ],

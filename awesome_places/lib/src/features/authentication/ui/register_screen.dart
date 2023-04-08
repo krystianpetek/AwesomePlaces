@@ -92,7 +92,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 widget.loading
                     ? ApproveButton(
                         onClick: () {},
-                        child: const CircularProgressIndicator(),
+                        child: const CircularProgressIndicator(
+                          color: Colors.blue,
+                        ),
                       )
                     : ApproveButton(
                         onClick: () async {
