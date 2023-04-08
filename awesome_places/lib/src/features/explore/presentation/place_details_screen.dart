@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
   const PlaceDetailsScreen({Key? key, required this.place}) : super(key: key);
@@ -195,6 +196,9 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
             widget.place.coordinate!.longitude,
           ),
           zoom: 13),
+      onTap: (argument) async {
+        await openMap(argument.latitude, argument.longitude);
+      },
       myLocationEnabled: true,
       myLocationButtonEnabled: true,
       buildingsEnabled: true,
@@ -217,6 +221,16 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         )
       },
     );
+  }
+
+  Future openMap(double lat, double lng) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+    if (await canLaunchUrlString(googleUrl)) {
+      await launchUrlString(googleUrl, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Unable open the map.';
+    }
   }
 
   Widget location(BuildContext context) {
