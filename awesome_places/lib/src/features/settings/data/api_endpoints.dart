@@ -1,4 +1,7 @@
 class ApiEndpoints {
+  static String username = "krystianpetek2@gmail.com";
+  static String passwd = "krystianpetek2@gmail.com";
+
   // static const awesomePlacesUrl = 'https://localhost:7098';
   static const registerUrl =
       'https://awesomeplacesapi20230325211214.azurewebsites.net/users/register';
@@ -14,4 +17,13 @@ class ApiEndpoints {
   static getPlaceById(String id) => '$awesomePlacesUrl/places/$id';
 
   static const String postPlace = '$awesomePlacesUrl/places';
+
+  static final Uri developerProfile =
+      Uri.parse("https://github.com/krystianpetek/");
+
+  static final Uri projectRepository =
+      Uri.parse("https://github.com/krystianpetek/");
+
+  static final Uri projectApiOAS = Uri.parse(
+      "https://awesomeplacesapi20230325211214.azurewebsites.net/swagger/index.html");
 }

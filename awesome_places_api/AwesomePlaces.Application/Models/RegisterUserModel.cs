@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace AwesomePlaces.Application.Models;
 public class RegisterUserModel
 {
-    [DefaultValue("userMock@email.com")]
+    [DefaultValue("krystianpetek2@email.com")]
     public string Email { get; set; }
     [DefaultValue("defaultPass")]
     public string Password { get; set; }

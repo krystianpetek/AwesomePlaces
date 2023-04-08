@@ -1,5 +1,6 @@
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
+import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/custom_snackbar.dart';
@@ -122,8 +123,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           await showModal(
                               text:
                                   "This feature isn't implemented yet!\nI will fill login data for you.");
-                          emailController.text = 'userMock@email.com';
-                          passwordController.text = 'defaultPass';
+                          emailController.text = ApiEndpoints.username;
+                          passwordController.text = ApiEndpoints.passwd;
                         })
                   ],
                 ),

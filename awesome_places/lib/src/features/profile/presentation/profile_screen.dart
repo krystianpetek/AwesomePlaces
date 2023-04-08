@@ -1,11 +1,13 @@
 import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/widgets/show_modal_bottom.dart';
+import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/circle_image.dart';
 import 'package:awesome_places/src/widgets/fade_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   ProfileScreen({super.key});
@@ -60,9 +62,9 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           delay: 300,
           duration: 1000,
           child: ListTile(
-            title: const Text('My account'),
+            title: const Text('Help center (author GH)'),
             onTap: () async {
-              await showModal(text: "This feature isn't implemented yet!");
+              launchBrowser(uri: ApiEndpoints.developerProfile);
             },
           ),
         ),
@@ -80,7 +82,7 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
           delay: 700,
           duration: 1000,
           child: ListTile(
-            title: const Text('Help center'),
+            title: const Text('My account'),
             onTap: () async {
               await showModal(text: "This feature isn't implemented yet!");
             },
@@ -137,12 +139,18 @@ class ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Future showModal({required String text}) {
+  Future<void> showModal({required String text}) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
         return ShowModalBottom(text: text);
       },
     );
+  }
+
+  Future<void> launchBrowser({required Uri uri}) async {
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
   }
 }
