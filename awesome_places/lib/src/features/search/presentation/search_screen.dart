@@ -32,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return Scaffold(
           appBar: AppBar(
+            surfaceTintColor: Colors.transparent,
             elevation: 0,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
