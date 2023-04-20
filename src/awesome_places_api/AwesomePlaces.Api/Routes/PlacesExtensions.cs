@@ -39,5 +39,3 @@ public static class PlacesExtensions
     }
 }
 // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/parameter-binding?view=aspnetcore-7.0 - minimal api
-
-// https://stackoverflow.com/questions/3548401/how-to-save-image-in-database-using-c-sharp - save image using dapper in bytes
