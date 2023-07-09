@@ -3,14 +3,12 @@ class ApiEndpoints {
   static String passwd = "defaultPass";
 
   // static const awesomePlacesUrl = 'https://localhost:7098';
-  static const registerUrl =
-      'https://awesomeplacesapi20230325211214.azurewebsites.net/users/register';
-
-  static const loginUrl =
-      'https://awesomeplacesapi20230325211214.azurewebsites.net/users/login';
-
   static const awesomePlacesUrl =
       'https://awesomeplacesapi20230325211214.azurewebsites.net';
+
+  static const registerUrl = '$awesomePlacesUrl/users/register';
+
+  static const loginUrl = '$awesomePlacesUrl/users/login';
 
   static const String getPlaceCollection = '$awesomePlacesUrl/places';
 
@@ -24,6 +22,6 @@ class ApiEndpoints {
   static final Uri projectRepository =
       Uri.parse("https://github.com/krystianpetek/AwesomePlaces");
 
-  static final Uri projectApiOAS = Uri.parse(
-      "https://awesomeplacesapi20230325211214.azurewebsites.net/swagger/index.html");
+  static final Uri projectApiOAS =
+      Uri.parse("$awesomePlacesUrl/swagger/index.html");
 }
