@@ -1,7 +1,7 @@
-import 'package:awesome_places/src/features/explore/data/models/place_state_model.dart';
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
+import 'package:awesome_places/src/providers/places/models/place_state_model.dart';
+import 'package:awesome_places/src/providers/places/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
-import 'package:awesome_places/src/features/explore/enums/place_view_enum.dart';
+import 'package:awesome_places/src/providers/places/enums/place_view_enum.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_grid_view.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_list_view.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';

@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:awesome_places/src/providers/authentication/enums/authentication_status.dart';
 import 'package:awesome_places/src/features/authentication/data/services/app_cache_service.dart';
-import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
 import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 import 'package:awesome_places/src/features/authentication/data/services/authentication_service.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'models/authentication_state_model.dart';
 
 final authenticationProvider =
     StateNotifierProvider<AuthenticationNotifier, AuthenticationStateModel>(

@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
+import 'package:awesome_places/src/providers/places/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/services/places_service.dart';
 import 'package:awesome_places/src/features/explore/presentation/widgets/star.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';

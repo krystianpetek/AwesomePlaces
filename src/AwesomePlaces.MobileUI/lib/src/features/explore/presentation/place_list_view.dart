@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
+import 'package:awesome_places/src/providers/places/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/place_list_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

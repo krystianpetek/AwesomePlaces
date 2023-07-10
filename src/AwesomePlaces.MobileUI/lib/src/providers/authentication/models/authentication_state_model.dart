@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:awesome_places/src/features/authentication/data/enums/authentication_status.dart';
+import 'package:awesome_places/src/providers/authentication/enums/authentication_status.dart';
 
 class AuthenticationStateModel {
   final String user;

@@ -1,4 +1,4 @@
-import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/login_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/register_screen.dart';
 import 'package:awesome_places/src/features/authentication/ui/welcome_screen.dart';

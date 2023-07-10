@@ -1,5 +1,5 @@
 import 'package:awesome_places/src/features/authentication/data/models/models.dart';
-import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
 import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/approve_button.dart';

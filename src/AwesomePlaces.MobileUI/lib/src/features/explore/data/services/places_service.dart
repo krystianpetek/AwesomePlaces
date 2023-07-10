@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:awesome_places/src/features/authentication/data/providers/authentication_provider.dart';
+import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
+import 'package:awesome_places/src/providers/places/places_provider.dart';
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
 import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;

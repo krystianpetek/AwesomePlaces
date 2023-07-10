@@ -1,5 +1,5 @@
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
-import 'package:awesome_places/src/features/explore/enums/place_view_enum.dart';
+import 'package:awesome_places/src/providers/places/enums/place_view_enum.dart';
 
 class PlaceStateModel {
   List<Place> places;

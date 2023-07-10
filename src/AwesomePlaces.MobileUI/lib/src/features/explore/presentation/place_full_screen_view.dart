@@ -1,5 +1,5 @@
-import 'package:awesome_places/src/features/explore/data/models/place_state_model.dart';
-import 'package:awesome_places/src/features/explore/data/providers/places_provider.dart';
+import 'package:awesome_places/src/providers/places/models/place_state_model.dart';
+import 'package:awesome_places/src/providers/places/places_provider.dart';
 import 'package:awesome_places/src/features/explore/presentation/widgets/stars.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:flutter/material.dart';
