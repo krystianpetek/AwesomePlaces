@@ -8,7 +8,7 @@
 
 ## AwesomePlaces - application for search  interesting places
 
-**AwesomePlaces** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web).
+**AwesomePlaces** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web). The application is designed for people who like to travel and discover new places, as well as for those who are looking for inspiration for their next trips. The application is designed to make it easier for users to find interesting places and share them with others. The application allows users to browse available places by category, location or name. Users can also add their own places, rate and comment on existing ones, and create lists of favorite places. The application also offers a map function that shows the location of selected places and how to navigate to them.
 
 <br/>
 <div align="center">
@@ -73,6 +73,8 @@ The project was created using the following technologies:
 
 ### Front-end
 
+It's the simple **searching platformm** app built as **Modular Monolith**, written in **Flutter 3**. Each module is an independent **vertical slice** with its custom architecture, and the overall application architecture has been divided into features.
+
 - `Flutter` - a framework for creating mobile, web and desktop applications
 - `flutter_riverpod` - a library to manage application state
 - `go_router` - app navigation library
@@ -98,4 +100,28 @@ The entire application solution has been divided into 5 layers, 4 for the back-e
 
 - `AwesomePlaces.Api` - API layer, contains controllers that are responsible for handling HTTP requests that are sent to the API. This layer also contains the Swagger configuration, which is used to document the API and to test endpoints, with the implementation of authentication using the JWT token (Json Web Token). This layer depends on the application layer by inheriting from the infrastructure layer, because it uses application services that are used in controllers. This layer is the outermost layer, because it is the layer that is visible to the end users of the system, because it is here that endpoints are issued that are used by client applications to communicate with the API. This layer is directly dependent only on the infrastructure layer. A global error handling system has also been implemented here, which is used in controllers to return appropriate HTTP error codes, depending on what error occurred in the system, and to ensure that the application is not stopped by an unhandled exception.
 
-- `AwesomePlaces.MobileUI` - the mobile application layer, contains the entire application logic, which is divided into 3 layers, the `models` layer, which contains the models used in the application, the `services` layer, which contains the services used in the application, and the `ui` layer, which contains the user interface of the application. The `models` layer contains the models used in the application, which are mapped from DTO models from the `AwesomePlaces.Application` layer, and the `services` layer contains the services used in the application, which are used to communicate with the API, and the `ui` layer contains the user interface of the application, which is divided into 3 layers, the `pages` layer, which contains the pages of the application, the `widgets` layer, which contains the widgets used in the application, and the `providers` layer, which contains the providers used in the application. The `pages` layer contains the pages of the application, which are used to display the user interface of the application, the `widgets` layer contains the widgets used in the application, which are used to display the user interface of the application, and the `providers` layer contains the providers used in the application, which are used to manage the state of the application. This layer depends on the `AwesomePlaces.Application` layer, because it uses services that are used to communicate with the API. This layer is the outermost layer, because it is the layer that is visible to the end users of the system, because it is here that the user interface of the application is issued, which is used by end users to communicate with the API. This layer is directly dependent only on the `AwesomePlaces.Application` layer.
+- `AwesomePlaces.MobileUI` - mobile application layer, contains all front-end application features, which is divided into `features`, `routes`, state `providers` and shared `widgets`. Each feature has, depending on its size, a `presentation` layer with views and a `data` layer containing models used in the module, services or validators, performing I/O, HTTP etc. operations. The `models` layer contains the models used in the application, which are mapped from the DTO models from the `AwesomePlaces.Application` layer, while the `services` layer contains the services used in the application that are used to communicate with the API, mapping, serialization, deserialization of classes and the `presentation` layer contains the user interface application. The `routes` layer contains the application navigation system, which is based on the `go_router` library, which is used to navigate between application views. The `providers` layer contains the application state management system, which is based on the `flutter_riverpod` library, which is used to manage the application state. The `widgets` layer contains shared widgets that are used in the application, such as buttons, text fields, etc.
+
+## Features
+
+Awesome Places is an application for searching interesting places around the world.
+
+- Browse a list of interesting places by category or location
+- Display the detailed data of the places, such as name, location, description, rating and images.
+- The user can search for places by keywords, categories or location, and view the details of each place on a separate screen.
+- The user can also save their favorite places to a local database and access them offline (WIP).
+- The user can share your opinions and ratings with other users
+- Application allows to add your own places to the API and contribute to the community
+- You can use the map to find places near you and navigate to them
+- The application has a simple and elegant user interface, with dark and light themes available.
+
+## Screenshots
+
+| | | |
+| :-------------------------:|:-------------------------:|:-------------------------: |
+| ![](./assets/screens/1.png)  |  ![](./assets/screens/2.png) | ![](./assets/screens/3.png) |
+| ![](./assets/screens/4.png)  |  ![](./assets/screens/5.png) | ![](./assets/screens/6.png) |
+| ![](./assets/screens/9.png)  |  ![](./assets/screens/8.png) | ![](./assets/screens/19.png) |
+| ![](./assets/screens/10.png)  |  ![](./assets/screens/11.png) | ![](./assets/screens/12.png) |
+| ![](./assets/screens/13.png)  |  ![](./assets/screens/14.png) | ![](./assets/screens/15.png) |
+| ![](./assets/screens/16.png)  |  ![](./assets/screens/17.png) | ![](./assets/screens/18.png) |

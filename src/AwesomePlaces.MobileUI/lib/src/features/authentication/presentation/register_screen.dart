@@ -1,34 +1,33 @@
+import 'package:awesome_places/src/features/authentication/data/models/models.dart';
 import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
-import 'package:awesome_places/src/features/authentication/ui/widgets/widgets.dart';
-import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
+import 'package:awesome_places/src/features/authentication/presentation/widgets/widgets.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/approve_button.dart';
 import 'package:awesome_places/src/widgets/snackbar_messages/custom_snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_places/src/features/authentication/data/models/models.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
-  LoginScreen({super.key});
+class RegisterScreen extends ConsumerStatefulWidget {
+  RegisterScreen({super.key});
   bool loading = false;
 
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final authenticationNotifier = ref.watch(authenticationProvider.notifier);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
@@ -46,15 +45,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             Column(
               children: <Widget>[
                 const Text(
-                  'Login',
+                  "Register",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
                     fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Login to your account',
+                  "Create an account in my app",
                   style: TextStyle(
                     color: Colors.grey[500],
                     fontSize: 15,
@@ -63,70 +62,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                      onTap: () async {
-                        await showModal(
-                          text: "Login by Facebook isn't implemented yet!",
-                        );
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(7),
-                        child: Icon(FontAwesomeIcons.facebook, size: 30),
-                      ),
-                    ),
-                    const SizedBox(width: 30),
-                    InkWell(
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                      onTap: () async {
-                        await showModal(
-                          text: "Login by Google isn't implemented yet!",
-                        );
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(7),
-                        child: Icon(FontAwesomeIcons.google, size: 30),
-                      ),
-                    ),
-                  ],
-                ),
                 Form(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   key: _formKey,
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       EmailField(
-                        textEditingController: emailController,
-                        label: 'Email',
-                      ),
+                          label: "Email",
+                          textEditingController: emailController),
                       const SizedBox(height: 20),
                       PasswordField(
-                        label: 'Password',
-                        textEditingController: passwordController,
-                        obscureText: true,
-                      ),
+                          label: "Password",
+                          obscureText: true,
+                          textEditingController: passwordController),
+                      const SizedBox(height: 20),
+                      PasswordField(
+                          label: "Confirm password",
+                          hintText: "Confirm password",
+                          obscureText: true,
+                          textEditingController: confirmPasswordController),
                     ],
                   ),
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                        child: const Text('Forgot password?'),
-                        onTap: () async {
-                          await showModal(
-                              text:
-                                  "This feature isn't implemented yet!\nI will fill login data for you.");
-                          emailController.text = ApiEndpoints.username;
-                          passwordController.text = ApiEndpoints.passwd;
-                        })
-                  ],
                 ),
               ],
             ),
@@ -145,11 +102,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             widget.loading = true;
                             // loading should will be move to authenticate state
                           });
+                          if (passwordController.text !=
+                              confirmPasswordController.text) {
+                            MessageSnackBar.buildErrorSnackbar(
+                              context,
+                              "Passwords must be the same!",
+                            );
+                            setState(() {
+                              widget.loading = false;
+                            });
+                            return;
+                          }
 
-                          await authenticationNotifier.login(
-                            LoginModel(
+                          await authenticationNotifier.register(
+                            RegisterModel(
                               email: emailController.text,
                               password: passwordController.text,
+                              confirmPassword: confirmPasswordController.text,
                             ),
                           );
                           if (authenticationNotifier
@@ -163,7 +132,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             // ignore: use_build_context_synchronously
                             MessageSnackBar.buildSuccessSnackBar(
                               context,
-                              'Authenticated successfully.',
+                              'Registration completed successfully.',
                             );
                           }
                           setState(() {
@@ -171,7 +140,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           });
                         },
                         child: const Text(
-                          'Login',
+                          "Register",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
@@ -182,14 +151,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text("Don't have an account?"),
+                    const Text("Already have an account?"),
                     const SizedBox(width: 5),
                     InkWell(
                       onTap: () {
-                        context.goNamed(Routes.register.name);
+                        context.goNamed(Routes.login.name);
                       },
                       child: const Text(
-                        "Register",
+                        "Login",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, color: Colors.blue),
                       ),
@@ -208,6 +177,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   dispose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 

@@ -1,5 +1,5 @@
 import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
-import 'package:awesome_places/src/features/authentication/ui/widgets/show_modal_bottom.dart';
+import 'package:awesome_places/src/features/authentication/presentation/widgets/show_modal_bottom.dart';
 import 'package:awesome_places/src/features/settings/data/api_endpoints.dart';
 import 'package:awesome_places/src/routes/models/routes.dart';
 import 'package:awesome_places/src/widgets/circle_image.dart';
