@@ -1,15 +1,22 @@
-<div style="display:flex; justify-content: center; gap: 0.5rem; flex-direction: column; align-items: center;">
+<br/>
+<div align="center">
   <img src="./assets/logo/brand_logo.svg" width="100"/>
+  <p></p>
   <img src="./assets/logo/brand_name.svg" width="500"/>
 </div>
+<br/>
+
 
 ## AwesomePlaces - application for search  interesting places
 
 **AwesomePlaces** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web).
 
-<div style="display:flex; justify-content: center; gap: 3rem; flex-direction: row; margin: 40px 0;">
-<img src="./assets/screens/show-2.png" height="700" />
-<img src="./assets/screens/show-1.png" height="700" />
+<br/>
+<div align="center">
+    <img src="./assets/screens/show-2.png" height="700" />
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <img src="./assets/screens/show-1.png" height="700" />
 </div>
 
 ## Run the application
@@ -44,13 +51,14 @@ To run the app use the following command:
 
 and the last step, select the device on which you want to run the application:
 
-<div style="display:flex; justify-content: center; gap: 3rem; flex-direction: row; margin: 20px 0;">
+<div>
   <img src="./assets/screens/flutter-run.png" />
 </div>
 
 after that, the application should start on the selected device, and should look like this:
 
-<div style="display:flex; justify-content: center; gap: 3rem; flex-direction: row;  margin: 20px 0;">
+<div align="center">
+<br/>
   <img src="./assets/screens/1.png" height="600" />
 </div>
 
