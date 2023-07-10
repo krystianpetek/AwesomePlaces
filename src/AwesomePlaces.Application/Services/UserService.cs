@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace AwesomePlaces.Infrastructure.Services;
+namespace AwesomePlaces.Application.Services;
 public class UserService : IUserService
 {
 	private readonly IUserRepository _userRepository;

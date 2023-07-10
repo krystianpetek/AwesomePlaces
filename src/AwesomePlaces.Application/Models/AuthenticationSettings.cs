@@ -1,4 +1,4 @@
-﻿namespace AwesomePlaces.Infrastructure;
+﻿namespace AwesomePlaces.Application.Models;
 public class AuthenticationSettings
 {
 	public string JwtKey { get; set; }

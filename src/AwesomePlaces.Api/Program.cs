@@ -1,6 +1,7 @@
 using AwesomePlaces.Api.Middleware;
 using AwesomePlaces.Api.Routes;
 using AwesomePlaces.Application;
+using AwesomePlaces.Application.Models;
 using AwesomePlaces.Infrastructure;
 using AwesomePlaces.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Authentication;

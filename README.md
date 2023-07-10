@@ -6,7 +6,6 @@
 </div>
 <br/>
 
-
 ## AwesomePlaces - application for search  interesting places
 
 **AwesomePlaces** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web).
@@ -62,4 +61,41 @@ after that, the application should start on the selected device, and should look
   <img src="./assets/screens/1.png" height="600" />
 </div>
 
-      `Work in progress...`
+## Project architecture
+
+The project was created using the following technologies:
+
+### Back-end
+
+- `ASP.NET Core 7` - framework for creating web applications, APIs and services
+- `Entity Framework Core` - ORM (Object Relational Mapper) to map objects to relational databases, in this case the `InMemory` database
+- `Dapper` - ORM for mapping objects to relational databases, in this case it is the `Sqlite` database (relational database in the form of a file)
+- `FluentValidation` - library for model validation, checking the correctness of input data to the API with `IEndpointFilter` in middleware of ASP.NET Core
+`Swagger` - a tool for documenting and querying the API
+
+### Front-end
+
+- `Flutter` - a framework for creating mobile, web and desktop applications
+- `flutter_riverpod` - a library to manage application state
+- `go_router` - app navigation library
+- `uuid` - library for generating unique identifiers
+- `http` - library for making HTTP requests
+- `shared_preferences` - a library for saving data in the device's memory
+- `location` - a library for retrieving the location of the device and taking care of location permissions
+- `google_maps_flutter` - library for displaying Google maps
+- `flutter_svg` - library for displaying SVG images
+
+The entire application solution has been divided into 5 layers, 4 for the back-end, in relaying on Clean Architecture, and one for the front-end. The layers have been divided as follows:
+
+<div align="center">
+  <img src="./assets/screens/clean-architecture.png" />
+</div>
+<br/>
+
+- `AwesomePlaces.Core` - domain layer, containing domain entities, specifically: `Place`, `Address` and `Coordinate` and identity entities `User` and `Role`, as well as public contracts to repositories of these entities, contracts to services domain names and exceptions. This layer does not depend on any other layer, it has no external dependencies, it is the most inner layer.
+
+- `AwesomePlaces.Application` - the application layer containing the business logic of the application, in this case these are application services that use domain service contracts from the `AwesomePlaces.Core` layer, which are then used in controllers to separate database repositories from models passed in controllers, it's another level of abstraction, that was created. In this layer, there are also DTO (Data transfer object) models with them validators, that pass data via the public interface in `AwesomePlaces.Api`, and later in the next stage, before performing operations on the database, they are mapped to domain entities. This layer depends on the domain layer, but no longer depends on any external layers.
+
+- `AwesomePlaces.Infrastructure` - the infrastructure layer, contains implementations of interfaces from the `AwesomePlaces.Core` layer, in this case these are repository implementations that use the `InMemory` database with `Entity Framework Core` and `Sqlite` with the support of `Dapper`, as well as implementations of application services that use repositories. In this system, this layer contains implementations of repositories that are used in application services. This layer depends on the `AwesomePlaces.Application`, it inherits from the domain layer because there is inheritance from the application layer. It is a layer that combines external dependencies with the domain layer, but using abstractions in the domain and application layer, the dependence of external entities from the project's business rules has been separated. The infrastructure layer is mainly used to communicate external dependencies not directly related to the project's business theme, such as a database, file system or external API.
+
+- `AwesomePlaces.Api` - API layer, contains controllers that are responsible for handling HTTP requests that are sent to the API. This layer also contains the Swagger configuration, which is used to document the API and to test endpoints, with the implementation of authentication using the JWT token (Json Web Token). This layer depends on the application layer by inheriting from the infrastructure layer, because it uses application services that are used in controllers. This layer is the outermost layer, because it is the layer that is visible to the end users of the system, because it is here that endpoints are issued that are used by client applications to communicate with the API. This layer is directly dependent only on the infrastructure layer. A global error handling system has also been implemented here, which is used in controllers to return appropriate HTTP error codes, depending on what error occurred in the system, and to ensure that the application is not stopped by an unhandled exception.

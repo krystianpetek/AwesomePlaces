@@ -3,7 +3,7 @@ using AwesomePlaces.Core.Exceptions;
 using AwesomePlaces.Core.Repositories;
 using AwesomePlaces.Core.Services;
 
-namespace AwesomePlaces.Infrastructure.Services;
+namespace AwesomePlaces.Application.Services;
 public class PlaceService : IPlaceService
 {
 	private readonly IPlaceRepository _placeRepository;
