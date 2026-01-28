@@ -3,8 +3,7 @@ class ApiEndpoints {
   static String passwd = "defaultPass";
 
   // static const awesomePlacesUrl = 'https://localhost:7098';
-  static const awesomePlacesUrl =
-      'https://awesomeplacesapi20230325211214.azurewebsites.net';
+  static const awesomePlacesUrl = 'https://krystianblazor.azurewebsites.net';
 
   static const registerUrl = '$awesomePlacesUrl/users/register';
 

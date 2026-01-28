@@ -32,7 +32,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                 ),
               );
             case ConnectionState.done:
-              placeNotifier.places = snapshot.data!;
+              placeNotifier.places = snapshot.data ?? [];
               return Expanded(
                 child: placeNotifier.placeViewEnum == PlaceViewEnum.ListView
                     ? const PlaceListView()

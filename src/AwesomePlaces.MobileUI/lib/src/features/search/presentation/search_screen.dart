@@ -94,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             );
                           case ConnectionState.done:
-                            places = snapshot.data!;
+                            places = snapshot.data ?? [];
                             foundedPlaces = places;
                             return ListView.separated(
                               shrinkWrap: true,

@@ -2,7 +2,7 @@ namespace AwesomePlaces.Core.Entities;
 
 public class Coordinate
 {
-	private Coordinate() { }
+	public Coordinate() { }
 
 	public Coordinate(double latitude, double longitude)
 	{

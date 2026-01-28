@@ -18,7 +18,7 @@ public static class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 
-		AuthenticationSettings? authenticationSettings = builder.Configuration.GetRequiredSection("AuthenticationSettings").Get<AuthenticationSettings>();
+        AuthenticationSettings? authenticationSettings = builder.Configuration.GetRequiredSection("AuthenticationSettings").Get<AuthenticationSettings>();
 
 		builder.Services.AddAuthorization();
 		builder.Services

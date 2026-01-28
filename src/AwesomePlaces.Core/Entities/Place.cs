@@ -6,16 +6,16 @@ namespace AwesomePlaces.Core.Entities;
 public class Place
 {
 	public Guid Id { get; protected set; } = Guid.NewGuid();
-	private string Name { get; init; }
-	private string Description { get; set; }
-	private PlaceTypes PlaceType { get; init; }
-	private byte[] Image { get; init; }
-	private double Rating { get; init; }
-	private bool RequiredFee { get; init; }
+    public string Name { get; init; }
+    public string Description { get; set; }
+    public PlaceTypes PlaceType { get; init; }
+    public byte[] Image { get; init; }
+    public double Rating { get; init; }
+    public bool RequiredFee { get; init; }
 	public virtual Coordinate Coordinate { get; init; }
 	public virtual Address Address { get; init; }
 
-	private Place() { }
+	public Place() { }
 
 	public Place(Guid id, string name, string description, PlaceTypes placeType, Coordinate coordinate, Address address, byte[] image, double rating, bool requiredFee)
 	{

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:awesome_places/src/providers/authentication/authentication_provider.dart';
 import 'package:awesome_places/src/features/explore/data/models/place.dart';
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 case ConnectionState.done:
-                  placeNotifier.places = snapshot.data!;
+                  placeNotifier.places = snapshot.data ?? [];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -326,7 +327,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget cardPlace(BuildContext context, Place place) {
+  Widget cardPlace(BuildContext context, Place? place) {
     return Container(
       padding: const EdgeInsets.all(10),
       constraints: const BoxConstraints(maxHeight: 300),
@@ -346,10 +347,9 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               image: DecorationImage(
-                fit: BoxFit.fill,
-                opacity: 0.9,
-                image: MemoryImage(place.image),
-              ),
+                  fit: BoxFit.fill,
+                  opacity: 0.9,
+                  image: MemoryImage(place?.image ?? new Uint8List(0))),
             ),
             child: Stack(
               clipBehavior: Clip.none,
@@ -359,7 +359,7 @@ class HomeScreen extends StatelessWidget {
                   left: 10,
                   bottom: 15,
                   child: Text(
-                    place.name,
+                    place?.name ?? "",
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -374,7 +374,7 @@ class HomeScreen extends StatelessWidget {
                       const Star(),
                       const SizedBox(width: 5),
                       Text(
-                        "${place.rating}",
+                        "${place?.rating}",
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!

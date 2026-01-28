@@ -9,7 +9,7 @@ public class Address
 	public string ZipCode { get; init; }
 	public string Country { get; init; }
 
-	private Address() { }
+	public Address() { }
 
 	public Address(Guid id, string street, string city, string state, string zipCode, string country)
 	{
