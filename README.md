@@ -20,7 +20,7 @@
 
 ### WebAPI
 
-To start the mobile application, you need to have the [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) installed on your computer. Then, in the project directory `AwesomePlaces.Api`, you can run the following commands:
+To start the WebApi, you need to have the [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) installed on your computer. Then, in the project directory `AwesomePlaces.Api`, you can run the following commands:
 
 ```powershell
   dotnet restore
